@@ -1,0 +1,41 @@
+<table class="table table-hover table-striped pretty shadow-effect-1">
+    <thead class="thead-inverse">
+      <tr>
+        <th><%= sortable "first_name", "First Name" %></th>
+        <th><%= sortable "last_name", "Last Name" %></th>
+        <th>Phone Number</th>
+        <th>Address</th>
+        <th>Salesperson</th>
+        <th><%= sortable "created_at", "Date Created" %></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @leads.each do |lead| %>
+      <tr>
+        <td><%=link_to lead.first_name, lead%></td>
+        <td><%=link_to lead.last_name, lead%></td>
+        <td>
+          <% unless lead.phone.nil? %>
+            <%= number_to_phone(lead.phonenumber, area_code: true)%>
+          <% end %>
+        </td>
+        <td>
+          <% unless lead.address.nil? %>
+            <%= lead.address %>, <%= lead.city %>
+          <% end %>
+        </td>
+        <% unless User.find_by_id(lead.user_id).nil? %>
+          <td><%= User.find_by_id(lead.user_id).fullname %></td>
+          <% else %>
+          <td></td>
+        <% end %>
+        <td scope="row"><%=lead.created_at.strftime("%m/%d/%y")%></td>
+      </tr>
+      <% end %>
+  </tbody>
+</table>
+<script>
+$('#search-icon').click(function() {
+    $('#advanced-search-bar').slideToggle(300);
+});
+</script>

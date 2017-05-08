@@ -1,0 +1,14 @@
+<div class="row">
+  <div class="login-container col-md-10 col-md-offset-1">
+    <h2>Login</h2>
+    <%= bootstrap_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+      <%= f.email_field :email, icon: "user", style: "color:black;", autofocus: true, :required => true %>
+      <%= f.password_field :password, icon: "lock", autocomplete: "off", :required => true %>
+      <%= f.check_box :remember_me %>
+      <br>
+      <%= f.submit "Submit", :class => "btn btn-success"%>
+    <% end %>
+    <br>
+    <%= render "devise/shared/links" %>
+  </div>
+</div>

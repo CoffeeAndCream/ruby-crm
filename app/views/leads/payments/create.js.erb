@@ -1,0 +1,3 @@
+$('#empty_contract').hide();
+$('#payment').fadeIn().show();
+$('#payment').fadeIn().append("<%= escape_javascript render(:partial => 'leads/payments/payments', :locals => {payment: @lead.payments.last}).html_safe %>");

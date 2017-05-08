@@ -1,0 +1,8 @@
+development:
+  adapter: postgresql
+  encoding: unicode
+  database: crm_development
+  pool: 5
+  username: postgres
+  password: turn0ffth3l1ghts
+  host: localhost

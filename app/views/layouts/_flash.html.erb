@@ -1,0 +1,14 @@
+<% flash.each do |key, value| %>
+  <div class="animated fadeInDown alert alert-<%= key %> hide-on-mobile" id="flash-message" style="margin: 0px !important;">
+    <a class="close" id="close-flash">×</a>
+        <%= value %>
+  </div>
+<% end %>
+<script>
+$(document).on('turbolinks:load', function(){
+ $("#close-flash").click(function() {
+    // assumes element with id='button'
+    $("#flash-message").slideUp();
+ });
+});
+</script>

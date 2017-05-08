@@ -1,0 +1,123 @@
+<div class="container padding-top-25">
+  <div class="row info-card">
+    <div class="col-lg-6">
+      <h3><i class="material-icons">person_pin</i><%= @lead.fullname %>  <%= render 'links' %></h3>
+      <hr>
+      <table class="table table-hover pretty">
+        <tbody>
+          <tr>
+          <% unless @lead.address.nil? || @lead.address.empty? %>
+            <td><b>Address</b> </td>
+            <td><%= @lead.address %>, <%=@lead.city%>, <%=@lead.state%></td>
+          <% end %>
+          </tr>
+          <tr>
+            <% unless @lead.phone.nil? || @lead.phone.empty?  %>
+            <td><b>Phone</b> </td>
+            <td><%= number_to_phone(@lead.phonenumber, area_code: true) %></td>
+              <% end %>
+          </tr>
+          <tr>
+            <% unless @lead.email.nil? || @lead.email.empty?  %>
+            <td><b>Email</b> </td>
+                <td> <%= @lead.email %></td>
+              <% end %>
+          </tr>
+          <tr>
+            <% unless @lead.user.nil? %>
+            <td><b>Salesperson</b> </td>
+              <td><%= @user.first_name %> <%= @user.last_name %></h5></td>
+              <% end %>
+          </tr>
+          <tr>
+            <td><b>Services</b></td>
+            <td>
+              <% unless @lead.services.nil? %>
+                <% @lead.services.each do |service| %>
+                  <% unless service.nil? || service.empty? %>
+                    <%= Service.find_by_id(service.to_i).name %>,
+                  <% end %>
+                <% end %>
+              <% end %>
+            </td>
+          </tr>
+          <tr class="<%=@project_alert%>" style="background-color: <%= @project_date_color %>">
+            <td><b>Project Due Date</b></td>
+            <% unless @project.finish_date.nil? %>
+              <td><%= @project.finish_date.strftime("%m/%d/%y") %></td>
+            <% end %>
+          </tr>
+        <thead>
+      </table>
+    </div>
+    <div class="col-lg-6 padding-top-25">
+      <iframe
+        width="100%"
+        height="350"
+        frameborder="0" style="border:0"
+        src="https://www.google.com/maps/embed/v1/directions?key=AIzaSyBvEZgBoPE2Hj02TCkfweQxrGp4stARVig&origin=415+Terminal+Dr,McFarland+WI&destination= +
+              <%= @lead.address.gsub(' ',' ') %>,<%=@lead.city %>+<%=@lead.state.strip%> +
+              &avoid=tolls">
+      </iframe>
+    </div>
+  </div>
+  <div class="row details-card">
+    <div class="col-lg-7">
+      <h3>Project Tasks <i class="material-icons">dashboard</i></h3>
+        <div id="tasks">
+          <% @lead.project.tasks.each do |task| %>
+            <% unless task.nil? %>
+              <div id="task-<%= task.id %>">
+                <%= link_to 'Delete', lead_project_task_path(@lead, @lead.project, task), controller: :projects, action: :destroy, method: :delete, remote: true, :style => "float:left;padding:1px 10px 0px 0px !important;color:blue !important;" %>
+                <h5 style="display: inline-block; margin-top:5px"><%= task.name %> </h5>
+                <h6 style="padding-left: 45px;margin-top:-10px !important; color:#666;"> <%= task.details %></h6>
+              </div>
+            <% end %>
+          <% end %>
+          <%= bootstrap_form_for :task, url: lead_project_tasks_path(@lead, @lead.project), :html => {:method => :post}, remote: true  do |f| %>
+            <%= f.collection_select(:name, Service.all, :name, :name, :label => 'Service') %>
+            <%= f.text_area :details,  placeholder: "eg. I need to call the manufacturer about this task.", required: true %>
+            <%= f.button 'Add New Task', :class => "btn btn-primary btn-md width-100" %>
+          <% end %>
+        </div>
+    </div>
+  </div>
+  <div class="row details-card">
+    <div class="col-lg-7">
+      <h3>Comments <i class="material-icons">chat</i></h3>
+      <div id="comments">
+        <% @lead.comments.each do |comment| %>
+          <% unless comment.nil? %>
+            <div id="comment-<%= comment.id %>">
+               <%= button_to "Delete", lead_comment_path(@lead, comment), method: :delete, :class=>'btn btn-link', :style => "float:left;padding:1px 0px 0px 0px !important;color:blue !important;", remote: true %> &nbsp;
+               <h5 style="display: inline-block; margin-top:5px"> <%= comment.comment %> </h5>
+               <h6 style="padding-left: 50px;margin-top:-10px !important; color:#666;"> <%=comment.created_at.strftime('%c') %> </h6>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+        <%= bootstrap_form_for :comments, url: lead_comments_path(@lead), :html => {:method => :post}, remote: true  do |f| %>
+          <%= f.text_field :comment %>
+          <%= f.button 'New Comment', :class => "btn btn-primary btn-md" %>
+        <% end %>
+    </div>
+  </div>
+  <div class="row details-card">
+    <div class="col-lg-12">
+      <h3>Photos <i class="material-icons">photo</i></h3>
+    <ul class="img-list">
+      <% @lead.photos.each do |photo| %>
+        <% unless photo.image.nil? %>
+        <li>
+          <%= link_to image_tag(photo.image.thumb('180x180#').url, alt: photo.title, class: 'img-thumbnail'),
+                      photo.image.url, target: '_blank' %>
+          <span class="text-content-bottom"><span><%= link_to raw("<span style='color:white' class='glyphicon glyphicon-trash'></span><span style='color:white;'>&nbsp;Remove</span>"), lead_photo_path(@lead, photo), :method => :delete %></span></span>
+          <span class="text-content"><span><%= photo.title %></span></span>
+
+        </li>
+        <% end%>
+      <% end %>
+    </ul>
+    </div>
+  </div>
+</div>

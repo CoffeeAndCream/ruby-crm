@@ -1,0 +1,56 @@
+<div class="col-lg-4" id="financial-table" style="min-width:350px !important;">
+  <% unless @lead.contract_total.nil? || @lead.contract_total == 0 %>
+    <%=bootstrap_form_for :payments, url: lead_payments_path(@lead), method: :post, remote: true do |f| %>
+      <%= f.number_field :amount %>
+      <%= f.select :payment_type, options_for_select([ "Down Payment", "Payment" ], "Payment") %>
+      <%= f.button "Add Payment", :class => "btn btn-primary btn-sm" %>
+    <% end %>
+  <% else %>
+    <%= bootstrap_form_for @lead, url: 'payments/update_contract', remote: true do |f| %>
+      <%= f.number_field :contract_total %>
+      <%= f.hidden_field :lead_id, value: @lead.id %>
+      <%= f.button 'Contract Amount', :class => "btn btn-primary btn-sm" %>
+    <% end %>
+  <% end %>
+</div>
+<div class="col-lg-8 table-container">
+  <h3>Payments</h3>
+  <table class="table table-hover pretty table-responsive" style="margin-top: 1px !important" id="payment-table">
+    <thead>
+      <td>Date Paid</td>
+      <td>Type</td>
+      <td>Amount Paid</td>
+      <td>Amount Due</td>
+      <td>Original Total</td>
+      <td>Actions</td>
+    </thead>
+    <% @total = 0 %>
+    <tbody id="payment">
+        <% @lead.payments.each do |payment| %>
+          <% @total += payment.amount.to_i %>
+          <tr id="payment-<%= payment.id %>">
+            <td><%= payment.created_at.strftime("%m/%d/%y") %>
+            <td><%= payment.payment_type %>
+            <td style="color:green">+<%= number_to_currency(payment.amount) %></td>
+            <% if  @lead.contract_total - @total <= 0 %>
+              <td style="color:green">$0.00</td>
+            <% else %>
+              <td style="color:red"><%= number_to_currency(@total - @lead.contract_total) %></td>
+            <% end %>
+            <td><%= number_to_currency(@lead.contract_total) %></td>
+            <td><%= button_to "Delete", lead_payment_path(@lead, payment), method: :delete, :class=>'btn btn-danger btn-xs', :style => "float:left;", remote: true %></td>
+          </tr>
+        <% end %>
+        <% if @lead.payments.empty? %>
+          <tr id="empty_contract">
+            <td></td>
+            <td></td>
+            <td></td>
+            <td style="color:red"><%= number_to_currency(@lead.contract_total) %></td>
+            <td><%= number_to_currency(@lead.contract_total) %></td>
+            <td><%= link_to("Reset Contract Total", lead_url(:lead => {:contract_total => 0}), :method => :put) %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+</div>

@@ -1,0 +1,49 @@
+<div class="container info-card">
+  <i class="material-icons" style="font-size: 36px; float:left">schedule</i>
+  <div id="schedule">
+    <div class="row">
+      <h2>Weekly Schedule</h2>
+      <div class="col-lg-10 col-lg-offset-1">
+        <br>
+        <table class="table table-hover table-responsive">
+          <thead>
+            <th style="text-align: left !important">Date</th>
+            <th style="text-align: left !important">Start Time</th>
+            <th style="text-align: left !important">End Time</th>
+            <th style="text-align: left !important">Appointment</th>
+            <th style="text-align: left !important">Description</th>
+          </thead>
+          <tbody>
+            <% @events.each do |event| %>
+              <tr>
+                <td>
+                  <% case event.start.strftime('%A') %>
+                    <% when 'Monday' %>
+                      <i class="material-icons" style="color:red !important">bookmark</i>
+                    <% when 'Tuesday' %>
+                      <i class="material-icons" style="color:orange !important">bookmark</i>
+                    <% when 'Wednesday' %>
+                      <i class="material-icons" style="color:yellow !important">bookmark</i>
+                    <% when 'Thursday' %>
+                      <i class="material-icons" style="color:green !important">bookmark</i>
+                    <% when 'Friday' %>
+                      <i class="material-icons" style="color:blue !important">bookmark</i>
+                    <% when 'Saturday' %>
+                      <i class="material-icons" style="color:purple !important">bookmark</i>
+                    <% when 'Sunday' %>
+                      <i class="material-icons" style="color:pink !important">bookmark</i>
+                  <% end %>
+                  <%=event.start.strftime('%A')%><br>
+                  <span style="padding-left: 30px;color:#777;"><%=event.start.strftime('%m/%d/%Y')%></span></td>
+                <td><%=event.start.strftime('%l:%M %P')%></td>
+                <td><%=event.ends.strftime('%l:%M %P')%></td>
+                <td><%=event.title%></td>
+                <td><%=event.description%></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

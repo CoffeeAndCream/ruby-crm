@@ -1,0 +1,11 @@
+<ul class="nav navbar-nav navbar-right">
+  <div class="dropdown">
+    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+      Options
+    </button>
+    <ul class="dropdown-menu" aria-labelledby="dropdownMenu">
+      <li><%= link_to raw('<i class="material-icons"  style="font-size: 18px;">track_changes</i> Edit'), edit_project_path(@lead, @lead.project),  method: :get %></li>
+      <li><%= link_to raw('<i class="material-icons"  style="font-size: 18px;">delete</i> Delete'), lead_project_path, method: :delete, data: { :confirm => "Are you sure?" } %></li>
+    </ul>
+  </div>
+</ul>

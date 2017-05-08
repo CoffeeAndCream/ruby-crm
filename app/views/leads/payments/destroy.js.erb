@@ -1,0 +1,3 @@
+var item = $('tr#payment-'+<%= @payment.id %>);
+item.remove();
+$('table#payment-table').load(document.URL +  ' table#payment-table');

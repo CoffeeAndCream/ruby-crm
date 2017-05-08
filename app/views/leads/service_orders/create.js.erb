@@ -1,0 +1,1 @@
+$('#service-orders').fadeIn().append("<%= escape_javascript render(:partial => 'leads/service_orders/service_order', :locals => {service_order: @lead.service_orders.last}).html_safe %>");

@@ -1,0 +1,6 @@
+<tr id="service-order-<%= service_order.id %>">
+  <td><%=service_order.name%></td>
+  <td style="color:green"><%=number_to_currency(service_order.cost)%></td>
+  <td><%=service_order.details%></td>
+  <td><%= button_to "Delete", lead_service_order_path(@lead, service_order), method: :delete, :class=>'btn btn-danger btn-xs', :style => "float:left;", remote: true %></td>
+</tr>

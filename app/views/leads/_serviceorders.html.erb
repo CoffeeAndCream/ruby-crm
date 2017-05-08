@@ -1,0 +1,30 @@
+<div class="col-lg-4" style="min-width:350px !important;">
+  <%=bootstrap_form_for :service_orders, url: lead_service_orders_path(@lead), method: :post, remote: true do |f| %>
+    <%= f.text_field :name, required: true %>
+    <%= f.text_field :cost %>
+    <%= f.text_area :details %>
+    <%= f.button "Add Service Order", :class => "btn btn-primary btn-sm" %>
+  <% end %>
+</div>
+<div class="col-lg-8  table-container">
+  <h3>Service Orders</h3>
+  <br>
+    <table class="table table-hover table-responsive" id="service-orders-table">
+    <thead>
+      <th style="text-align: left !important;">Name</th>
+      <th style="text-align: left !important;">Cost</th>
+      <th style="text-align: left !important;">Details</th>
+      <th style="text-align: left !important;">Actions</th>
+    </thead>
+    <tbody id="service-orders">
+      <% @lead.service_orders.each do |service_order| %>
+        <tr id="service-order-<%= service_order.id %>">
+          <td><%=service_order.name%></td>
+          <td style="color:green"><%=number_to_currency(service_order.cost)%></td>
+          <td><%=service_order.details%></td>
+          <td><%=button_to "Delete", lead_service_order_path(@lead, service_order), method: :delete, :class=>'btn btn-danger btn-xs', :style => "float:left;", remote: true %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

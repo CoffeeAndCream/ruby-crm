@@ -1,0 +1,67 @@
+// Place all the styles related to the leads controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+/* Style the tab */
+div.tab {
+    overflow: hidden;
+    margin-bottom: -30px;
+    padding-top: 25px;
+    z-index: 1 !important;
+}
+
+/* Style the buttons inside the tab */
+div.tab button {
+    background-color: inherit;
+    float: left;
+    background-color: #fff;
+    border: solid 1px;
+    border-color: #999;
+    border-radius: 2px;
+    outline: none;
+    cursor: pointer;
+    padding: 10px 12px;
+    transition: 0.3s;
+    margin-right: 2px;
+
+}
+
+/* Change background color of buttons on hover */
+div.tab button:hover {
+    background-color: #eee;
+    margin-top: -4px;
+}
+
+/* Create an active/current tablink class */
+div.tab button.active {
+  margin-right: 2px;
+  background-color: #ddd;
+  border: solid 1px;
+  border-color: cornflowerblue;
+  border-radius: 2px;
+}
+
+/* Style the tab content */
+.tabcontent {
+    display: none;
+    padding: 6px 6px;
+    border-top: none;
+    -webkit-animation: fadeEffect 1s;
+    animation: fadeEffect 1s; /* Fading effect takes 1 second */
+}
+
+@-webkit-keyframes fadeEffect {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+
+@keyframes fadeEffect {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+.appointment-form {
+  display: none;
+  .appointment-form-sub{
+    display:true
+  }
+}

@@ -1,0 +1,2 @@
+$('#job_site_notes_js').fadeIn().show();
+document.getElementById("job_site_notes_js").innerHTML = ("<%= j render(:partial => 'leads/job_site/job_site', :locals => {job_site: @job_site}) %>");

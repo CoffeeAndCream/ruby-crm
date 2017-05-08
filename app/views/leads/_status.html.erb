@@ -1,0 +1,93 @@
+<div class="container">
+  <div class="col-lg-12">
+    <div class="row" id="progress-bar">
+      <div class="col-md-1">
+      </div>
+      <% unless @lead.contacted %>
+      <div class="col-md-2 white-out" id="progress-header">
+        <div class="row">
+          <div id="progress-uncompleted">
+            <div id="progress-text">Contacted</div>
+          </div>
+        </div>
+      </div>
+      <% else %>
+        <div class="col-md-2" id="progress-header">
+          <div class="row">
+            <div id="progress-completed">
+              <div id="progress-text"><span class="glyphicon glyphicon-check"></span>Contacted</div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+      <% unless @lead.closed %>
+        <div class="col-md-2 white-out" id="progress-header">
+          <div class="row">
+            <div id="progress-uncompleted">
+              <div id="progress-text">Closed</div>
+            </div>
+          </div>
+        </div>
+      <% else %>
+      <div class="col-md-2" id="progress-header">
+        <div class="row">
+          <div id="progress-completed">
+            <div id="progress-text"><span class="glyphicon glyphicon-check"></span>Closed</div>
+          </div>
+        </div>
+      </div>
+      <% end %>
+      <% unless @lead.begin_project %>
+      <div class="col-md-2 white-out" id="progress-header">
+        <div class="row">
+          <div id="progress-uncompleted">
+            <div id="progress-text">Start Project</div>
+          </div>
+        </div>
+      </div>
+      <% else %>
+      <div class="col-md-2" id="progress-header">
+        <div class="row">
+          <div id="progress-completed">
+            <div id="progress-text"><span class="glyphicon glyphicon-check"></span>Started Project</div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+      <% unless @lead.finished_project %>
+      <div class="col-md-2 white-out" id="progress-header">
+        <div class="row">
+          <div id="progress-uncompleted">
+            <div id="progress-text">Finish Project</div>
+          </div>
+        </div>
+      </div>
+      <% else %>
+      <div class="col-md-2" id="progress-header">
+        <div class="row">
+          <div id="progress-completed">
+            <div id="progress-text"><span class="glyphicon glyphicon-check"></span>Finished Project</div>
+          </div>
+        </div>
+      </div>
+      <% end %>
+      <% unless @lead.send_thank_you %>
+      <div class="col-md-2 white-out" id="progress-header">
+        <div class="row">
+          <div id="progress-uncompleted">
+            <div id="progress-text">Sent Thank You</div>
+          </div>
+        </div>
+      </div>
+      <% else %>
+      <div class="col-md-2" id="progress-header">
+        <div class="row">
+          <div id="progress-completed">
+            <div id="progress-text"><span class="glyphicon glyphicon-check"></span>Sent Thank You</div>
+          </div>
+        </div>
+      </div>
+      <% end %>
+      <div class="col-md-1">
+      </div>
+    </div>

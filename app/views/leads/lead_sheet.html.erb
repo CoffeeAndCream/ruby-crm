@@ -1,0 +1,144 @@
+<head>
+  <title>Lead Sheet | Legacy Exteriors CRM</title>
+  <%= csrf_meta_tag %>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+</head>
+<style>
+body {
+  background-color: white !important;
+}
+h1,h2,h3 {
+text-decoration: underline !important;
+text-align: center !important;
+}
+h4{
+  font-weight: bolder !important;
+}
+td {
+  font-size: large !important;
+}
+hr {
+  color: black !important;
+  background-color: white;
+  border-color: black;
+  height: 15px !important;
+  padding-bottom: 12px !important;
+}
+.box {
+  font-size: 18px !important;
+  border: solid;
+  border-width: 1px;
+  max-height: 500px;
+  padding-bottom: 50px;
+  margin: 1px;
+}
+.box:hover {
+  background-color: #f5f5f5;
+}
+</style>
+<body style="background-color:white !important">
+<div class="container">
+  <div class="row">
+    <div class="col-lg-10 col-lg-offset-1">
+      <h3>Lead File for <b><%= @lead.fullname %></h3></b>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6 box">
+      <h3>Lead Info</h3>
+      <br>
+      <table class="table table-hover table-bordered table-striped">
+        <tbody>
+          <tr>
+          <% unless @lead.address.nil? || @lead.address.empty? %>
+            <td><b>Address</b> </td>
+            <td><%= @lead.address %>, <%=@lead.city%>, <%=@lead.state%></td>
+          <% end %>
+          </tr>
+          <tr>
+            <% unless @lead.phone.nil? || @lead.phone.empty?  %>
+            <td><b>Phone</b> </td>
+            <td><%= number_to_phone(@lead.phonenumber, area_code: true) %></td>
+            <% end %>
+          </tr>
+          <tr>
+            <% unless @lead.email.nil? || @lead.email.empty?  %>
+            <td><b>Email</b> </td>
+                <td> <%= @lead.email %></td>
+              <% end %>
+          </tr>
+          <tr>
+            <% unless @lead.user.nil? %>
+            <td><b>Salesperson</b> </td>
+              <td><%= @lead.user.first_name %> <%= @lead.user.last_name %></h5></td>
+              <% end %>
+          </tr>
+          <tr>
+            <td><b>Services</b></td>
+            <td>
+              <% unless @lead.services.nil? %>
+                <% @lead.services.each do |service| %>
+                  <% unless service.nil? || service.empty? %>
+                    <%= Service.find_by_id(service.to_i).name %>,
+                  <% end %>
+                <% end %>
+              <% end %>
+            </td>
+          </tr>
+          <tr>
+            <% unless @lead.user.nil? %>
+            <td><b>Source</b> </td>
+              <td><%= @lead.source %></h5></td>
+              <% end %>
+          </tr>
+          <tr>
+            <td><b>Status</b> </td>
+            <% if @lead.customer %>
+              <td>Customer</td>
+            <% else %>
+              <td>Lead</td>
+            <% end %>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-md-5 box">
+      <h3>Appointments</h3>
+      <% @lead.events.each do |event| %>
+        <b><%= event.title %><br></b>
+        <%= event.start.strftime('%A %m/%d/%Y') %><br>
+        <%= event.start.strftime('%H:%M %p') %> - <%= event.ends.strftime('%H:%M %p') %>
+      <% end %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-11 col-md-offset-0 box">
+      <h3>Notes</h3>
+      <br>
+      <% 8.times do %>
+        <hr>
+      <% end %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-11 col-md-offset-0 box">
+      <h3>Appointment Result</h3>
+        <%= bootstrap_form_for :form, layout: :horizontal do |f| %>
+        <h4><div class="col-md-6">
+          <%= f.check_box :sold %><hr>
+          <%= f.check_box :not_sold, label: "Not Sold" %><hr>
+          <%= f.check_box :maybe, label: "Maybe" %><hr>
+        </div>
+        <div class="col-md-6">
+          <%= f.check_box :rehash, label: "Rehash" %><hr>
+          <%= f.check_box :recontact, label: "Recontact" %><hr>
+          <%= f.check_box :reset, label: "Reset" %><hr>
+        </div>
+      </h4>
+      <% end %>
+    </div>
+  </div>
+</body>

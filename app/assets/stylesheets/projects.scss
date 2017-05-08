@@ -1,0 +1,68 @@
+// Place all the styles related to the projects controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+#services-done {
+  text-align: center;
+  background-color: lightgreen;
+  .btn {
+    color: green !important;
+    padding: 0px !important;
+  }
+  .btn:active:focus, .btn:hover, .btn:focus {
+    outline: none !important;
+    text-decoration: none !important;
+  }
+  .material-icons {
+      color: green !important;
+      vertical-align: middle !important;
+  }
+}
+#services-not-done {
+  text-align: center;
+  background-color: pink;
+  .btn {
+    color: red !important;
+    padding: 0px !important;
+  }
+  .btn:active:focus, .btn:hover, .btn:focus {
+    outline: none !important;
+    text-decoration: none !important;
+  }
+  .material-icons {
+      color: red !important;
+      vertical-align: middle !important;
+  }
+}
+.service-description #description-popup {
+  display: none;
+  max-width: 200px;
+  position: absolute;
+  padding: 10px 20px 10px 20px;
+  background: #444;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  color: white;
+  word-wrap: break-word;
+  z-index: 1;
+  margin-top: 20px;
+}
+
+#description-popup:before{
+  content: '';
+  position: absolute;
+  border-style: solid;
+  border-width: 0px 15px 15px;
+  border-color: #444 transparent;
+  display: block;
+  width: 0;
+  z-index: 1;
+  margin-top: -20px;
+
+}
+
+.service-description:hover #description-popup {
+  display: block;
+}

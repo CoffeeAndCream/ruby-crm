@@ -1,0 +1,174 @@
+<div class="container padding-top-25">
+  <div class="tab">
+    <button class="tablinks" onclick="openTab(event, 'leadInfo')" id="defaultOpen">Lead</button>
+    <button class="tablinks" onclick="openTab(event, 'financialInfo')">Finances</button>
+    <button class="tablinks" onclick="openTab(event, 'jobSiteInfo')">Job Site</button>
+    <button class="tablinks" onclick="openTab(event, 'serviceOrder')">Service Orders</button>
+  </div>
+  <div class="row info-card">
+    <div id="leadInfo" class="tabcontent">
+      <div class="row">
+        <i class="material-icons" style="float:left;font-size:32px">person_pin</i>
+      </div>
+      <%= render 'lead' %>
+    </div>
+
+    <div id="financialInfo" class="tabcontent">
+      <div class="row">
+        <i class="material-icons material-icon-tabs">account_balance</i>
+      </div>
+      <%= render 'finances' %>
+    </div>
+
+    <div id="jobSiteInfo" class="tabcontent">
+      <div class="row">
+        <i class="material-icons material-icon-tabs">add_location</i>
+      </div>
+      <%= render 'jobsite' %>
+    </div>
+    <div id="serviceOrder" class="tabcontent">
+      <div class="row">
+        <i class="material-icons material-icon-tabs">history</i>
+      </div>
+      <%= render 'serviceorders' %>
+    </div>
+  </div>
+  <div class="row details-card">
+   <i class="material-icons material-icon-tabs">chat</i>
+    <div class="col-lg-7">
+      <h3>Comments</h3>
+      <div id="comments">
+        <% @lead.comments.each do |comment| %>
+          <% unless comment.nil? %>
+            <div id="comment-<%= comment.id %>">
+               <%= button_to "Delete", lead_comment_path(@lead, comment), method: :delete, :class=>'btn btn-link', :style => "float:left;padding:1px 0px 0px 0px !important;color:blue !important;", remote: true %> &nbsp;
+               <h5 style="display: inline-block; margin-top:5px"> <%= comment.comment %> </h5>
+               <h6 style="padding-left: 50px;margin-top:-10px !important; color:#666;"> <%=comment.created_at.strftime('%c') %> </h6>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+        <%= bootstrap_form_for :comments, url: lead_comments_path(@lead), :html => {:method => :post}, remote: true  do |f| %>
+          <%= f.text_field :comment %>
+          <%= f.button 'New Comment', :class => "btn btn-primary btn-sm" %>
+        <% end %>
+    </div>
+  </div>
+  <div class="row details-card">
+   <i class="material-icons material-icon-tabs">access_time</i>
+    <div class="col-lg-10">
+      <h3>Appointments</h3>
+        <table class="table table-hover table-responsive"  id="events">
+          <br>
+          <br>
+          <thead>
+            <th style="text-align: left !important">Date</th>
+            <th style="text-align: left !important">Start Time</th>
+            <th style="text-align: left !important">End Time</th>
+            <th style="text-align: left !important">Appointment</th>
+            <th style="text-align: left !important">Description</th>
+            <th style="text-align: left !important">Actions</th>
+          </thead>
+          <tbody>
+            <% Event.where(:lead_id => @lead.id).each do |event| %>
+            <% unless event.start.nil? %>
+              <tr id="event-<%= event.id %>">
+                <td>
+                  <% case event.start.strftime('%A') %>
+                    <% when 'Monday' %>
+                      <i class="material-icons" style="color:red !important">bookmark</i>
+                    <% when 'Tuesday' %>
+                      <i class="material-icons" style="color:orange !important">bookmark</i>
+                    <% when 'Wednesday' %>
+                      <i class="material-icons" style="color:yellow !important">bookmark</i>
+                    <% when 'Thursday' %>
+                      <i class="material-icons" style="color:green !important">bookmark</i>
+                    <% when 'Friday' %>
+                      <i class="material-icons" style="color:blue !important">bookmark</i>
+                    <% when 'Saturday' %>
+                      <i class="material-icons" style="color:purple !important">bookmark</i>
+                    <% when 'Sunday' %>
+                      <i class="material-icons" style="color:pink !important">bookmark</i>
+                    <% else %>
+
+                  <% end %>
+                  <%=event.start.strftime('%A')%></td>
+                <td><%=event.start.strftime('%l:%M %P')%></td>
+                <td><%=event.ends.strftime('%l:%M %P')%></td>
+                <td><%=event.title%></td>
+                <td><%=event.description%></td>
+                <td><%= button_to "Delete", lead_event_path(@lead, event), method: :delete, :class=>'btn btn-link', :style => "float:left;padding:1px 0px 0px 0px !important;color:blue !important;", remote: true %></td>
+              </tr>
+              <% end %>
+            <% end %>
+          </tbody>
+        </table>
+        <button class="btn btn-default appointment-form-button width-100">Add Appointment</button>
+        <div class="appointment-form">
+          <br>
+          <%= bootstrap_form_for :event, url: lead_events_path(@lead), :html => {:method => :post}, remote: true  do |f| %>
+            <%= f.text_field :title, value: @lead.fullname %>
+            <%= f.collection_select(:color, Service.all.where.not(:name => nil), :color, :name, :label => "Services", :include_blank => "N/A") %>
+            <%= f.text_area :description, placeholder: "Meeting, lead follow-up, show, etc...", label: "Description", class: 'form-control' %>
+            <%= f.datetime_select :start %>
+            <%= f.datetime_select :ends %>
+            <%= f.hidden_field :lead_id, value: @lead.id %>
+            <% unless @user.nil? %>
+              <%= f.hidden_field :user_id, value: @user.id %>
+            <% else %>
+              <% unless !User.any? %>
+              <%= f.collection_select(:user_id, User.all.where.not(:first_name => nil), :id, :fullname, :label => "Assign to", :required => true) %>
+              <% end %>
+            <% end %>
+            <%= f.hidden_field :redirect_alert, value: true %>
+            <%= f.button 'Set Appointment', :class => "btn btn-primary btn-sm appointment-form-sub" %>
+          <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="row details-card">
+    <i class="material-icons material-icon-tabs">photo</i>
+    <div class="col-lg-10">
+    <h3>Photos</h3>
+    <ul class="img-list">
+      <% @lead.photos.each do |photo| %>
+        <% unless photo.image.nil? %>
+        <li>
+          <%= link_to image_tag(photo.image.thumb('180x180#').url, alt: photo.title, class: 'img-thumbnail'),
+                      photo.image.url, target: '_blank' %>
+          <span class="text-content-bottom"><span><%= link_to raw("<span style='color:white' class='glyphicon glyphicon-trash'></span><span style='color:white;'>&nbsp;Remove</span>"), lead_photo_path(@lead, photo), :method => :delete %></span></span>
+          <span class="text-content"><span><%= photo.title %></span></span>
+
+        </li>
+        <% end%>
+      <% end %>
+    </ul>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+$(".appointment-form-button").click(function(){
+    $(".appointment-form").fadeToggle();
+});
+$(".appointment-form-sub").click(function(){
+    $(".appointment-form").toggle().fadeUp();
+});
+
+
+function openTab(evt, tabName) {
+    var i, tabcontent, tablinks;
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+    }
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+    document.getElementById(tabName).style.display = "block";
+    evt.currentTarget.className += " active";
+}
+
+// Get the element with id="defaultOpen" and click on it
+document.getElementById("defaultOpen").click();
+</script>

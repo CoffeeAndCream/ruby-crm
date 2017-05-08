@@ -1,0 +1,76 @@
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12">
+      <h1><img src="/icons/pipe.png" height="75px" class=""></img> Projects</h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-12" id="search-background">
+      <h5 class="container hide-on-mobile" id="search-icon"><span class="glyphicon glyphicon-search"></span> Advanced Search</h5>
+      <%= render '/leads/search_form' %>
+    </div>
+  </div>
+  <br>
+<div class="row">
+  <div id="projects-table">
+    <table class="table table-hover table-striped pretty shadow-effect-1">
+      <thead class="thead-inverse">
+        <tr>
+          <th>Customer</th>
+          <th><%= sortable 'finish_date', "Due Date" %></th>
+          <% Service.all.each do |service| %>
+            <th style="text-align: center;"><%= service.name %></th>
+          <% end %>
+        </tr>
+      </thead>
+      <tbody>
+        <% @leads.each do |lead| %>
+        <% @task_array = [] %>
+        <% unless lead.project.nil? %>
+          <% lead.project.tasks.each do |task| %>
+            <% @task_array.push(task.name) %>
+          <% end %>
+            <tr>
+              <td><%= link_to lead.fullname, lead_project_path(lead, lead.project) %></td>
+              <td><%= lead.project.finish_date.strftime("%m/%d/%y") %></td>
+              <% Service.all.each do |service| %>
+                <% if @task_array.include? service.name %>
+                  <% if lead.project.tasks.find_by_name(service.name).completed? %>
+                    <td id="services-done" class="service-description">
+                      <%= button_to lead_project_task_update_path(lead, lead.project, lead.project.tasks.find_by_name(service.name),  :completed => false), confirm: "Are you sure?", :class => 'btn btn-link',  remote: true do %>
+                        <i class="material-icons">done</i> Done
+                      <% end %>
+                      <div id="description-popup">
+                        <%= lead.project.tasks.find_by_name(service.name).details %>
+                      </div>
+                    </td>
+                  <% else %>
+                    <td id="services-not-done" class="service-description">
+                      <%= button_to lead_project_task_update_path(lead, lead.project, lead.project.tasks.find_by_name(service.name), :completed => true), confirm: "Are you sure?", :class => 'btn btn-link',  remote: true do %>
+                        <i class="material-icons">error_outline</i> Not Done
+                      <% end %>
+                      <div id="description-popup">
+                        <%= lead.project.tasks.find_by_name(service.name).details %>
+                      </div>
+                    </td>
+                  <% end %>
+                <% else %>
+                  <td></td>
+                <% end %>
+              <% end %>
+            </tr>
+          <% end %>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+<div class="row">
+  <%= will_paginate @leads %>
+</div>
+</div>
+<script>
+$('#search-icon').click(function() {
+    $('#advanced-search-bar').slideToggle(300);
+});
+</script>

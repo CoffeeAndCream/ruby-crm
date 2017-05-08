@@ -1,0 +1,2 @@
+$('#comments').fadeIn().show();
+$('#comments').fadeIn().append("<%= j render(:partial => 'leads/comments/comment', :locals => {comment: @lead.comments.last}).html_safe %>");

@@ -1,0 +1,2 @@
+$('#tasks').fadeIn().show();
+$('#tasks').fadeIn().prepend("<%= j render(:partial => 'tasks/task', :locals => {task: @lead.project.tasks.last}).html_safe %>");

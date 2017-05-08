@@ -1,0 +1,41 @@
+<div class="container search-container hide-on-mobile" id="advanced-search-bar">
+  <%= form_for leads_path, :method => 'get', :enforce_utf8 => false, class: 'form-control'  do |f| %>
+    <%= hidden_field_tag :direction, params[:direction] %>
+    <%= hidden_field_tag :sort, params[:sort] %>
+      <div class="col-md-2">
+        <div class="row">
+          <%= text_field_tag :fullname, params[:fullname], class: 'search-form-boxes', placeholder: 'Name' %>
+        </div>
+      </div>
+      <div class="col-md-2">
+        <div class="row">
+          <%= text_field_tag :address, params[:address], class: 'search-form-boxes', placeholder: 'Address' %>
+        </div>
+      </div>
+      <div class="col-md-2">
+        <div class="row">
+          <%= text_field_tag :city, params[:city], class: 'search-form-boxes', placeholder: 'City' %>
+        </div>
+      </div>
+      <div class="col-md-1">
+        <div class="row">
+          <%= text_field_tag :zip, params[:zip], class: 'search-form-boxes', placeholder: 'Zip Code' %>
+        </div>
+      </div>
+      <div class="col-md-2">
+        <div class="row" style="margin-right: 5px !important;">
+          <%= select_tag "user", options_from_collection_for_select(User.where.not(:id => '1'), "id", "fullname"), {:prompt => 'Salesperson', :class => 'search-form form-control',:style => 'height: 26px !important; padding: 0px !important;'} %>
+        </div>
+      </div>
+      <div class="col-md-2">
+        <div class="row" style="margin-right: 5px !important;">
+          <%= select_tag(:customer, options_for_select([['Contact', nil], ['Yes', 1], ['No', 0]]), {:class => 'search-form form-control', :style => 'height: 26px !important; font-size: 14px !important; padding: 0px !important;'})%>
+        </div>
+      </div>
+      <div class="col-sm-1">
+        <div class="row">
+          <%= submit_tag "Search", :name => nil, :class => 'btn btn-default btn-sm', :style => 'height: 26px !important;padding: 0px 10px 0px 10px !important;' %>
+        </div>
+      </div>
+  </div>
+<% end %>

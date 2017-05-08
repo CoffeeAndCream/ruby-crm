@@ -1,0 +1,67 @@
+<div class="container info-card"  style="margin-top: -10px">
+  <i class="material-icons" style="font-size: 36px">people</i>
+  <div id="lead-tracking-table">
+  <div class="row">
+    <div class="col-md-10 col-md-offset-1">
+      <h2>Leads</h2>
+      <div class="col-lg-12" id="search-background">
+        <h5 class="container hide-on-mobile"  id="search-icon"><span class="glyphicon glyphicon-search"></span> Advanced Search</h5>
+        <%= render '/users/search_form' %>
+      </div>
+      <table class="table table-hover table-bordered table-responsive">
+        <thead>
+          <th>Leads</th>
+          <th>Contacted</th>
+          <th>Closed</th>
+          <th>Project Started</th>
+          <th>Project Finished</th>
+          <th>Followed Up</th>
+        </thead>
+        <tbody>
+          <% @leads.each do |lead| %>
+          <tr>
+            <td><%= link_to lead.fullname, lead_path(lead) %></td>
+            <td>
+              <% if lead.contacted %>
+                <%= link_to raw('<span class="glyphicon glyphicon-ok" id="task-done">'), lead_contacted_path(lead, :contacted => false), method: :post, remote: true %>
+              <% else %>
+                <%= link_to raw('<span class="glyphicon glyphicon-remove" id="task-not-done">'), lead_contacted_path(lead, :contacted => true), method: :post, remote: true %>
+              <% end %>
+            </td>
+            <td>
+              <% if lead.closed %>
+                <%= link_to raw('<span class="glyphicon glyphicon-ok" id="task-done">'), lead_closed_path(lead, :closed => false), method: :post, remote: true %>
+              <% else %>
+                <%= link_to raw('<span class="glyphicon glyphicon-remove" id="task-not-done">'), lead_closed_path(lead, :closed => true), method: :post, remote: true %>
+              <% end %>
+            </td>
+            <td>
+              <% if lead.begin_project %>
+                <%= link_to raw('<span class="glyphicon glyphicon-ok" id="task-done">'), lead_begin_project_path(lead, :begin_project => false), method: :post, remote: true %>
+              <% else %>
+                <%= link_to raw('<span class="glyphicon glyphicon-remove" id="task-not-done">'), lead_begin_project_path(lead, :begin_project => true), method: :post, remote: true %>
+              <% end %>
+            </td>
+            <td>
+              <% if lead.finished_project %>
+                <%= link_to raw('<span class="glyphicon glyphicon-ok" id="task-done">'), lead_finished_project_path(lead, :finished_project => false), method: :post, remote: true %>
+              <% else %>
+                <%= link_to raw('<span class="glyphicon glyphicon-remove" id="task-not-done">'), lead_finished_project_path(lead, :finished_project => true), method: :post, remote: true %>
+              <% end %>
+            </td>
+            <td>
+              <% if lead.send_thank_you %>
+                <%= link_to raw('<span class="glyphicon glyphicon-ok" id="task-done">'), lead_send_thank_you_path(lead, :send_thank_you => false), method: :post, remote: true %>
+              <% else %>
+                <%= link_to raw('<span class="glyphicon glyphicon-remove" id="task-not-done">'), lead_send_thank_you_path(lead, :send_thank_you => true), method: :post, remote: true %>
+              <% end %>
+            </td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+        <%= will_paginate @leads %>
+      </div>
+    </div>
+  </div>
+</div>

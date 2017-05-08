@@ -1,0 +1,13 @@
+<tr id="payment-<%= payment.id %>">
+  <td><%= payment.created_at.strftime("%m/%d/%y") %>
+  <td><%= payment.payment_type %>
+  <td style="color:green">+<%= number_to_currency(payment.amount) %></td>
+  <% @total = @lead.payments.sum(:amount) %>
+  <% if  @lead.contract_total - @total <= 0 %>
+    <td style="color:green">$0.00</td>
+  <% else %>
+    <td style="color:red"><%=number_to_currency(@total - @lead.contract_total)%></td>
+  <% end %>
+  <td><%= number_to_currency(@lead.contract_total) %></td>
+  <td><%= button_to "Delete", lead_payment_path(@lead, payment), method: :delete, :class=>'btn btn-danger btn-xs', :style => "float:left;", remote: true %></td>
+</tr>

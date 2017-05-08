@@ -1,0 +1,40 @@
+<div class="col-lg-4">
+  <%=bootstrap_form_for :job_site, url: lead_job_site_index_path(@lead), method: :post do |f| %>
+    <%= f.text_field :address, required: true %>
+    <%= f.text_field :city, required: true %>
+    <%= f.select :state, options_for_select(us_states), required: true %>
+    <%= f.text_field :zip %>
+    <%= f.text_area :notes %>
+    <%= f.button "Add Job Site", :class => "btn btn-primary btn-sm" %>
+  <% end %>
+</div>
+<div class="col-lg-8  table-container">
+  <h3>Location</h3>
+  <% unless @lead.job_site.nil? %>
+    <h5><i><%= @lead.job_site.address %>, <%= @lead.job_site.city %>, <%= @lead.job_site.state %> <%= @lead.job_site.zip %></i></h5>
+    <br>
+    <iframe
+      width="100%"
+      height="350"
+      frameborder="0" style="border:0"
+      src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBvEZgBoPE2Hj02TCkfweQxrGp4stARVig
+          &q=<%= @lead.job_site.address.gsub(' ',' ') %>,<%=@lead.job_site.city %>+<%=@lead.job_site.state.strip%>" allowfullscreen>
+    </iframe>
+    <h3>Notes</h3>
+    <% unless @lead.job_site.notes.empty? %>
+      <div id="job_site_notes_js">
+        <%= @lead.job_site.notes %>
+      </div>
+    <% else %>
+      <div id="job_site_notes_js">
+        <i>No notes available for this job</i>
+      </div>
+      <%=bootstrap_form_for :job_site, url: lead_job_site_path(@lead, @lead.job_site), method: :put, remote: true do |f| %>
+        <%= f.text_area :notes, value: @lead.job_site.notes %>
+        <%= f.button "Update Your Notes", :class => "btn btn-primary btn-sm" %>
+      <% end %>
+    <% end %>
+  <% else %>
+      <h5>No location selected <i class="material-icons">announcement</i></h5>
+  <% end %>
+</div>

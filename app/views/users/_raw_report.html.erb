@@ -1,0 +1,35 @@
+<div class="container info-card" style="margin-top: -12px">
+  <i class="material-icons" style="font-size: 36px; float:left">public</i>
+  <div id="raw-data-table">
+    <h2>Breakdown</h2>
+    <div class="col-md-8 col-md-offset-2">
+      <div class="row ">
+        <br>
+        <table class="table table-hover table-responsive">
+          <tbody>
+            <tr>
+              <td><b>Total Number of Leads</b></td>
+              <td><%= @leads.count %></td>
+              <td>Inf%</td>
+            </tr>
+            <tr>
+              <td><b>Projects Started</b></td>
+              <td><%= @leads.where(:begin_project => true).count %></td>
+              <td><%= number_to_percentage((@leads.where(:finished_project => true).count.to_f/@leads.where(:begin_project => true).count.to_f)*100, precision: 1) %></td>
+            </tr>
+            <tr>
+              <td><b>Leads Closed</b></td>
+              <td><%= @leads.where(:closed => true).count %></td>
+              <td><%= number_to_percentage((@leads.where(:closed => true).count.to_f/@leads.count.to_f)*100, precision: 1) %></td>
+            </tr>
+            <tr>
+              <td><b>Contracts Signed</b></td>
+              <td style="color:green"><%= number_to_currency(@leads.sum(:contract_total)) %></td>
+              <td><%= number_to_percentage((Payment.where(:lead_id => Lead.where(:user => current_user)).where("amount > ?", 0).sum(:amount).to_f/@leads.sum(:contract_total).to_f)*100, precision: 1) %></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
