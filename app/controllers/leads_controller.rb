@@ -20,8 +20,11 @@ class LeadsController < ApplicationController
 
   def convert
     @lead = Lead.find_by(id: params[:lead_id])
+    @user = User.find_by_id(@lead.user_id)
+
     unless @lead.customer
       @lead.update_attributes(customer: true)
+      UserMailer.welcome_email(@user, @lead).deliver_now
       redirect_to :action => 'show', :id => @lead
     else
       redirect_to :back, :info => @lead.fullname.to_s + ' is already a contact.'

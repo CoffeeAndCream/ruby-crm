@@ -1,0 +1,29 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>New update regarding, <%= @lead.fullname %></h1>
+    <p>
+      Your lead is now a customer! Congratulations!
+      Lead info:
+      <li><%= @lead.address %>, <%=@lead.city%>, <%=@lead.state%></li>
+      <li><%= number_to_phone(@lead.phonenumber, area_code: true) %></li>
+      <li><%= @lead.email %></li>
+      <br>
+      Services:
+      <% unless @lead.services.nil? %>
+        <% @lead.services.each do |service| %>
+          <% unless service.nil? || service.empty? %>
+            <%= Service.find_by_id(service.to_i).name %>,
+          <% end %>
+        <% end %>
+      <% end %>
+    </p>
+    <p>
+      To login to the site to see more about your lead, just follow this link: <%= @url %>.
+    </p>
+  </body>
+</html>
