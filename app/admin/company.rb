@@ -14,8 +14,7 @@ ActiveAdmin.register Company do
   index do
       column :company_name
       column :company_email
-      column :last_sign_in_at
-      column :sign_in_count
+      column :company_phone
       column :smtp_address
       actions
   end
