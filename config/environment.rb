@@ -8,7 +8,7 @@ ActionMailer::Base.smtp_settings = {
     :address        => 'smtp.gmail.com',
     :domain         => 'legacy-exteriors.com',
     :port           => 587,
-    :user_name      => 'shulse@legacy-exteriors.com',
-    :password       => '*****************',
+    :user_name      => 'info@legacy-exteriors.com',
+    :password       => 'L3g@cy3111!',
     :authentication => :plain
 }

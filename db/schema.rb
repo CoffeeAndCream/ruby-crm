@@ -37,6 +37,16 @@ ActiveRecord::Schema.define(version: 201702111755526) do
     t.index ["lead_id"], name: "index_comments_on_lead_id", using: :btree
   end
 
+  create_table "companies", force: :cascade do |t|
+    t.string   "company_name"
+    t.string   "company_email"
+    t.string   "company_email_password"
+    t.string   "company_phone"
+    t.string   "smtp_address"
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
   create_table "events", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "lead_id"
