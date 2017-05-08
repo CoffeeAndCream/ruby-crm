@@ -10,6 +10,13 @@ ActiveAdmin.register Company do
 #   permitted = [:permitted, :attributes]
 #   permitted << :other if params[:action] == 'create' && current_user.admin?
 #   permitted
-# end
-
+  # end
+  index do
+      column :company_name
+      column :company_email
+      column :last_sign_in_at
+      column :sign_in_count
+      column :smtp_address
+      actions
+  end
 end
