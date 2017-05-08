@@ -11,9 +11,12 @@ class PhotosController < ApplicationController
   def create
     @lead = Lead.find_by_id(params[:lead_id])
     #create the images from the params
+
     unless params[:photo][:image].nil?
         params[:photo][:image].each do |image|
-        @lead.photos << Photo.create(:title => params[:photo][:title], :image => image)
+          url = @lead.id.to_s + '/' + 'image' + rand(100000000).to_s;
+          Cloudinary::Uploader.upload(image, :public_id => url);
+          @lead.photos.create(:image_uid => url, :title => params[:photo][:title])
       end
     end
     if @lead.save

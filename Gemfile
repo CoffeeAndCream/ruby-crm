@@ -78,6 +78,7 @@ gem 'groupdate'
 
 gem "will_paginate", :git => "https://github.com/mislav/will_paginate.git"
 gem 'dragonfly', '~> 1.1.1'
+gem 'dragonfly-cloudinary'
 gem 'rack-cache'
 gem 'has_scope'
 
