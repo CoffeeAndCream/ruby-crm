@@ -4,7 +4,7 @@ date_range_picker = function() {
     $(this).daterangepicker({
         timePicker: true,
         timePickerIncrement: 30,
-        alwaysShowCalendars: true
+        alwaysShowCalendars: false
     }, function(start, end, label) {
       $('.start_hidden').val(start.format('YYYY-MM-DD HH:mm'));
       $('.end_hidden').val(end.format('YYYY-MM-DD HH:mm'));

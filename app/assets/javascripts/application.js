@@ -11,10 +11,10 @@
 // about supported directives.
 //
 //= require turbolinks
-//= require jquery_ujs
 //= require Chart.bundle
 //= require chartkick
-//= require date_range_picker
+//= require moment
+//= require daterangepicker
 //= require_tree .
 $(document).on("click", ".element", function(){
    $.ajax({
