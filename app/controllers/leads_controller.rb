@@ -24,7 +24,7 @@ class LeadsController < ApplicationController
 
     unless @lead.customer
       @lead.update_attributes(customer: true)
-      UserMailer.welcome_email(@user, @lead).deliver_now
+      UserMailer.lead_email(@user, @lead).deliver_now
       redirect_to :action => 'show', :id => @lead
     else
       redirect_to :back, :info => @lead.fullname.to_s + ' is already a contact.'

@@ -9,7 +9,8 @@ ActiveAdmin.register_page "Dashboard" do
         panel "Recent Leads" do
           table_for Lead.order('created_at desc').limit(10) do
             column("Name")   {|lead| link_to lead.fullname, admin_lead_path(lead)                                  }
-            column("Phone"){|lead| lead.phone }
+            column("Phone"){|lead| number_to_phone(lead.phonenumber, area_code: true)
+ }
             column("Address")   {|lead| lead.address                       }
             column("Salesperson")   {|lead| unless lead.user.nil?
               lead.user.fullname

@@ -5,9 +5,9 @@
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
   </head>
   <body>
-    <h1>New update regarding, <%= @lead.fullname %></h1>
+    <h1>New update regarding <%= @lead.fullname %></h1>
     <p>
-      Your lead is now a customer! Congratulations!
+      Your lead is now a customer. Congratulations!
       Lead info:
       <li><%= @lead.address %>, <%=@lead.city%>, <%=@lead.state%></li>
       <li><%= number_to_phone(@lead.phonenumber, area_code: true) %></li>
