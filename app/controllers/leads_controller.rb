@@ -62,7 +62,7 @@ class LeadsController < ApplicationController
   end
   def closed
     @lead = Lead.find_by_id(params[:lead_id])
-    @lead.update_attributes(:closed => params[:closed])
+    @lead.update_attributes(:closed => params[:closed], :customer => params[:closed])
     @lead.save
     @leads = apply_scopes(Lead).where(:user_id => current_user.id).order(created_at: :desc).paginate(:page => params[:page], :per_page => 10)
     respond_to do |format|
