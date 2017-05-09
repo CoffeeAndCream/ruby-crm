@@ -29,7 +29,7 @@ class EventsController < ApplicationController
   def destroy
     @lead_id = @event.lead_id
     @event.destroy
-    if params.has_key?(:lead_id)
+    if @event.destroy
       respond_to do |format|
         format.js {render 'leads/events/destroy.js.erb'}
       end
