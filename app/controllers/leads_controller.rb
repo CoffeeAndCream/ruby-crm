@@ -101,9 +101,11 @@ class LeadsController < ApplicationController
     end
   end
   def destroy
-    @lead = Lead.find_by(id: params[:id])
-    @lead.destroy
-    redirect_to leads_path
+    unless authenticate_active_admin_user!
+      @lead = Lead.find_by(id: params[:id])
+      @lead.destroy
+      redirect_to leads_path, info: "Lead destroyed"
+    end
   end
   def lead_sheet
     @lead = Lead.find_by(id: params[:lead_id])
