@@ -1,13 +1,12 @@
 <head>
   <title><%= params[:controller].capitalize %> | Legacy Exteriors CRM</title>
+
+  <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+  
   <%= csrf_meta_tag %>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
 
-  
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <script type="text/javascript" src="//maps.googleapis.com/maps/api/js?key=AIzaSyBDo_zFNCFAJlM5st-oCnsAf8aCyzyol2A" async="" defer="defer"></script>
-  <%= include_gon %>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -26,6 +25,10 @@
   <link href='/assets/scheduler.min.css' rel='stylesheet' />
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+  <script type="text/javascript" src="//maps.googleapis.com/maps/api/js?key=AIzaSyBDo_zFNCFAJlM5st-oCnsAf8aCyzyol2A" async="" defer="defer"></script>
+  <%= include_gon %>
 </head>
 <br>
 <div id="remote_container"></div>
