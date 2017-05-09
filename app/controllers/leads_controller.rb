@@ -101,6 +101,7 @@ class LeadsController < ApplicationController
     end
   end
   def destroy
+    authenticate_active_admin_user!
     @lead = Lead.find_by(id: params[:id])
     @lead.destroy
     redirect_to leads_path
