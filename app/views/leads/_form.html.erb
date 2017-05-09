@@ -60,7 +60,9 @@
       <div class="col-md-5">
       </div>
       <div class="col-md-10">
-        <%= f.text_field :source, :placeholder => 'Online, phone, advertisement, a friend, etc.' %>
+        <% unless !Source.any? %>
+        <%= f.collection_select(:source, Source.all, :source_type, :source_type, :label => "Sources", :placeholder => 'Online, phone, advertisement, a friend, etc.') %>
+        <% end %>
       </div>
     </div>
       <%= f.submit "Submit", :class => "btn btn-success"  %>

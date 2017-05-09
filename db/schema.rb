@@ -143,6 +143,12 @@ ActiveRecord::Schema.define(version: 201702111755526) do
     t.datetime "updated_at",                     null: false
   end
 
+  create_table "sources", force: :cascade do |t|
+    t.string   "source_type"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
   create_table "tasks", force: :cascade do |t|
     t.integer  "project_id"
     t.string   "name"
