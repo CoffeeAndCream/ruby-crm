@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   include ApplicationHelper
+  before_filter :request_filter
   before_action :authenticate_user!
   before_action :set_time_zone, if: :authenticate_user!
 
@@ -26,6 +27,11 @@ class ApplicationController < ActionController::Base
   end
   def json_request?
     request.format.json?
+  end
+
+
+  def request_filter
+     $request = request
   end
 
   private
