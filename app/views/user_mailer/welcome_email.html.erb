@@ -5,7 +5,7 @@
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
   </head>
   <body>
-    <h1>Welcome to ruby-crm.herokuapp.com, <%= @user.fullname %></h1>
+    <h1>Welcome to <%= request.protocol + request.host %>, <%= @user.fullname %></h1>
     <p>
       You have successfully signed up to ruby-crm.herokuapp.com,
       your username is: <%= @user.email %>.<br><br>
