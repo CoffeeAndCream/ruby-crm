@@ -1,7 +1,7 @@
 class UserMailer < ApplicationMailer
   def welcome_email(user)
     @user = user
-    @url  = 'http://ruby-crm.herokuapp.com/'
+    @url  = request.base_url
     if !Company.first.nil?
       company = Company.first
       delivery_options = {
