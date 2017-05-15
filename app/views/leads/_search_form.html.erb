@@ -2,9 +2,14 @@
   <%= form_for leads_path, :method => 'get', :enforce_utf8 => false, class: 'form-control'  do |f| %>
     <%= hidden_field_tag :direction, params[:direction] %>
     <%= hidden_field_tag :sort, params[:sort] %>
-      <div class="col-md-2">
+      <div class="col-md-1">
         <div class="row">
-          <%= text_field_tag :fullname, params[:fullname], class: 'search-form-boxes', placeholder: 'Name' %>
+          <%= text_field_tag :first_name, params[:first_name], class: 'search-form-boxes', placeholder: 'First name' %>
+        </div>
+      </div>
+      <div class="col-md-1">
+        <div class="row">
+          <%= text_field_tag :last_name, params[:last_name], class: 'search-form-boxes', placeholder: 'Last name' %>
         </div>
       </div>
       <div class="col-md-2">
@@ -12,7 +17,7 @@
           <%= text_field_tag :address, params[:address], class: 'search-form-boxes', placeholder: 'Address' %>
         </div>
       </div>
-      <div class="col-md-2">
+      <div class="col-md-1">
         <div class="row">
           <%= text_field_tag :city, params[:city], class: 'search-form-boxes', placeholder: 'City' %>
         </div>

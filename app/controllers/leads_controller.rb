@@ -1,6 +1,6 @@
 class LeadsController < ApplicationController
   helper_method :sort_column, :sort_direction
-  has_scope :zip, :user, :city, :fullname, :address, :city, :customer
+  has_scope :zip, :user, :city, :fullname, :first_name, :last_name, :address, :city, :customer
 
 
   def index

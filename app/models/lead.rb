@@ -3,6 +3,8 @@ class Lead < ApplicationRecord
   scope :city, -> city { where(:city => city) }
   scope :zip, -> zip { where(:zip => zip) }
   scope :fullname, -> fullname { where('(first_name || last_name) LIKE ?', "%#{fullname}%")}
+  scope :first_name, -> first_name { where(first_name: first_name)}
+  scope :last_name, -> last_name { where(last_name: last_name)}
   scope :address, -> address { where('(address || city) LIKE ?', "%#{address}%")}
   scope :city, -> city { where('(city) LIKE ?', "%#{city}%") }
   scope :customer, -> customer { where(customer: customer) }
