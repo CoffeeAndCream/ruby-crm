@@ -1,15 +1,14 @@
 <div class="container">
   <div class="row">
-    <div class="col-md-10">
       <div class="col-md-1">
         <i class="material-icons" style="font-size: 80px;padding-top: 5px">fingerprint</i>
       </div>
-      <div class="col-md-2">
+      <div class="col-md-8">
         <h3><%= @user.first_name %> <%= @user.last_name %></h3>
         <h5><%= @user.email %></h5>
       </div>
     </div>
-    <div class="col-md-2" style="float: right;padding-top: 10px">
+    <div class="col-md-2" style="float: right;padding-top: 0px">
       <%= render 'links' %>
     </div>
   </div>
