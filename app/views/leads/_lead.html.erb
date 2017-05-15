@@ -62,7 +62,7 @@
     height="350"
     frameborder="0" style="border:0"
     src="https://www.google.com/maps/embed/v1/directions?key=AIzaSyBvEZgBoPE2Hj02TCkfweQxrGp4stARVig&origin=4125+Terminal+Dr,McFarland+WI&destination= +
-          <%= @lead.address.gsub(' ',' ') %>,<%=@lead.city %>+<%=@lead.state.strip%> +
+          <%= @lead.address.gsub(' ',' ') %>+ ', '+<%= @lead.city %>+<%=@lead.state.strip%> +
           &avoid=tolls">
   </iframe>
 </div>
