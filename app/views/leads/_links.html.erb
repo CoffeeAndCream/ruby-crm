@@ -11,6 +11,7 @@
       <% end %>
       <li><%= link_to raw('<i class="material-icons"  style="font-size: 18px;">track_changes</i> Edit'), edit_lead_path(@lead),  method: :get %></li>
       <li><%= link_to raw('<i class="material-icons" style="font-size: 18px;">add_a_photo</i> Add photos'), new_lead_photo_path(@lead) %>
+      <li><%= link_to raw('<i class="material-icons" style="font-size: 18px;">perm_contact_calendar</i> Set Appointment'), calendar_url(:lead_id => @lead.id) %>
       <li><%= link_to raw('<i class="material-icons" style="font-size: 18px;">print</i> Lead sheet'), lead_lead_sheet_path(@lead) %>
       <li><%= link_to raw('<i class="material-icons" style="font-size: 18px;">archive</i> Convert to customer'), lead_convert_path(@lead), method: :post %>
       <li><%= link_to raw('<i class="material-icons" style="font-size: 18px;">delete</i> Delete'), lead_path, method: :delete, data: { :confirm => "Are you sure?" } %></li>

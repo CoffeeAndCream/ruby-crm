@@ -11,6 +11,7 @@
             <th style="text-align: left !important">Start Time</th>
             <th style="text-align: left !important">End Time</th>
             <th style="text-align: left !important">Appointment</th>
+            <th style="text-align: left !important">Location</th>
             <th style="text-align: left !important">Description</th>
           </thead>
           <tbody>
@@ -37,7 +38,8 @@
                   <span style="padding-left: 30px;color:#777;"><%=event.start.strftime('%m/%d/%Y')%></span></td>
                 <td><%=event.start.strftime('%l:%M %P')%></td>
                 <td><%=event.ends.strftime('%l:%M %P')%></td>
-                <td><%=event.title%></td>
+                <td><%= link_to event.title, lead_path(event.lead_id) %></td>
+                <td><%= Lead.find_by_id(event.lead_id).address + ', ' + Lead.find_by_id(event.lead_id).city + ', ' + Lead.find_by_id(event.lead_id).state %></td>
                 <td><%=event.description%></td>
               </tr>
             <% end %>

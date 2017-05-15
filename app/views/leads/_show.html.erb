@@ -67,7 +67,6 @@
             <th style="text-align: left !important">End Time</th>
             <th style="text-align: left !important">Appointment</th>
             <th style="text-align: left !important">Description</th>
-            <th style="text-align: left !important">Actions</th>
           </thead>
           <tbody>
             <% Event.where(:lead_id => @lead.id).each do |event| %>
@@ -97,12 +96,14 @@
                 <td><%=event.ends.strftime('%l:%M %P')%></td>
                 <td><%=event.title%></td>
                 <td><%=event.description%></td>
-                <td><%= button_to "Delete", lead_event_path(@lead, event), method: :delete, :class=>'btn btn-link', :style => "float:left;padding:1px 0px 0px 0px !important;color:blue !important;", remote: true %></td>
+                <!--<td><%= button_to "Delete", lead_event_path(@lead, event), method: :delete, :class=>'btn btn-link', :style => "float:left;padding:1px 0px 0px 0px !important;color:blue !important;", remote: true %></td>
+                -->
               </tr>
               <% end %>
             <% end %>
           </tbody>
         </table>
+        <!--
         <button class="btn btn-default appointment-form-button width-100">Add Appointment</button>
         <div class="appointment-form">
           <br>
@@ -124,6 +125,7 @@
             <%= f.button 'Set Appointment', :class => "btn btn-primary btn-sm appointment-form-sub" %>
           <% end %>
       </div>
+    -->
     </div>
   </div>
   <div class="row details-card">

@@ -2,9 +2,12 @@ var date_range_picker;
 date_range_picker = function() {
   $('.date-range-picker').each(function(){
     $(this).daterangepicker({
-        timePicker: true,
-        timePickerIncrement: 30,
-        alwaysShowCalendars: true,
+      "timePicker": true,
+      "timePickerIncrement": 30,
+      "showCustomRangeLabel": false,
+      "alwaysShowCalendars": false,
+      "applyClass": "btn-primary",
+      "cancelClass": "btn-danger",
         locale: {
             format: 'MM/DD/YYYY h:mm A'
         }

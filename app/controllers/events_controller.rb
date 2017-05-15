@@ -27,14 +27,9 @@ class EventsController < ApplicationController
     @event.update(event_params)
   end
   def destroy
-    @lead_id = @event.lead_id
     @event.destroy
-    if @event.destroy
-      respond_to do |format|
-        format.js {render 'leads/events/destroy.js.erb'}
-      end
-    end
   end
+
 
   private
     def set_event

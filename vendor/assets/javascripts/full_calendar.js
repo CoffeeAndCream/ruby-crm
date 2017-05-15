@@ -24,15 +24,16 @@ initialize_calendar = function() {
       theme: 'jquery-ui',
       aspectRatio: 1.8,
 
-      select: function(start, end) {
+      select: function(start, end, ev, view, resource) {
         $.getScript('/events/new', function() {
           $('#event_date_range').val(moment(start).format("MM/DD/YYYY HH:mm") + ' - ' + moment(end).format("MM/DD/YYYY HH:mm"))
           date_range_picker();
           $('.start_hidden').val(moment(start).format('YYYY-MM-DD HH:mm'));
           $('.end_hidden').val(moment(end).format('YYYY-MM-DD HH:mm'));
-          console.log(moment(start).format('YYYY-MM-DD HH:mm'));
+          $('.salesperson').val(resource.id);
+          $('.lead_id').val(gon.lead.id);
+          $('.event_title').val(gon.lead.first_name + ' ' + gon.lead.last_name);
         });
-
         calendar.fullCalendar('unselect');
       },
 
