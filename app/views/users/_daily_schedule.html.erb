@@ -41,12 +41,12 @@
                 <% unless Lead.find_by_id(event.lead_id).nil? %>
                   <td><%= link_to event.title, lead_path(event.lead_id) %></td>
                 <% else %>
-                  <td></td>
+                  <td>event.title</td>
                 <% end %>
                 <% unless Lead.find_by_id(event.lead_id).nil? %>
                   <td><%= Lead.find_by_id(event.lead_id).address + ', ' + Lead.find_by_id(event.lead_id).city + ', ' + Lead.find_by_id(event.lead_id).state %></td>
                 <% else %>
-                  <td></td>
+                  <td>Unknown location</td>
                 <% end %>
                 <td><%=event.description%></td>
               </tr>
