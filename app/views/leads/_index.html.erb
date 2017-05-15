@@ -21,7 +21,7 @@
         </td>
         <td>
           <% unless lead.address.nil? %>
-            <%= lead.address %>, <%= lead.city %>
+            <%= lead.address %>, <%= lead.city %>, <%= lead.state %>
           <% end %>
         </td>
         <% unless User.find_by_id(lead.user_id).nil? %>
