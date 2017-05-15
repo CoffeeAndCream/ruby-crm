@@ -30,6 +30,7 @@ initialize_calendar = function() {
           date_range_picker();
           $('.start_hidden').val(moment(start).format('YYYY-MM-DD HH:mm'));
           $('.end_hidden').val(moment(end).format('YYYY-MM-DD HH:mm'));
+          console.log(moment(start).format('YYYY-MM-DD HH:mm'));
         });
 
         calendar.fullCalendar('unselect');
@@ -40,7 +41,6 @@ initialize_calendar = function() {
           event: {
             id: event.id,
             user_id: event.resourceId,
-            resourceId: event.resourceId,
             start: event.start.format(),
             ends: event.end.format()
           }

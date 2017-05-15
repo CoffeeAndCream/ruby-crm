@@ -4,8 +4,8 @@
     <%= f.input :color,:collection => Service.all,:label_method => :name,:value_method => :color,:label => "Services" ,:include_blank => false %>
     <%= f.input :user_id,:collection => User.where.not(:first_name => nil),:label_method => :fullname,:value_method => :id,:label => "Salesperson" ,:include_blank => false %>
     <%= f.input :date_range, input_html: { class: "form-control input-sm date-range-picker" } %>
-    <%= f.input_field :start, as: :hidden, value: Date.today, class: 'form-control input-sm start_hidden date-range-picker' %>
-    <%= f.input_field :ends, as: :hidden, value: Date.today, class: 'form-control input-sm end_hidden' %>
+    <%= f.input :start, as: :hidden, value: Date.today, class: 'form-control input-sm start_hidden' %>
+    <%= f.input :ends, as: :hidden, value: Date.today, class: 'form-control input-sm end_hidden' %>
     <%= f.text_area :description, placeholder: "Meeting, lead follow-up, show, etc...", label: "Description", class: 'form-control' %>
   </div>
   <br>
