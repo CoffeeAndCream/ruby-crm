@@ -58,6 +58,7 @@
    <i class="material-icons material-icon-tabs">access_time</i>
     <div class="col-lg-10">
       <h3>Appointments</h3>
+      <% unless Event.where(:lead_id => @lead.id).empty? %>
         <table class="table table-hover table-responsive"  id="events">
           <br>
           <br>
@@ -103,6 +104,9 @@
             <% end %>
           </tbody>
         </table>
+      <% else %>
+        This lead doesn't have any appointments. <%= link_to 'Want to add an appointment?', calendar_url(:lead_id => @lead.id) %>
+      <% end %>
         <!--
         <button class="btn btn-default appointment-form-button width-100">Add Appointment</button>
         <div class="appointment-form">
@@ -132,6 +136,7 @@
     <i class="material-icons material-icon-tabs">photo</i>
     <div class="col-lg-10">
     <h3>Photos</h3>
+    <% unless @lead.photos.empty? %>
     <ul class="img-list">
       <% @lead.photos.each do |photo| %>
         <% unless photo.image_uid.nil? %>
@@ -145,6 +150,9 @@
         <% end%>
       <% end %>
     </ul>
+    <% else %>
+      This lead has no photos. <%= link_to 'Want to add a photo?', new_lead_photo_path(@lead)  %>
+    <% end %>
     </div>
   </div>
 </div>

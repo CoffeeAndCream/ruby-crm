@@ -8,7 +8,7 @@
 </div>
 <div class="col-lg-8  table-container">
   <h3>Service Orders</h3>
-  <br>
+  <% unless @lead.service_orders.empty? %>
     <table class="table table-hover table-responsive" id="service-orders-table">
     <thead>
       <th style="text-align: left !important;">Name</th>
@@ -27,4 +27,7 @@
       <% end %>
     </tbody>
   </table>
+  <% else %>
+    <i>No service orders to show.</i>
+  <% end %>
 </div>
