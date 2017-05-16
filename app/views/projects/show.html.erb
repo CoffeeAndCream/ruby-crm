@@ -114,7 +114,7 @@
       <% @lead.photos.each do |photo| %>
         <% unless photo.image_uid.nil? %>
         <li>
-          <%= cl_image_tag(photo.image_uid, :crop => :fill, :width => 180, :height => 180, class: 'img-thumbnail', alt: photo.title) %>
+          <%= cl_image_tag(photo.image_uid, :crop => :fill, class: 'img-thumbnail', alt: photo.title) %>
           <span class="text-content-bottom"><span><%= link_to raw("<span style='color:white' class='glyphicon glyphicon-trash'></span><span style='color:white;'>&nbsp;Remove</span>"), lead_photo_path(@lead, photo), :method => :delete %></span></span>
           <span class="text-content"><span><%= photo.title %></span></span>
         </li>

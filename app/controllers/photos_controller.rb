@@ -14,7 +14,7 @@ class PhotosController < ApplicationController
 
     unless params[:photo][:image].nil?
         params[:photo][:image].each do |image|
-          url = @lead.id.to_s + '/' + 'image' + rand(100000000).to_s;
+          url = @lead.id.to_s + '-' + 'image' + rand(100000000).to_s;
           Cloudinary::Uploader.upload(image, :public_id => url);
           @lead.photos.create(:image_uid => url, :title => params[:photo][:title])
       end
@@ -31,8 +31,12 @@ class PhotosController < ApplicationController
     @photo = Photo.find_by(id: params[:id])
     puts @photo.image_uid
     Cloudinary::Uploader.destroy(@photo.image_uid)
-    @photo.destroy
-    redirect_back(fallback_location: :back)
+    unless @photo.nil?
+      @photo.destroy
+      respond_to do |format|
+        format.js{render 'photos/destroy.js.erb'}
+      end
+    end
   end
 
   private

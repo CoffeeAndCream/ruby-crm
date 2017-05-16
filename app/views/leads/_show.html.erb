@@ -120,12 +120,10 @@
     <ul class="img-list">
       <% @lead.photos.each do |photo| %>
         <% unless photo.image_uid.nil? %>
-        <li>
-          <%= cl_image_tag(photo.image_uid, :crop => :fill, :width => 180, :height => 180, class: 'img-thumbnail', alt: photo.title) %>
-
-          <span class="text-content-bottom"><span><%= link_to raw("<span style='color:white' class='glyphicon glyphicon-trash'></span><span style='color:white;'>&nbsp;Remove</span>"), lead_photo_path(@lead, photo), :method => :delete %></span></span>
+        <li id="img-<%= photo.image_uid %>">
+          <a href='<%=Cloudinary::Utils.cloudinary_url(photo.image_uid, class: 'img-thumbnail', alt: photo.title)%>'><%= cl_image_tag(photo.image_uid, height: 1000, width: 1000, crop: :fill, class: 'img-thumbnail', alt: photo.title) %></a>
+          <span class="text-content-bottom"><span><%= link_to raw("<span style='color:white' class='glyphicon glyphicon-trash'></span><span style='color:white;'>&nbsp;Remove</span>"), lead_photo_path(@lead, photo), :method => :delete, data: {confirm: "Are you sure?"}, remote: true %></span></span>
           <span class="text-content"><span><%= photo.title %></span></span>
-
         </li>
         <% end%>
       <% end %>
