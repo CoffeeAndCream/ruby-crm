@@ -35,7 +35,7 @@
   </div>
   <div class="row details-card">
    <i class="material-icons material-icon-tabs">chat</i>
-    <div class="col-lg-7">
+    <div class="col-lg-10">
       <h3>Comments</h3>
       <div id="comments">
         <% @lead.comments.each do |comment| %>
@@ -48,8 +48,8 @@
           <% end %>
         <% end %>
       </div>
-        <%= bootstrap_form_for :comments, url: lead_comments_path(@lead), :html => {:method => :post}, remote: true  do |f| %>
-          <%= f.text_field :comment %>
+        <%= bootstrap_form_for :comments, url: lead_comments_path(@lead), :html => {:method => :post}, layout: :inline, remote: true  do |f| %>
+          <%= f.text_field :comment, hide_label: true, placeholder: "Leave a comment...", style: 'width: 100% !important' %>
           <%= f.button 'New Comment', :class => "btn btn-primary btn-sm" %>
         <% end %>
     </div>
