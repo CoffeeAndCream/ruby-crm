@@ -41,9 +41,9 @@
         <% @lead.comments.each do |comment| %>
           <% unless comment.nil? %>
             <div id="comment-<%= comment.id %>">
-               <%= button_to "Delete", lead_comment_path(@lead, comment), method: :delete, :class=>'btn btn-link', :style => "float:left;padding:1px 0px 0px 0px !important;color:blue !important;", remote: true %> &nbsp;
+               <%= button_to "Delete", lead_comment_path(@lead, comment), method: :delete, :class=>'btn btn-xs btn-danger', :style => "float:left;margin-top:6px !important;", remote: true %> &nbsp;
                <h5 style="display: inline-block; margin-top:5px"> <%= comment.comment %> </h5>
-               <h6 style="padding-left: 50px;margin-top:-10px !important; color:#666;"> <%=comment.created_at.strftime('%c') %> </h6>
+               <h6 style="padding-left: 55px;margin-top:-10px !important; color:#666;"> <%=comment.created_at.strftime('%c') %> </h6>
             </div>
           <% end %>
         <% end %>
