@@ -1,13 +1,13 @@
 <div class="col-lg-4" id="financial-table" style="min-width:350px !important;">
   <% unless @lead.contract_total.nil? || @lead.contract_total == 0 %>
     <%=bootstrap_form_for :payments, url: lead_payments_path(@lead), method: :post, remote: true do |f| %>
-      <%= f.number_field :amount %>
-      <%= f.select :payment_type, options_for_select([ "Down Payment", "Payment" ], "Payment") %>
+      <%= f.number_field :amount, prepend: '$' %>
+      <%= f.select :payment_type, options_for_select([ "Down Payment", "Payment" ], "Payment"), prepend: 'Type', hide_label: true %>
       <%= f.button "Add Payment", :class => "btn btn-primary btn-sm" %>
     <% end %>
   <% else %>
     <%= bootstrap_form_for @lead, url: 'payments/update_contract', remote: true do |f| %>
-      <%= f.number_field :contract_total %>
+      <%= f.number_field :contract_total, prepend: '$' %>
       <%= f.hidden_field :lead_id, value: @lead.id %>
       <%= f.button 'Contract Amount', :class => "btn btn-primary btn-sm" %>
     <% end %>

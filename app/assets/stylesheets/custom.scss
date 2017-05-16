@@ -13,6 +13,9 @@ $THEME_FONT_DROPDOWN: #4f9de2;
 $THEME_FONT_DROPDOWN_HOVER: #3a76ab;
 
 
+.checkbox_container input {
+  display: inline !important;
+}
 //mobile viewports
 @media all and (max-width: 1200px) {
   .hide-on-mobile {

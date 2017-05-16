@@ -29,6 +29,8 @@ class PhotosController < ApplicationController
 
   def destroy
     @photo = Photo.find_by(id: params[:id])
+    puts @photo.image_uid
+    Cloudinary::Uploader.destroy(@photo.image_uid)
     @photo.destroy
     redirect_back(fallback_location: :back)
   end

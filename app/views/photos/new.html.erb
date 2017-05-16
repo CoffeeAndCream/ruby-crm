@@ -1,12 +1,14 @@
+<script type="text/javascript" src="https://cdn.jsdelivr.net/bootstrap.filestyle/1.1.0/js/bootstrap-filestyle.min.js"> </script>
+
 <div class="container">
   <div class="col-md-6 col-md-offset-3 info-card">
-    <h1>New photos</h1>
-
+    <h1>New Photos</h1>
     <%= bootstrap_form_for [@lead, @photo] do |f| %>
-        <%= f.file_field :image, required: true, :multiple => true %>
-        <%= f.text_field :title, class: 'form-control input-sm', style: 'width: 100%', label: "Caption" %>
+      <%= f.file_field :image, required: true, :multiple => true, class: "filestyle", "data-input" => false  %>
+      <%= f.text_field :title, class: 'form-control input-sm', placeholder: "Add a caption to your photos", hide_label: true %>
       <%= hidden_field_tag :lead_id => @lead.id %>
       <%= f.submit 'Submit', class: 'btn btn-primary btn-md' %>
+      <%= link_to 'Cancel', :back, class: 'btn btn-md btn-danger' %>
     <% end %>
   </div>
 </div>

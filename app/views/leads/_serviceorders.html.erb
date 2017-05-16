@@ -1,14 +1,13 @@
 <div class="col-lg-4" style="min-width:350px !important;">
   <%=bootstrap_form_for :service_orders, url: lead_service_orders_path(@lead), method: :post, remote: true do |f| %>
-    <%= f.text_field :name, required: true %>
-    <%= f.text_field :cost %>
+    <%= f.text_field :name, required: true, placeholder: 'Services done...' %>
+    <%= f.text_field :cost, prepend: '$' %>
     <%= f.text_area :details %>
     <%= f.button "Add Service Order", :class => "btn btn-primary btn-sm" %>
   <% end %>
 </div>
 <div class="col-lg-8  table-container">
   <h3>Service Orders</h3>
-  <% unless @lead.service_orders.empty? %>
     <table class="table table-hover table-responsive" id="service-orders-table">
     <thead>
       <th style="text-align: left !important;">Name</th>
@@ -27,7 +26,4 @@
       <% end %>
     </tbody>
   </table>
-  <% else %>
-    <i>No service orders to show.</i>
-  <% end %>
 </div>

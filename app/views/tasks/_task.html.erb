@@ -1,5 +1,5 @@
 <div id="task-<%= task.id %>">
-  <%= link_to 'Delete', lead_project_task_path(@lead, @lead.project, task), controller: :projects, action: :destroy, method: :delete, remote: true, :style => "float:left;padding:1px 10px 0px 0px !important;color:blue !important;" %>
-  <h5 style="display: inline-block; margin-top:5px"><%= task.name %> </h5>
-  <h6 style="padding-left: 45px;margin-top:-10px !important; color:#666;"> <%= task.details %></h6>
+  <%= link_to 'Delete', lead_project_task_path(@lead, @lead.project, task), class: 'btn btn-xs btn-danger', style: 'margin-top: 10px;', controller: :projects, action: :destroy, method: :delete, remote: true %>
+  <h5 style="display: inline-block; margin-top:5px;"><%= task.name %> </h5>
+  <p style="padding-left: 55px;margin-top:-10px !important; color:#666;"> <%= task.details %></h6>
 </div>

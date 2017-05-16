@@ -13,5 +13,6 @@
   <%= f.date_field :start_date, :required => true %>
   <%= f.date_field :finish_date, :required => true %>
   <%= f.submit 'Update', :class => "btn btn-primary" %>
+  <%= link_to 'Cancel', :back, class: 'btn btn-danger' %>
   </div>
 <% end %>

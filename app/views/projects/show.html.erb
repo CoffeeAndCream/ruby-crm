@@ -1,8 +1,10 @@
 <div class="container padding-top-25">
   <div class="row info-card">
-    <div class="col-lg-6">
-      <h3><i class="material-icons">person_pin</i><%= @lead.fullname %>  <%= render 'links' %></h3>
+    <i class="material-icons material-icon-tabs">person_pin</i>
+    <div class="col-lg-5">
+      <h3><%= @lead.fullname %>  <%= render 'links' %></h3>
       <hr>
+      <br>
       <table class="table table-hover pretty">
         <tbody>
           <tr>
@@ -62,62 +64,66 @@
     </div>
   </div>
   <div class="row details-card">
-    <div class="col-lg-7">
-      <h3>Project Tasks <i class="material-icons">dashboard</i></h3>
+    <i class="material-icons material-icon-tabs">dashboard</i>
+    <div class="col-lg-10">
+      <h3>Project Tasks</h3>
         <div id="tasks">
           <% @lead.project.tasks.each do |task| %>
             <% unless task.nil? %>
               <div id="task-<%= task.id %>">
-                <%= link_to 'Delete', lead_project_task_path(@lead, @lead.project, task), controller: :projects, action: :destroy, method: :delete, remote: true, :style => "float:left;padding:1px 10px 0px 0px !important;color:blue !important;" %>
-                <h5 style="display: inline-block; margin-top:5px"><%= task.name %> </h5>
-                <h6 style="padding-left: 45px;margin-top:-10px !important; color:#666;"> <%= task.details %></h6>
+                <%= link_to 'Delete', lead_project_task_path(@lead, @lead.project, task), class: 'btn btn-xs btn-danger', style: 'margin-top: 10px;', controller: :projects, action: :destroy, method: :delete, remote: true %>
+                <h5 style="display: inline-block; margin-top:5px;"><%= task.name %> </h5>
+                <p style="padding-left: 55px;margin-top:-10px !important; color:#666;"> <%= task.details %></h6>
               </div>
             <% end %>
           <% end %>
           <%= bootstrap_form_for :task, url: lead_project_tasks_path(@lead, @lead.project), :html => {:method => :post}, remote: true  do |f| %>
-            <%= f.collection_select(:name, Service.all, :name, :name, :label => 'Service') %>
+            <%= f.collection_select(:name, Service.all, :name, :name, :label => 'Service', include_blank: true, required: true) %>
             <%= f.text_area :details,  placeholder: "eg. I need to call the manufacturer about this task.", required: true %>
-            <%= f.button 'Add New Task', :class => "btn btn-primary btn-md width-100" %>
+            <%= f.button 'Add New Task', :class => "btn btn-primary btn-sm" %>
           <% end %>
         </div>
     </div>
   </div>
   <div class="row details-card">
-    <div class="col-lg-7">
-      <h3>Comments <i class="material-icons">chat</i></h3>
-      <div id="comments">
-        <% @lead.comments.each do |comment| %>
-          <% unless comment.nil? %>
-            <div id="comment-<%= comment.id %>">
-               <%= button_to "Delete", lead_comment_path(@lead, comment), method: :delete, :class=>'btn btn-link', :style => "float:left;padding:1px 0px 0px 0px !important;color:blue !important;", remote: true %> &nbsp;
-               <h5 style="display: inline-block; margin-top:5px"> <%= comment.comment %> </h5>
-               <h6 style="padding-left: 50px;margin-top:-10px !important; color:#666;"> <%=comment.created_at.strftime('%c') %> </h6>
-            </div>
+      <i class="material-icons material-icon-tabs">chat</i>
+      <div class="col-lg-6">
+        <h3>Comments</h3>
+        <div id="comments">
+          <% @lead.comments.each do |comment| %>
+            <% unless comment.nil? %>
+              <div id="comment-<%= comment.id %>">
+                 <%= button_to "Delete", lead_comment_path(@lead, comment), method: :delete, :class=>'btn btn-xs btn-danger', :style => "float:left;margin-top:6px !important;", remote: true %> &nbsp;
+                 <h5 style="display: inline-block; margin-top:5px"> <%= comment.comment %> </h5>
+                 <h6 style="padding-left: 55px;margin-top:-10px !important; color:#666;"> <%=comment.created_at.strftime('%c') %> </h6>
+              </div>
+            <% end %>
           <% end %>
-        <% end %>
+        </div>
+          <%= bootstrap_form_for :comments, url: lead_comments_path(@lead), :html => {:method => :post}, remote: true  do |f| %>
+            <%= f.text_field :comment, hide_label: true, placeholder: "Leave a comment...", append: f.primary('Leave a comment'), input_group_class: 'input-group-md' %>
+          <% end %>
       </div>
-        <%= bootstrap_form_for :comments, url: lead_comments_path(@lead), :html => {:method => :post}, remote: true  do |f| %>
-          <%= f.text_field :comment %>
-          <%= f.button 'New Comment', :class => "btn btn-primary btn-md" %>
-        <% end %>
-    </div>
   </div>
   <div class="row details-card">
-    <div class="col-lg-12">
-      <h3>Photos <i class="material-icons">photo</i></h3>
+    <i class="material-icons material-icon-tabs">photo</i>
+    <div class="col-lg-10">
+    <h3>Photos</h3>
+    <% unless @lead.photos.empty? %>
     <ul class="img-list">
       <% @lead.photos.each do |photo| %>
-        <% unless photo.image.nil? %>
+        <% unless photo.image_uid.nil? %>
         <li>
-          <%= link_to image_tag(photo.image.thumb('180x180#').url, alt: photo.title, class: 'img-thumbnail'),
-                      photo.image.url, target: '_blank' %>
+          <%= cl_image_tag(photo.image_uid, :crop => :fill, :width => 180, :height => 180, class: 'img-thumbnail', alt: photo.title) %>
           <span class="text-content-bottom"><span><%= link_to raw("<span style='color:white' class='glyphicon glyphicon-trash'></span><span style='color:white;'>&nbsp;Remove</span>"), lead_photo_path(@lead, photo), :method => :delete %></span></span>
           <span class="text-content"><span><%= photo.title %></span></span>
-
         </li>
         <% end%>
       <% end %>
     </ul>
+    <% else %>
+      This lead has no photos. <%= link_to 'Want to add a photo?', new_lead_photo_path(@lead)  %>
+    <% end %>
     </div>
   </div>
 </div>

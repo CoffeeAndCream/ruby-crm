@@ -14,31 +14,31 @@
 <div class="row">
   <%= bootstrap_form_for(@lead) do |f| %>
     <div class="col-md-5">
-      <%= f.text_field :first_name, :required => true %>
+      <%= f.text_field :first_name, :required => true, icon: 'user' %>
     </div>
     <div class="col-md-5">
-      <%= f.text_field :last_name, :required => true %>
+      <%= f.text_field :last_name, :required => true, icon: 'user' %>
     </div>
 </div>
   <div class="row">
       <div class="col-md-5">
-        <%= f.text_field :phone, :required => true %>
+        <%= f.text_field :phone, :required => true, icon: 'earphone' %>
       </div>
       <div class="col-md-5">
-        <%= f.text_field :email %>
+        <%= f.text_field :email, icon: 'envelope' %>
       </div>
     </div>
     <div class="row">
       <div class="col-md-10">
       </div>
       <div class="col-md-3">
-        <%= f.text_field :address %>
+        <%= f.text_field :address, icon: 'map-marker' %>
       </div>
       <div class="col-md-3">
         <%= f.text_field :city %>
       </div>
       <div class="col-md-2">
-        <%= f.select :state, options_for_select(us_states), {:selected => "WI"} %>
+        <%= f.select :state, options_for_select(us_states, 'WI') %>
       </div>
       <div class="col-md-2">
         <%= f.text_field :zip %>
@@ -47,9 +47,10 @@
     <div class="row">
       <div class="col-md-10">
       </div>
-      <div class="col-md-10">
+      <div class="col-md-5">
+        <b>Services</b>
         <% unless !Service.any? %>
-        <%= f.collection_check_boxes(:services, Service.all.where.not(:name => nil), :id, :name, :label => "Services") %>
+          <%= f.collection_check_boxes(:services, Service.all.where.not(:name => nil), :id, :name, :hide_label => true, :help => "Select any services the customer needs.") %>
         <% end %>
       </div>
       <div class="col-md-5">
@@ -59,13 +60,13 @@
       </div>
       <div class="col-md-5">
       </div>
-      <div class="col-md-10">
+      <div class="col-md-5">
         <% unless !Source.any? %>
-        <%= f.collection_select(:source, Source.all, :source_type, :source_type, :label => "Sources", :placeholder => 'Online, phone, advertisement, a friend, etc.') %>
+        <%= f.collection_select(:source, Source.all, :source_type, :source_type, :label => "Sources", :placeholder => 'Online, phone, advertisement, a friend, etc.', icon: 'globe') %>
         <% end %>
       </div>
     </div>
-      <%= f.submit "Submit", :class => "btn btn-success"  %>
+      <%= f.submit "Submit", :class => "btn btn-success", style: 'float:right'  %><%= link_to 'Cancel', leads_path, :class => "btn btn-danger btn-md", :style => "float:right;margin-right:10px", method: :get %>
     <% end %>
     </div>
   </div>

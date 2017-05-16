@@ -33,3 +33,6 @@ $(document).on('turbolinks:load', function(){
 $(document).on('turbolinks:load', function(){
    $( "#resizable" ).resizable();
 });
+$(document).on('turbolinks:load', function(){
+  $(":file").filestyle({input: false});
+});
