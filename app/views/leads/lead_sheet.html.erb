@@ -59,6 +59,12 @@ hr {
           <% end %>
           </tr>
           <tr>
+            <% unless @lead.job_site.nil? %>
+              <td><b>Job Site Details</b></td>
+              <td><%= @lead.job_site.address %>, <%= @lead.job_site.city %>, <%= @lead.job_site.state %> <%= @lead.job_site.zip %></td>
+            <% end %>
+          </tr>
+          <tr>
             <% unless @lead.phone.nil? || @lead.phone.empty?  %>
             <td><b>Phone</b> </td>
             <td><%= number_to_phone(@lead.phonenumber, area_code: true) %></td>
@@ -117,11 +123,15 @@ hr {
   <div class="row">
     <div class="col-md-11 col-md-offset-0 box">
       <h3>Notes</h3>
-      <br>
-      <% 8.times do %>
-        <hr>
+      <% unless @lead.events.nil? %>
+        <% @lead.events.each do |event| %>
+          <%= event.description %>
+        <% end %>
       <% end %>
     </div>
+  </div>
+  <div class="row">
+
   </div>
   <div class="row">
     <div class="col-md-11 col-md-offset-0 box">
