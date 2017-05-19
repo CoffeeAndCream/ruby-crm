@@ -23,9 +23,13 @@ class LeadsController < ApplicationController
     @user = User.find_by_id(@lead.user_id)
 
     unless @lead.customer
-      @lead.update_attributes(customer: true)
-      UserMailer.lead_email(@user, @lead).deliver_now
-      redirect_to :action => 'show', :id => @lead
+      if @user.nil?
+        redirect_to :action => 'show', :id => @lead
+      else
+        @lead.update_attributes(customer: true)
+        UserMailer.lead_email(@user, @lead).deliver_now
+        redirect_to :action => 'show', :id => @lead
+      end
     else
       redirect_to :back, :info => @lead.fullname.to_s + ' is already a contact.'
     end
