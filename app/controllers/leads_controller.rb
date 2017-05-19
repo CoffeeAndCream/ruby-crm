@@ -33,9 +33,13 @@ class LeadsController < ApplicationController
 
   def create
     @lead = Lead.new(permitted_params)
-    @lead.save!
-    @lead.update_attributes(created_at: DateTime.now)
-    redirect_to lead_path(@lead)
+    if @lead.save
+      @lead.update_attributes(created_at: DateTime.now)
+      redirect_to lead_path(@lead)
+    else
+      @lead = Lead.where(address: params[:address])
+      redirect_to new_lead_path, :danger => "A lead already exists with that name and address. <a href=" + lead_path(@lead) + ">Click</a>".html_safe
+    end
   end
   def update
     @lead = Lead.find_by_id(params[:id])
@@ -111,7 +115,7 @@ class LeadsController < ApplicationController
     require 'pdfkit'
     @lead = Lead.find_by_id(params[:lead_id])
     render layout: false
-    
+
   end
   private
   def permitted_params

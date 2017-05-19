@@ -2,7 +2,7 @@
   <% unless value.empty? %>
     <div class="animated fadeInDown alert alert-<%= key %> hide-on-mobile" id="flash-message" style="margin: 0px !important;">
       <a class="close" id="close-flash">×</a>
-          <%= value %>
+          <%= value.html_safe %>
     </div>
   <% end %>
 <% end %>
