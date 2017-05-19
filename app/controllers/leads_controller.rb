@@ -31,7 +31,7 @@ class LeadsController < ApplicationController
         redirect_to :action => 'show', :id => @lead
       end
     else
-      redirect_to :back, :info => @lead.fullname.to_s + ' is already a contact.'
+      redirect_to :back, :info => @lead.fullname.to_s + ' is a contact.'
     end
   end
 

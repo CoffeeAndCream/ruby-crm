@@ -11,7 +11,8 @@ class ProjectsController < ApplicationController
     @project = @lead.project
   end
   def index
-    @leads = apply_scopes(Lead).where(begin_project: true).search(params[:search]).order(sort_column + " " + sort_direction).paginate(page: params[:page], per_page: 25)
+    @leads = apply_scopes(Lead.where(begin_project: true)).search(params[:search]).paginate(page: params[:page], per_page: 25)
+    @leads = @leads.joins(:project).order('projects.finish_date' + ' ' + sort_direction)
   end
   def create
     @lead = Lead.find_by_id(params[:lead_id])

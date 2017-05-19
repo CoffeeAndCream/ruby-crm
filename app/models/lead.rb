@@ -8,6 +8,7 @@ class Lead < ApplicationRecord
   scope :address, -> address { where('(address || city) LIKE ?', "%#{address}%")}
   scope :city, -> city { where('(city) LIKE ?', "%#{city}%") }
   scope :customer, -> customer { where(customer: customer) }
+
   #scope :by_period, -> created_at, ended_at { where("created_at = ? AND created_at = ?", created_at, ended_at) }
 
   belongs_to :user, inverse_of: :leads
