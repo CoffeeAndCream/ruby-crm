@@ -13,7 +13,7 @@ class ApplicationController < ActionController::Base
   def authenticate_active_admin_user!
      authenticate_user!
      unless current_user.role?(:admin)
-        redirect_to root_path
+        redirect_to root_path, :info => "Only administrators can use this feature."
      end
   end
   def after_sign_in_path_for(resource)
