@@ -70,7 +70,7 @@ gem 'bootstrap_form'
 gem 'simple_form'
 gem 'nilify_blanks'
 
-gem 'wicked_pdf'
+gem 'pdfkit'
 gem 'wkhtmltopdf-binary'
 
 gem 'chartkick'

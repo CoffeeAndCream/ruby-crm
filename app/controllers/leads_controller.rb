@@ -108,8 +108,10 @@ class LeadsController < ApplicationController
     end
   end
   def lead_sheet
-    @lead = Lead.find_by(id: params[:lead_id])
+    require 'pdfkit'
+    @lead = Lead.find_by_id(params[:lead_id])
     render layout: false
+    
   end
   private
   def permitted_params
