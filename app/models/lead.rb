@@ -24,6 +24,9 @@ class Lead < ApplicationRecord
   has_one :project, inverse_of: :lead, dependent: :destroy
   has_one :job_site, inverse_of: :lead, dependent: :destroy
 
+  mount_uploader :image, ImageUploader
+
+
   def fullname
     "#{first_name} #{last_name}"
   end

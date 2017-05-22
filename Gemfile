@@ -74,7 +74,7 @@ gem 'pdfkit'
 gem 'wkhtmltopdf-binary'
 
 #AWS
-gem 'aws-sdk', '~> 2'
+gem 'carrierwave'
 
 gem 'chartkick'
 gem 'groupdate'

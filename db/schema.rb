@@ -95,6 +95,7 @@ ActiveRecord::Schema.define(version: 201702111755526) do
     t.boolean  "customer",                                  default: false
     t.boolean  "send_thank_you",                            default: false
     t.datetime "updated_at",                                                null: false
+    t.string   "image"
     t.index ["user_id"], name: "index_leads_on_user_id", using: :btree
   end
 
