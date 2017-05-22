@@ -8,29 +8,34 @@
         <h5 class="container hide-on-mobile"  id="search-icon"><span class="glyphicon glyphicon-search"></span> Advanced Search</h5>
         <%= render '/users/search_form' %>
       </div>
-      <table class="table table-hover table-bordered table-responsive">
-        <thead>
-          <th>Name</th>
-          <th>Address</th>
-          <th>Phone Number</th>
-          <th>Status</th>
-        </thead>
-        <tbody>
-          <% @leads.each do |lead| %>
-          <tr>
-            <td><%= link_to lead.fullname, lead_path(lead) %></td>
-            <td><%= lead.address %>, <%= lead.city %>, <%= lead.state %> <%= lead.zip %></td>
-            <td><%= lead.phone %></td>
-            <% unless lead.lead_task.nil? %>
-              <td><%= lead.lead_task %></td>
-            <% else %>
-              <td><b>Check your tasks</b></td>
+      <div id="leads-table">
+        <table class="table table-hover table-bordered table-responsive">
+          <thead>
+            <th>Name</th>
+            <th>Address</th>
+            <th>Phone Number</th>
+            <th>Status</th>
+          </thead>
+          <tbody>
+            <% @events.each do |event| %>
+            <% lead = Lead.find_by_id(event.lead_id) %>
+              <% unless lead.nil? %>
+                <tr>
+                  <td><%= link_to lead.fullname, lead_path(lead) %></td>
+                  <td><%= lead.address %>, <%= lead.city %>, <%= lead.state %> <%= lead.zip %></td>
+                  <td><%= lead.phone %></td>
+                  <% unless lead.lead_task.nil? %>
+                    <td><%= lead.lead_task %></td>
+                  <% else %>
+                    <td>No task available yet</td>
+                  <% end %>
+                </tr>
             <% end %>
-          </tr>
           <% end %>
-        </tbody>
-      </table>
-        <%= will_paginate @leads %>
+          </tbody>
+        </table>
+          <%= will_paginate @leads %>
+        </div>
       </div>
     </div>
   </div>

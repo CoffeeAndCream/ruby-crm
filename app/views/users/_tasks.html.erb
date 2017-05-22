@@ -4,12 +4,41 @@
     <div class="row">
       <div class="col-md-10 col-md-offset-1">
         <h2>Tasks</h1>
-        <% @events.each do |event| %>
-            <% if event.future_event? %>
-              <%= event.title %>
+          <table class="table table-hover table-responsive">
+            <thead>
+              <th style="text-align:left !important">Lead</th>
+              <th style="text-align:left !important">Action</th>
+              <th></th>
+            </thead>
+            <tbody>
+            <% @events.each do |event| %>
+              <% if event.future_event? && !Lead.find_by_id(event.lead_id).nil? %>
+              <% lead = Lead.find_by_id(event.lead_id) %>
+              <tr>
+                <td><%= lead.fullname %></td>
+                <td>Follow up on Lead</td>
+                <td>
+                  <%= bootstrap_form_for lead, url: lead_lead_task_path(lead) do |f| %>
+                    <%= f.form_group :lead_task, help: "Follow up on lead status", remote: true, onclick: 'render_task_board();' do %>
+                      <%= f.radio_button :lead_task, "NG", label: "NG", inline: true, id: 'lead-task-radios', onclick: "$(this).closest('form').submit();" %>
+                      <%= f.radio_button :lead_task, "Rehash", label: "Rehash", inline: true, id: 'lead-task-radios', onclick: "$(this).closest('form').submit(); " %>
+                      <%= f.radio_button :lead_task, "Sold", label: "Sold", inline: true, id: 'lead-task-radios', onclick: "$(this).closest('form').submit(); " %>
+                  <% end %>
+                 <% end %>
+               </td>
+             </tr>
             <% end %>
         <% end %>
+      </tbody>
+    </table>
       </div>
     </div>
   </div>
 </div>
+<script>
+function render_task_board(){
+  $("#lead-task-radios").click(function(){
+      $('div#leads-table').load(document.URL +  ' div#leads-table')
+  })
+}
+</script>

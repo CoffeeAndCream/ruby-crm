@@ -15,13 +15,8 @@ Rails.application.routes.draw do
   resources :users
 
   resources :leads do
-    post '/contacted' => 'leads#contacted'
-    post '/closed' => 'leads#closed'
-    post '/begin_project' => 'leads#begin_project'
-    post '/finished_project' => 'leads#finished_project'
-    post '/send_thank_you' => 'leads#send_thank_you'
-    post '/convert-to-customer' => 'leads#convert'
     get '/lead-sheet' => 'leads#lead_sheet'
+    patch 'lead_task' => 'leads#tasks'
 
     resources :events
     resources :services
