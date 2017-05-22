@@ -48,7 +48,7 @@ class LeadsController < ApplicationController
   def update
     @lead = Lead.find_by_id(params[:id])
     @lead.update_attributes(permitted_params)
-     redirect_to :action => 'show', :id => @lead
+    redirect_to :action => 'show', :id => @lead
   end
   def update_contract
     @lead = Lead.find_by_id(params[:lead][:lead_id])
@@ -124,7 +124,7 @@ class LeadsController < ApplicationController
   private
   def permitted_params
     params.require(:lead).permit(:first_name, :last_name, :address, :phone, :email, :lead_id, :sort_column, :sort_direction,:city,:state,:zip, :fullname, :contract_total,
-    :visit_date, :comments, :page, :contacted, :visited, :begin_project, :finished_project, :send_thank_you, :user_id, :source, :image, :services => [])
+    :visit_date, :comments, :page, :contacted, :visited, :begin_project, :finished_project, :send_thank_you, :user_id, :source, images: [], :services => [])
   end
 
 end

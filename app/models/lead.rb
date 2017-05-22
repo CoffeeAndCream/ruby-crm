@@ -23,9 +23,7 @@ class Lead < ApplicationRecord
   has_many :service_orders, dependent: :destroy
   has_one :project, inverse_of: :lead, dependent: :destroy
   has_one :job_site, inverse_of: :lead, dependent: :destroy
-
-  mount_uploader :image, ImageUploader
-
+  mount_uploaders :images, ImageUploader
 
   def fullname
     "#{first_name} #{last_name}"

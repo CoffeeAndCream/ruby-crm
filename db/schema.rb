@@ -95,7 +95,7 @@ ActiveRecord::Schema.define(version: 201702111755526) do
     t.boolean  "customer",                                  default: false
     t.boolean  "send_thank_you",                            default: false
     t.datetime "updated_at",                                                null: false
-    t.string   "image"
+    t.json     "images"
     t.index ["user_id"], name: "index_leads_on_user_id", using: :btree
   end
 
@@ -111,7 +111,6 @@ ActiveRecord::Schema.define(version: 201702111755526) do
   create_table "photos", force: :cascade do |t|
     t.integer  "lead_id"
     t.string   "image_uid"
-    t.string   "title"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["lead_id"], name: "index_photos_on_lead_id", using: :btree
@@ -158,9 +157,6 @@ ActiveRecord::Schema.define(version: 201702111755526) do
     t.datetime "created_at",                 null: false
     t.datetime "updated_at",                 null: false
     t.index ["project_id"], name: "index_tasks_on_project_id", using: :btree
-  end
-
-  create_table "uploads", force: :cascade do |t|
   end
 
   create_table "users", force: :cascade do |t|

@@ -75,6 +75,7 @@ gem 'wkhtmltopdf-binary'
 
 #AWS
 gem 'carrierwave'
+gem 'fog'
 
 gem 'chartkick'
 gem 'groupdate'

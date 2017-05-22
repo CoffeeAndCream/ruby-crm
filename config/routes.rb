@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   resources :projects
   resources :events
   resources :users
+  resources :photos
 
   resources :leads do
     post '/contacted' => 'leads#contacted'
