@@ -73,6 +73,9 @@ gem 'nilify_blanks'
 gem 'pdfkit'
 gem 'wkhtmltopdf-binary'
 
+#AWS
+gem 'aws-sdk', '~> 2'
+
 gem 'chartkick'
 gem 'groupdate'
 

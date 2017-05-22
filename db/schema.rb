@@ -159,6 +159,9 @@ ActiveRecord::Schema.define(version: 201702111755526) do
     t.index ["project_id"], name: "index_tasks_on_project_id", using: :btree
   end
 
+  create_table "uploads", force: :cascade do |t|
+  end
+
   create_table "users", force: :cascade do |t|
     t.string   "email",                                           default: "",     null: false
     t.string   "encrypted_password",                              default: "",     null: false
