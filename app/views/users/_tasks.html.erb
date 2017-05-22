@@ -1,0 +1,15 @@
+<div class="container info-card"  style="margin-top: -10px">
+  <i class="material-icons" style="font-size: 36px">info</i>
+  <div id="lead-tracking-table">
+    <div class="row">
+      <div class="col-md-10 col-md-offset-1">
+        <h2>Tasks</h1>
+        <% @events.each do |event| %>
+            <% if event.future_event? %>
+              <%= event.title %>
+            <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

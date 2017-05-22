@@ -10,52 +10,22 @@
       </div>
       <table class="table table-hover table-bordered table-responsive">
         <thead>
-          <th>Leads</th>
-          <th>Contacted</th>
-          <th>Closed</th>
-          <th>Project Started</th>
-          <th>Project Finished</th>
-          <th>Followed Up</th>
+          <th>Name</th>
+          <th>Address</th>
+          <th>Phone Number</th>
+          <th>Status</th>
         </thead>
         <tbody>
           <% @leads.each do |lead| %>
           <tr>
             <td><%= link_to lead.fullname, lead_path(lead) %></td>
-            <td>
-              <% if lead.contacted %>
-                <%= link_to raw('<span class="glyphicon glyphicon-ok" id="task-done">'), lead_contacted_path(lead, :contacted => false), method: :post, remote: true %>
-              <% else %>
-                <%= link_to raw('<span class="glyphicon glyphicon-remove" id="task-not-done">'), lead_contacted_path(lead, :contacted => true), method: :post, remote: true %>
-              <% end %>
-            </td>
-            <td>
-              <% if lead.closed %>
-                <%= link_to raw('<span class="glyphicon glyphicon-ok" id="task-done">'), lead_closed_path(lead, :closed => false), method: :post, remote: true %>
-              <% else %>
-                <%= link_to raw('<span class="glyphicon glyphicon-remove" id="task-not-done">'), lead_closed_path(lead, :closed => true), method: :post, remote: true %>
-              <% end %>
-            </td>
-            <td>
-              <% if lead.begin_project %>
-                <%= link_to raw('<span class="glyphicon glyphicon-ok" id="task-done">'), lead_begin_project_path(lead, :begin_project => false), method: :post, remote: true %>
-              <% else %>
-                <%= link_to raw('<span class="glyphicon glyphicon-remove" id="task-not-done">'), lead_begin_project_path(lead, :begin_project => true), method: :post, remote: true %>
-              <% end %>
-            </td>
-            <td>
-              <% if lead.finished_project %>
-                <%= link_to raw('<span class="glyphicon glyphicon-ok" id="task-done">'), lead_finished_project_path(lead, :finished_project => false), method: :post, remote: true %>
-              <% else %>
-                <%= link_to raw('<span class="glyphicon glyphicon-remove" id="task-not-done">'), lead_finished_project_path(lead, :finished_project => true), method: :post, remote: true %>
-              <% end %>
-            </td>
-            <td>
-              <% if lead.send_thank_you %>
-                <%= link_to raw('<span class="glyphicon glyphicon-ok" id="task-done">'), lead_send_thank_you_path(lead, :send_thank_you => false), method: :post, remote: true %>
-              <% else %>
-                <%= link_to raw('<span class="glyphicon glyphicon-remove" id="task-not-done">'), lead_send_thank_you_path(lead, :send_thank_you => true), method: :post, remote: true %>
-              <% end %>
-            </td>
+            <td><%= lead.address %>, <%= lead.city %>, <%= lead.state %> <%= lead.zip %></td>
+            <td><%= lead.phone %></td>
+            <% unless lead.lead_task.nil? %>
+              <td><%= lead.lead_task %></td>
+            <% else %>
+              <td><b>Check your tasks</b></td>
+            <% end %>
           </tr>
           <% end %>
         </tbody>
