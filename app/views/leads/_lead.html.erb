@@ -32,11 +32,7 @@
         <td><b>Services</b></td>
         <td>
           <% unless @lead.services.nil? %>
-            <% @lead.services.each do |service| %>
-              <% unless service.nil? || service.empty? %>
-                <%= Service.find_by_id(service.to_i).name %>,
-              <% end %>
-            <% end %>
+            <%= (@lead.services.reject(&:empty?).map { |i| Service.find_by_id(i).name }).join(', ') %>
           <% end %>
         </td>
       </tr>

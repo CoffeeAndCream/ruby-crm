@@ -3,42 +3,54 @@
   <div id="lead-tracking-table">
     <div class="row">
       <div class="col-md-10 col-md-offset-1">
-        <h2>Tasks</h1>
-          <table class="table table-hover table-responsive">
+        <h2>Tasks for You</h2>
+        <h5 style="text-align: center"><i> If you see a task here, but the lead isn't assigned to you above, contact your administrator so you can be assigned to the correct lead</i></h5>
+        <br>
+        <div id="task-table">
+          <table class="table table-hover table-bordered table-responsive table-striped">
             <thead>
-              <th style="text-align:left !important">Lead</th>
-              <th style="text-align:left !important">Action</th>
-              <th></th>
+              <th>Event</th>
+              <th>Appointment Time</th>
+              <th>Task</th>
+              <th>Action</th>
             </thead>
             <tbody>
-            <% @events.each do |event| %>
-              <% if event.future_event? && !Lead.find_by_id(event.lead_id).nil? %>
-              <% lead = Lead.find_by_id(event.lead_id) %>
-              <tr>
-                <td><%= lead.fullname %></td>
-                <td>Follow up on Lead</td>
-                <td>
-                  <%= bootstrap_form_for lead, url: lead_lead_task_path(lead) do |f| %>
-                    <%= f.form_group :lead_task, help: "Follow up on lead status", remote: true, onclick: 'render_task_board();' do %>
-                      <%= f.radio_button :lead_task, "NG", label: "NG", inline: true, id: 'lead-task-radios', onclick: "$(this).closest('form').submit();" %>
-                      <%= f.radio_button :lead_task, "Rehash", label: "Rehash", inline: true, id: 'lead-task-radios', onclick: "$(this).closest('form').submit(); " %>
-                      <%= f.radio_button :lead_task, "Sold", label: "Sold", inline: true, id: 'lead-task-radios', onclick: "$(this).closest('form').submit(); " %>
-                  <% end %>
-                 <% end %>
-               </td>
-             </tr>
-            <% end %>
-        <% end %>
-      </tbody>
-    </table>
+            <% @events.where.not(:lead_id => nil).where(:user_id => @user.id).each do |event| %>
+            <% lead = Lead.find_by_id(event.lead_id) %>
+              <% if !event.future_event? && lead.lead_task == 'Rehash' %>
+                <tr id='lead-task-<%=lead.id.to_s%>'>
+                  <td><%= lead.fullname %></td>
+                  <td><%= event.ends.strftime("%m/%d/%Y - %H:%m %p") %></td>
+                  <td>Follow up on Lead</td>
+                  <td>
+                    <%= bootstrap_form_for lead, url: lead_lead_task_path(lead) do |f| %>
+                      <%= f.form_group :lead_task, remote: true do %>
+                        <%= f.radio_button :lead_task, "NG", id: 'NG', label: "NG", inline: true, class: 'lead-task-radios' %>
+                        <%= f.radio_button :lead_task, "Rehash", id: 'Rehash', label: "Rehash", inline: true, class: 'lead-task-radios' %>
+                        <%= f.radio_button :lead_task, "Sold", id: 'Sold', label: "Sold", inline: true, class: 'lead-task-radios' %>
+                      <% end %>
+                    <% end %>
+                 </td>
+               </tr>
+              <% end %>
+          <% end %>
+        </tbody>
+      </table>
+      <%= will_paginate @events %>
+      </div>
       </div>
     </div>
   </div>
 </div>
 <script>
-function render_task_board(){
-  $("#lead-task-radios").click(function(){
-      $('div#leads-table').load(document.URL +  ' div#leads-table')
+  $(".lead-task-radios").click(function(){
+      $(this).closest('form').submit();
+      if($(this).attr('id') !== 'Rehash'){
+        var id = '#' + $(this).closest("tr").attr('id');
+        $(id).remove();
+      }
+      setTimeout(function(){
+        $('div#leads-table').load(document.URL +  ' div#leads-table');
+      }, 200)
   })
-}
 </script>

@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   def show
     @user = current_user
     @leads = apply_scopes(Lead).where(:user_id => @user.id).order(created_at: :desc).paginate(:page => params[:page], :per_page => 10)
-    @events = Event.where(:user_id => @user).where(start: Date.today.beginning_of_week..Date.today.beginning_of_week+7).order(start: :asc)
+    @events = Event.where(:user_id => @user).where(start: Date.today.beginning_of_week..Date.today.beginning_of_week+7).order(start: :asc).paginate(:page => params[:page], :per_page => 10)
   end
   def edit
     @user = current_user
