@@ -116,7 +116,7 @@ hr {
       <% @lead.events.each do |event| %>
         <b><%= event.title %><br></b>
         <%= event.start.strftime('%A %m/%d/%Y') %><br>
-        <%= event.start.strftime('%H:%M %p') %> - <%= event.ends.strftime('%H:%M %p') %>
+        <%= event.start.strftime('%I:%M %p') %> - <%= event.ends.strftime('%I:%M %p') %>
       <% end %>
     </div>
   </div>
