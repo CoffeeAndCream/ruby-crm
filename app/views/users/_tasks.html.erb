@@ -43,6 +43,7 @@
   </div>
 </div>
 <script>
+$(document).on('turbolinks:load', function() {
   $(".lead-task-radios").change(function(){
       $(this).closest('form').submit();
       if($(this).attr('id') !== 'Rehash'){
@@ -54,4 +55,5 @@
   $(".lead-task-dropdowns").change(function(){
     setTimeout(function(){$('div#task-table').load(document.URL +  ' div#task-table')}, 200);
   })
+});
 </script>
