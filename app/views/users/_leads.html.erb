@@ -10,13 +10,14 @@
         <%= render '/users/search_form' %>
       </div>
     -->
-      <div id="leads-table">
+      <div id="all-leads-table">
         <table class="table table-hover table-bordered table-striped table-responsive">
           <thead>
             <th>Name</th>
             <th>Address</th>
             <th>Phone Number</th>
             <th>Services</th>
+            <th>Status</th>
           </thead>
           <tbody>
             <% @leads.each do |lead| %>
@@ -25,6 +26,15 @@
                 <td><%= lead.address %>, <%= lead.city %>, <%= lead.state %> <%= lead.zip %></td>
                 <td><%= number_to_phone(lead.phonenumber,  area_code: true) %></td>
                 <td><%= (lead.services.reject(&:empty?).map { |i| Service.find_by_id(i).name }).join(', ') %></td>
+                <td id="all-leads-tasks">
+                  <% unless lead.lead_task.nil? %>
+                    <%= form_for(lead, url: lead_lead_task_path(lead)) do |f| %>
+                      <%= f.select(:lead_task, options_for_select(["NG", "Rehash", "Sold"], lead.lead_task), {hide_label: true}, {class: 'lead-task-dropdowns', onchange: "$(this).closest('form').submit();setTimeout(function(){$('div#task-table').load(document.URL +  ' div#task-table')}, 200)"}) %>
+                    <% end %>
+                  <% else %>
+                    No status
+                  <% end %>
+                </td>
               </tr>
             <% end %>
           </tbody>
