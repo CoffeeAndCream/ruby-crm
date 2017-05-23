@@ -20,7 +20,7 @@
               <% if !event.future_event? && lead.lead_task == 'Rehash' || lead.lead_task.nil? %>
                 <tr id='lead-task-<%=lead.id.to_s%>'>
                   <td style="text-align: center"><%= lead.fullname %></td>
-                  <td style="text-align: center"><%= event.ends.strftime("%m/%d/%Y - %H:%m %p") %></td>
+                  <td style="text-align: center"><%= event.ends.strftime("%m/%d/%Y - %I:%m %p") %></td>
                   <td style="text-align: center">Follow up on Lead</td>
                   <td style="text-align: center">
                     <%= bootstrap_form_for lead, url: lead_lead_task_path(lead) do |f| %>
