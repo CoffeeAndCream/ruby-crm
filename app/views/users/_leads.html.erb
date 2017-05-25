@@ -28,8 +28,11 @@
                 <td><%= (lead.services.reject(&:empty?).map { |i| Service.find_by_id(i).name }).join(', ') %></td>
                 <td id="all-leads-tasks">
                   <% unless lead.lead_task.nil? %>
-                    <%= form_for(lead, url: lead_lead_task_path(lead)) do |f| %>
-                      <%= f.select(:lead_task, options_for_select(["NG", "Rehash", "Sold"], lead.lead_task), {hide_label: true}, {class: 'lead-task-dropdowns', onchange: "$(this).closest('form').submit();setTimeout(function(){$('div#task-table').load(document.URL +  ' div#task-table')}, 200)"}) %>
+                    <%= form_for lead, remote: true, url: lead_lead_task_path(lead) do |f| %>
+                      <%= f.select(:lead_task, options_for_select(["NG", "Rehash", "Sold"], lead.lead_task), {hide_label: true},
+                          {class: 'lead-task-dropdowns', onchange: "$(this).closest('form').trigger('submit');if(this.value === 'Rehash'){
+                              $('#all-leads-table-rows').append('#{ j render partial: "users/task", locals: {lead: lead} }')
+                            };"}) %>
                     <% end %>
                   <% else %>
                     No status

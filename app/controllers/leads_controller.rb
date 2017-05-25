@@ -70,10 +70,6 @@ class LeadsController < ApplicationController
     @lead = Lead.find_by_id(params[:lead_id])
     render layout: false
   end
-  def tasks
-    @lead = Lead.find_by_id(params[:lead_id])
-    @lead.update_attributes(permitted_params)
-  end
 
   private
   def permitted_params

@@ -1,1 +1,1 @@
-$('div#leads-table').load(document.URL +  ' div#leads-table');
+$("#all-leads-table-rows").append("<%= j render(:partial => 'users/task', :locals => {lead: @lead}) %>");
