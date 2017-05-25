@@ -30,7 +30,7 @@
                   <% unless lead.lead_task.nil? %>
                     <%= form_for lead, remote: true, url: lead_lead_task_path(lead) do |f| %>
                       <%= f.select(:lead_task, options_for_select(["NG", "Rehash", "Sold"], lead.lead_task), {hide_label: true},
-                          {class: 'lead-task-dropdowns', onchange: "$(this).closest('form').trigger('submit');if(this.value === 'Rehash'){
+                          {class: 'lead-task-dropdowns', onchange: "$(this).closest('form').trigger('submit');$('div#all-leads-table-rows').load(document.URL +  ' div#all-leads-table-rows');if(this.value === 'Rehash'){
                               $('#all-leads-table-rows').append('#{ j render partial: "users/task", locals: {lead: lead} }')
                             };"}) %>
                     <% end %>
