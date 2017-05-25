@@ -32,7 +32,7 @@
                       <%= f.select(:lead_task, options_for_select(["NG", "Rehash", "Sold"], lead.lead_task), {hide_label: true},
                           {class: 'lead-task-dropdowns', onchange: "$(this).closest('form').trigger('submit');if(this.value === 'Rehash'){
                               $('#all-leads-table-rows').append('#{ j render partial: "users/task", locals: {lead: lead} }')
-                            };"}) %>
+                            };$('div#all-leads-table-rows').load(document.URL +  ' div#all-leads-table-rows');"}) %>
                     <% end %>
                   <% else %>
                     No status
