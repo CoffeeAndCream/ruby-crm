@@ -4,11 +4,11 @@
   <td style="text-align: center"><%= event.ends.strftime("%m/%d/%Y - %I:%m %p") %></td>
   <td style="text-align: center">Follow up on Lead</td>
   <td style="text-align: center">
-    <%= bootstrap_form_for lead, url: lead_lead_task_path(lead), remote: true, class: 'leads-table' do |f| %>
+    <%= bootstrap_form_for lead, url: lead_lead_tasks_path(lead), class: 'leads-table' do |f| %>
       <%= f.form_group :lead_task, remote: true do %>
-        <%= f.radio_button :lead_task, "NG", id: 'NG', label: "NG", inline: true, checked: false, class: 'lead-task-radios', remote: true, onchange: "this.form.submit();$('#'+this.closest('tr').id).remove();$('div#all-leads-table').load(document.URL +  ' div#all-leads-table');" %>
-        <%= f.radio_button :lead_task, "Rehash", id: 'Rehash', label: "Rehash", inline: true, checked: true, class: 'lead-task-radios', remote: true, onchange: "this.form.submit();" %>
-        <%= f.radio_button :lead_task, "Sold", id: 'Sold', label: "Sold", inline: true, checked: false, class: 'lead-task-radios', remote: true, onchange: "this.form.submit();$('#'+this.closest('tr').id).remove();$('div#all-leads-table').load(document.URL +  ' div#all-leads-table');" %>
+        <%= f.radio_button :lead_task, "NG", id: 'NG', label: "NG", inline: true, onchange: 'this.form.submit();$("#"+this.closest("tr").id).remove();$("div#all-leads-table").load(document.URL +  " div#all-leads-table")' %>
+        <%= f.radio_button :lead_task, "Rehash", id: 'Rehash', label: "Rehash", inline: true, onchange: 'this.form.submit();' %>
+        <%= f.radio_button :lead_task, "Sold", id: 'Sold', label: "Sold", inline: true, onchange: 'this.form.submit();$("#"+this.closest("tr").id).remove();$("div#all-leads-table").load(document.URL +  " div#all-leads-table")' %>
       <% end %>
     <% end %>
  </td>

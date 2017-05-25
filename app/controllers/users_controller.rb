@@ -15,15 +15,20 @@ class UsersController < ApplicationController
     @user.update(user_params)
     redirect_to user_path(@user)
   end
-  def tasks
+  def leads_table
     @lead = Lead.find_by_id(params[:lead_id])
     @lead.update_attributes(lead_params)
     @event = Event.find_by(:lead_id => @lead.id)
-    #respond_to do |format|
-    #  format.js { render 'users/update_tasks.js.erb' }
-    #end
+    respond_to do |format|
+      format.html
+      format.js { render 'users/update_tasks.js.erb' }
+    end
   end
-
+  def tasks_table
+    @lead = Lead.find_by_id(params[:lead_id])
+    @lead.update_attributes(lead_params)
+    @event = Event.find_by(:lead_id => @lead.id)
+  end
   private
   def user_params
     params.require(:user).permit(:email, :password, :first_name, :last_name)
