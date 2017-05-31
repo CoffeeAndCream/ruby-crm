@@ -4,23 +4,18 @@
     <div class="row">
       <div class="col-md-10 col-md-offset-1">
         <h2>Tasks</h2>
-        <h5 style="text-align: center"><i> If you see a task here, but the lead isn't assigned to you, contact your administrator so you can be place on the lead</i></h5>
         <br>
         <div id="task-table">
           <table class="table table-hover table-bordered table-responsive table-striped">
-            <thead>
-              <th>Event</th>
-              <th>Appointment Time</th>
-              <th>Task</th>
-              <th>Action</th>
-            </thead>
             <tbody id="all-leads-table-rows">
-            <% @events.where.not(:lead_id => nil).where(:user_id => @user.id).each do |event| %>
-            <% lead = Lead.find_by_id(event.lead_id) %>
-              <% if !event.future_event? && lead.lead_task == 'Rehash' || lead.lead_task.nil? %>
+            <% counter = 0 %>
+            <% @tasks.each do |task| %>
+            <% lead = Lead.find_by_id(task.lead_id) %>
+              <% if lead.lead_task == 'Rehash' || lead.lead_task.nil? %>
+                <% counter += 1 %>
                 <tr id='lead-task-<%=lead.id.to_s%>'>
                   <td style="text-align: center"><%= lead.fullname %></td>
-                  <td style="text-align: center"><%= event.ends.strftime("%m/%d/%Y - %I:%m %p") %></td>
+                  <td style="text-align: center"><%= task.ends.strftime("%m/%d/%Y - %I:%m %p") %></td>
                   <td style="text-align: center">Follow up on Lead</td>
                   <td style="text-align: center">
                     <%= bootstrap_form_for lead, url: lead_lead_tasks_path(lead), class: 'leads-table' do |f| %>
@@ -35,6 +30,20 @@
               <% end %>
           <% end %>
         </tbody>
+        <% if counter == 0 %>
+        <div class="row">
+          <div class="col-md-8 col-md-offset-4">
+            <b>You don't have any tasks at the moment!</b>
+          </div>
+        </div>
+        <% else %>
+          <thead class="table-bordered">
+            <th>Event</th>
+            <th>Appointment Time</th>
+            <th>Task</th>
+            <th>Action</th>
+          </thead>
+        <% end %>
       </table>
       <%= will_paginate @events %>
       </div>

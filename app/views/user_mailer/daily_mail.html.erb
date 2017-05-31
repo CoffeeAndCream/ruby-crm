@@ -1,0 +1,39 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Daily Schedule</h1>
+    <table class="table table-hover table-bordered table-striped table-responsive">
+      <thead>
+        <th>Lead</th>
+        <th>Date/Time</th>
+        <th>Location</th>
+        <th>Details</th>
+      </thead>
+      <tbody>
+        <% @events.each do |event| %>
+          <% lead = Lead.find_by_id(event.lead_id) %>
+          <tr>
+            <% unless lead.nil? %>
+            <td><%= lead.fullname %></td>
+            <% else %>
+            <td></td>
+            <% end %>
+            <td><%=event.start.strftime('%m/%d/%Y %l:%M %P')%> - <%=event.ends.strftime('%m/%d/%Y %l:%M %P')%></td>
+            <% unless Lead.find_by_id(event.lead_id).nil? %>
+              <td><%= Lead.find_by_id(event.lead_id).address + ', ' + Lead.find_by_id(event.lead_id).city + ', ' + Lead.find_by_id(event.lead_id).state %></td>
+            <% else %>
+              <td>Unknown location</td>
+            <% end %>
+            <td><%=event.description %></td>
+          </tr>
+      </tbody>
+    </table>
+    <p>
+      To login to the site to see more about your lead, just follow this link: <%= @url %>.
+    </p>
+  </body>
+</html>
