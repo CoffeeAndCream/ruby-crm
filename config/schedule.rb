@@ -19,7 +19,6 @@
 
 # Learn more: http://github.com/javan/whenever
 set :output, 'log/whenever.log'
-every 1.minute do
-  command "echo 'HELLO WORLD'"
+every 1.day, :at => '7:30 am' do
   rake 'my_mailer:email_sender'
 end
