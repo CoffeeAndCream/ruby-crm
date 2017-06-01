@@ -3,15 +3,28 @@
 <html>
   <head>
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+    <style>
+    td{
+      border-bottom: solid 1px darkgray;
+      padding: 5px;
+      font-size: 12px;
+      min-width: 50px;
+      max-width: 500px;
+    }
+    th{
+      font-size: 20px;
+      color: darkcyan;
+    }
+    </style>
   </head>
   <body>
     <h1>Daily Schedule</h1>
+    <p>This is your schedule for today!</p>
     <table class="table table-hover table-bordered table-striped table-responsive">
       <thead>
         <th>Lead</th>
-        <th>Date/Time</th>
+        <th>Time</th>
         <th>Location</th>
-        <th>Details</th>
       </thead>
       <tbody>
         <% @events.each do |event| %>
@@ -22,16 +35,16 @@
             <% else %>
             <td></td>
             <% end %>
-            <td><%=event.start.strftime('%m/%d/%Y %l:%M %P')%> - <%=event.ends.strftime('%m/%d/%Y %l:%M %P')%></td>
+            <td><%=event.start.strftime('%l:%M %P')%></td>
             <% unless Lead.find_by_id(event.lead_id).nil? %>
               <td><%= Lead.find_by_id(event.lead_id).address + ', ' + Lead.find_by_id(event.lead_id).city + ', ' + Lead.find_by_id(event.lead_id).state %></td>
             <% else %>
               <td>Unknown location</td>
             <% end %>
-            <td><%=event.description %></td>
           </tr>
         <% end %>
       </tbody>
     </table>
+    <p>Are you interested in reviewing more details? <%= @url %></p>
   </body>
 </html>
