@@ -48,7 +48,7 @@ class LeadsController < ApplicationController
   def update
     @lead = Lead.find_by_id(params[:id])
     @lead.update_attributes(permitted_params)
-     redirect_to :action => 'show', :id => @lead
+    redirect_to :action => 'show', :id => @lead
   end
   def update_contract
     @lead = Lead.find_by_id(params[:lead][:lead_id])
@@ -56,56 +56,6 @@ class LeadsController < ApplicationController
     respond_to do |format|
       format.html {}
       format.js { render 'leads/payments/update_contract.js.erb'}
-    end
-  end
-  def contacted
-    @lead = Lead.find_by_id(params[:lead_id])
-    @lead.update_attributes(:contacted => params[:contacted])
-    @lead.save
-    @leads = apply_scopes(Lead).where(:user_id => current_user.id).order(created_at: :desc).paginate(:page => params[:page], :per_page => 10)
-    respond_to do |format|
-      format.html {}
-      format.js { render '/users/update_table.js.erb'}
-    end
-  end
-  def closed
-    @lead = Lead.find_by_id(params[:lead_id])
-    @lead.update_attributes(:closed => params[:closed], :customer => params[:closed])
-    @lead.save
-    @leads = apply_scopes(Lead).where(:user_id => current_user.id).order(created_at: :desc).paginate(:page => params[:page], :per_page => 10)
-    respond_to do |format|
-      format.html {}
-      format.js { render '/users/update_table.js.erb'}
-    end
-  end
-  def begin_project
-    @lead = Lead.find_by_id(params[:lead_id])
-    @lead.update_attributes(:begin_project => params[:begin_project])
-    @lead.save
-    @leads = apply_scopes(Lead).where(:user_id => current_user.id).order(created_at: :desc).paginate(:page => params[:page], :per_page => 10)
-    respond_to do |format|
-      format.html {}
-      format.js { render '/users/update_table.js.erb'}
-    end
-  end
-  def send_thank_you
-    @lead = Lead.find_by_id(params[:lead_id])
-    @lead.update_attributes(:send_thank_you => params[:send_thank_you])
-    @lead.save
-    @leads = apply_scopes(Lead).where(:user_id => current_user.id).order(created_at: :desc).paginate(:page => params[:page], :per_page => 10)
-    respond_to do |format|
-      format.html {}
-      format.js { render '/users/update_table.js.erb'}
-    end
-  end
-  def finished_project
-    @lead = Lead.find_by_id(params[:lead_id])
-    @lead.update_attributes(:finished_project => params[:finished_project])
-    @lead.save
-    @leads = apply_scopes(Lead).where(:user_id => current_user.id).order(created_at: :desc).paginate(:page => params[:page], :per_page => 10)
-    respond_to do |format|
-      format.html {}
-      format.js { render '/users/update_table.js.erb'}
     end
   end
   def destroy
@@ -119,12 +69,11 @@ class LeadsController < ApplicationController
     require 'pdfkit'
     @lead = Lead.find_by_id(params[:lead_id])
     render layout: false
-
   end
+
   private
   def permitted_params
-    params.require(:lead).permit(:first_name, :last_name, :address, :phone, :email, :lead_id, :sort_column, :sort_direction,:city,:state,:zip, :fullname, :contract_total,
-    :visit_date, :comments, :page, :contacted, :visited, :begin_project, :finished_project, :send_thank_you, :user_id, :source, :services => [])
+    params.require(:lead).permit(:first_name, :last_name, :address, :phone, :email, :lead_id, :sort_column, :sort_direction,:city,:state,:zip, :fullname, :contract_total, :visit_date, :comments, :page, :contacted, :visited, :begin_project, :finished_project, :send_thank_you, :user_id, :source, :lead_task, :customer_task, :project_task, :services => [])
   end
 
 end

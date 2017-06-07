@@ -75,6 +75,7 @@ gem 'wkhtmltopdf-binary'
 
 gem 'chartkick'
 gem 'groupdate'
+gem 'whenever', :require => false
 
 gem "will_paginate", :git => "https://github.com/mislav/will_paginate.git"
 gem 'dragonfly', '~> 1.1.1'
