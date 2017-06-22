@@ -15,7 +15,7 @@ class ProjectsController < ApplicationController
     if finished.nil? || finished.empty?
       finished = false
     end
-    @leads = apply_scopes(Lead).search(params[:search]).paginate(page: params[:page], per_page: 25)
+    @leads = apply_scopes(Lead).search(params[:search]).paginate(page: params[:page], per_page: 50)
     @leads = @leads.joins(:project).where('projects.finished' => finished).order('projects.finish_date' + ' ' + sort_direction)
   end
   def create
