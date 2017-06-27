@@ -11,6 +11,7 @@ initialize_calendar = function() {
       selectHelper: true,
 			aspectRatio: 1.8,
 			scrollTime: '7:00', // undo default 7am scrollTime
+      titleFormat: 'dddd MM/DD',
 			header: {
 				left: 'today prev,next',
 				center: 'title',

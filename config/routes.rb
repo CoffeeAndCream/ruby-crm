@@ -16,13 +16,9 @@ Rails.application.routes.draw do
   resources :photos
 
   resources :leads do
-    post '/contacted' => 'leads#contacted'
-    post '/closed' => 'leads#closed'
-    post '/begin_project' => 'leads#begin_project'
-    post '/finished_project' => 'leads#finished_project'
-    post '/send_thank_you' => 'leads#send_thank_you'
-    post '/convert-to-customer' => 'leads#convert'
     get '/lead-sheet' => 'leads#lead_sheet'
+    patch 'lead_tasks' => 'users#tasks_table', defaults: {format: 'js'}
+    patch 'user_leads' => 'users#leads_table', defaults: {format: 'js'}
 
     resources :events
     resources :services

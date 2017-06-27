@@ -5,17 +5,7 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-Service.create!(name: 'Roofing', color: '#aa42f4')
-Service.create!(name: 'Gutters', color: '#cc8616')
-Service.create!(name: 'Siding', color: '#cc1515')
-Service.create!(name: 'Decking', color: '#aa116d')
-Service.create!(name: 'Soffit', color: '#47bc38')
-Service.create!(name: 'Windows', color: '#3866bc')
-Source.create!(source_type: 'Website')
-Source.create!(source_type: 'Home Advisor')
-Source.create!(source_type: 'Radio')
-Source.create!(source_type: 'Friend or Family Referral')
-Source.create!(source_type: 'Google Adwords')
-Source.create!(source_type: 'Employee Referral')
-Source.create!(source_type: 'Previous Customer')
-User.create!(role: 'admin', email: 'info@legacy-exteriors.com', password: 'L3g@cy3111!', password_confirmation: 'L3g@cy3111!', first_name: 'Administrator')
+
+500.times do
+  Lead.create!(first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, address: Faker::Address.street_address, city: Faker::Address.city, state: Faker::Address.state, zip: Faker::Address.zip, phone: Faker::PhoneNumber.cell_phone)
+end
