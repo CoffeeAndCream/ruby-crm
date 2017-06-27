@@ -20,15 +20,15 @@ class PhotosController < ApplicationController
   end
 
   def destroy
-    @photo = Photo.find_by(id: params[:id])
-    puts @photo.image_uid
-    Cloudinary::Uploader.destroy(@photo.image_uid)
-    unless @photo.nil?
-      @photo.destroy
-      respond_to do |format|
-        format.js{render 'photos/destroy.js.erb'}
-      end
-    end
+    @lead = Lead.find_by_id(params[:lead_id])
+    images = @lead.images
+    deleted_image = images.delete_at(params[:id].to_i)
+    deleted_image.try(:remove!)
+    @lead.remove_images! if images.empty?
+    @lead.images = images
+    @lead.save!
+
+    redirect_to lead_path(@lead)
   end
 
   private
