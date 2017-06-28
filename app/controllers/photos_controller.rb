@@ -27,8 +27,10 @@ class PhotosController < ApplicationController
     @lead.remove_images! if images.empty?
     @lead.images = images
     @lead.save!
-
-    redirect_to lead_path(@lead)
+    respond_to do |format|
+      format.js { render 'destroy.js.erb' }
+    end
+    #redirect_to lead_path(@lead)
   end
 
   private
