@@ -107,23 +107,39 @@
   </div>
   <div class="row details-card">
     <i class="material-icons material-icon-tabs">photo</i>
-    <div class="col-lg-10">
-      <h3>Photos</h3>
-      <% unless @lead.photos.empty? %>
-      <ul class="img-list">
-        <% @lead.photos.each do |photo| %>
-          <% unless photo.image_uid.nil? %>
-          <li id="img-<%= photo.image_uid %>">
-            <a href='<%=Cloudinary::Utils.cloudinary_url(photo.image_uid, class: 'img-thumbnail', alt: photo.title)%>' target="_blank"><%= cl_image_tag(photo.image_uid, height: 1000, width: 1000, crop: :fill, class: 'img-thumbnail', alt: photo.title) %></a>
-            <span class="text-content-bottom"><span><%= link_to raw("<span style='color:white' class='glyphicon glyphicon-trash'></span><span style='color:white;'>&nbsp;Remove</span>"), lead_photo_path(@lead, photo), :method => :delete, data: {confirm: "Are you sure?"}, remote: true %></span></span>
-            <span class="text-content"><span><%= photo.title %></span></span>
-          </li>
-          <% end%>
+    <div id="photos-table" class="col-lg-10">
+      <h3>Files and Photos</h3>
+      <% unless @lead.images.empty? %>
+        <ul class="list-inline">
+          <% file_counter = -1 %>
+          <% @lead.images.each do |image| %>
+          <% file_counter += 1 %>
+            <% if File.extname(image.to_s) == '.png' || File.extname(image.to_s) == '.jpg' || File.extname(image.to_s) == '.jpeg' %>
+              <li id='file-<%= file_counter %>'>
+                <a href=<%=image.to_s%> target="_blank">
+                  <%= image_tag image.to_s, alt: 'Image', class: 'img-thumbnail',  height: '180', width: '180' %>
+                </a>
+                <%= link_to '<i class="img-delete-icon material-icons" style="color: red !important;">remove_circle</i>'.html_safe, lead_photo_path(@lead, file_counter), method: :delete, remote: true %>
+              </li>
+            <% end %>
+          <% end %>
+      </ul>
+      <ul class="list-inline">
+        <% file_counter = -1 %>
+        <% @lead.images.each do |image| %>
+        <% file_counter += 1 %>
+          <% unless File.extname(image.to_s) == '.png' || File.extname(image.to_s) == '.jpg' || File.extname(image.to_s) == '.jpeg' %>
+            <li id='file-<%= file_counter %>'>
+              <% puts image.inspect %>
+              <%= link_to File.basename(image.to_s), image.to_s, alt: 'File', style: 'font-size: 16px; padding-right: 30px;', class: 'img-thumbnail btn btn-md btn-default' %>
+              <%= link_to '<i class="file-delete-icon material-icons" style="color: red !important;">remove_circle</i>'.html_safe, lead_photo_path(@lead, file_counter), method: :delete, remote: true %>
+            </li>
+          <% end %>
         <% end %>
       </ul>
-      <% else %>
-        This lead has no photos. <%= link_to 'Want to add a photo?', new_lead_photo_path(@lead)  %>
-      <% end %>
+    <% else %>
+      This lead has no files. <%= link_to 'Want to add a file?', new_lead_photo_path(@lead)  %>
+    <% end %>
     </div>
   </div>
 </div>
