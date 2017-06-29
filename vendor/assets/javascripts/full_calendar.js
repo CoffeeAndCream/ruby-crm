@@ -15,8 +15,12 @@ initialize_calendar = function() {
 			header: {
 				left: 'today prev,next',
 				center: 'title',
-				right: 'timelineDay,timelineWeek,month,listWeek'
-			},
+				right: 'timelineDay,timelineWeek,month'
+      },
+      buttonText : {
+        prev : '<',
+        next : '>'
+      },
 			defaultView: 'timelineDay',
       defaultEventMinutes: 90,
       eventLimit: true,
@@ -37,7 +41,6 @@ initialize_calendar = function() {
         });
         calendar.fullCalendar('unselect');
       },
-
       eventDrop: function(event, delta, revertFunc, resourceId) {
         event_data = {
           event: {
@@ -53,7 +56,6 @@ initialize_calendar = function() {
             type: 'PATCH'
         });
       },
-
       eventClick: function(event, jsEvent, view) {
         $.getScript(event.edit_url, function() {
           $('#event_date_range').val(moment(event.start).format("MM/DD/YYYY HH:mm") + ' - ' + moment(event.end).format("MM/DD/YYYY HH:mm"))
@@ -63,6 +65,6 @@ initialize_calendar = function() {
         });
       }
     });
-  })
+  });
 };
 $(document).on('turbolinks:load', initialize_calendar);

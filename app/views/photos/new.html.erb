@@ -2,13 +2,15 @@
 
 <div class="container">
   <div class="col-md-6 col-md-offset-3 info-card">
-    <h1>New Photos</h1>
-    <%= bootstrap_form_for [@lead, @photo] do |f| %>
-      <%= f.file_field :image, required: true, :multiple => true, class: "filestyle", "data-input" => false  %>
-      <%= f.text_field :title, class: 'form-control input-sm', placeholder: "Add a caption to your photos", hide_label: true %>
-      <%= hidden_field_tag :lead_id => @lead.id %>
+    <h1>New Files</h1>
+    <%= bootstrap_form_for lead_upload_photos_path(@lead), :html => { multipart: true } do |f| %>
+      <%= f.file_field :images, multiple: true, required: 'true', label: 'Files', class: 'filestyle' %>
+      <br>
       <%= f.submit 'Submit', class: 'btn btn-primary btn-md' %>
-      <%= link_to 'Cancel', :back, class: 'btn btn-md btn-danger'  %>
+      <%= link_to 'Cancel', lead_path(@lead), class: 'btn btn-md btn-danger'  %>
     <% end %>
   </div>
 </div>
+<script>
+  $(":file").filestyle({input: false});
+</script>

@@ -11,14 +11,6 @@ class PhotosController < ApplicationController
   def create
     @lead = Lead.find_by_id(params[:lead_id])
     #create the images from the params
-
-    unless params[:photo][:image].nil?
-        params[:photo][:image].each do |image|
-          url = @lead.id.to_s + '-' + 'image' + rand(100000000).to_s;
-          Cloudinary::Uploader.upload(image, :public_id => url);
-          @lead.photos.create(:image_uid => url, :title => params[:photo][:title])
-      end
-    end
     if @lead.save
       flash[:success] = "Photos saved!"
       redirect_to lead_path(@lead)
@@ -28,20 +20,22 @@ class PhotosController < ApplicationController
   end
 
   def destroy
-    @photo = Photo.find_by(id: params[:id])
-    puts @photo.image_uid
-    Cloudinary::Uploader.destroy(@photo.image_uid)
-    unless @photo.nil?
-      @photo.destroy
-      respond_to do |format|
-        format.js{render 'photos/destroy.js.erb'}
-      end
+    @lead = Lead.find_by_id(params[:lead_id])
+    images = @lead.images
+    deleted_image = images.delete_at(params[:id].to_i)
+    deleted_image.try(:remove!)
+    @lead.remove_images! if images.empty?
+    @lead.images = images
+    @lead.save!
+    respond_to do |format|
+      format.js { render 'destroy.js.erb' }
     end
+    #redirect_to lead_path(@lead)
   end
 
   private
 
   def photo_params
-    params.require(:photo).permit(:title, :image)
+    params.require(:photo).permit(:image_uid)
   end
 end

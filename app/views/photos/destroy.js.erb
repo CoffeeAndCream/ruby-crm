@@ -1,5 +1,1 @@
-<%= puts @photo.image_uid %>
-var id = '#img-' + '<%= @photo.image_uid %>';
-console.log(id);
-var thing = $(id);
-thing.remove();
+$('div#photos-table').load(document.URL +  ' div#photos-table');

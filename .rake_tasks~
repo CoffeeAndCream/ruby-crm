@@ -8,6 +8,7 @@ assets:precompile
 bourbon:install[sass_path]
 cache_digests:dependencies
 cache_digests:nested_dependencies
+cloudinary:sync_static
 db:create
 db:drop
 db:environment:set
@@ -28,16 +29,13 @@ dev:cache
 initializers
 log:clear
 middleware
+my_mailer:email_sender
 notes
 notes:custom
 restart
 routes
 secret
 stats
-sunspot:reindex[batch_size,models,silence]
-sunspot:solr:run
-sunspot:solr:start
-sunspot:solr:stop
 test
 test:db
 time:zones[country_or_offset]

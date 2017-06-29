@@ -23,12 +23,16 @@ class Lead < ApplicationRecord
   has_many :service_orders, dependent: :destroy
   has_one :project, inverse_of: :lead, dependent: :destroy
   has_one :job_site, inverse_of: :lead, dependent: :destroy
+  mount_uploaders :images, ImageUploader
 
   def fullname
     "#{first_name} #{last_name}"
   end
   def phonenumber
-    phone.tr('^A-Za-z0-9', '')
+    if(phone.tr('^A-Za-z0-9', '').length > 10)
+      return phone.tr('^A-Za-z0-9', '')[1..-1]
+    end
+    return phone.tr('^A-Za-z0-9', '')
   end
   def self.search(search)
     if search

@@ -96,9 +96,12 @@ ActiveRecord::Schema.define(version: 201702111755526) do
     t.boolean  "send_thank_you",                            default: false
     t.datetime "updated_at",                                                null: false
     t.json     "images"
+<<<<<<< HEAD
+=======
     t.string   "lead_task"
     t.string   "customer_task"
     t.string   "project_task"
+>>>>>>> 5dbbbffbf2e22035657e4594ea72e52d4d6cefb1
     t.index ["user_id"], name: "index_leads_on_user_id", using: :btree
   end
 
