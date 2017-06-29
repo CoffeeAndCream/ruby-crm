@@ -1,40 +1,45 @@
-<div class="container search-container hide-on-mobile" id="advanced-search-bar">
+<div class="container" id="">
   <%= form_for leads_path, :method => 'get', :enforce_utf8 => false, class: 'form-control'  do |f| %>
     <%= hidden_field_tag :direction, params[:direction] %>
     <%= hidden_field_tag :sort, params[:sort] %>
       <div class="col-md-2">
+        <div class="row" style="margin-top: 10px;">
+          <span style="" id="search-icon"><span class="glyphicon glyphicon-search"></span> Advanced Search</span>
+        </div>
+      </div>
+      <div class="col-md-1">
         <div class="row">
           <%= text_field_tag :first_name, params[:first_name], class: 'search-form-boxes', placeholder: 'First name' %>
         </div>
       </div>
-      <div class="col-md-2">
+      <div class="col-md-1">
         <div class="row">
           <%= text_field_tag :last_name, params[:last_name], class: 'search-form-boxes', placeholder: 'Last name' %>
         </div>
       </div>
-      <div class="col-md-2">
+      <div class="col-md-2 hide-table-col-mobile">
         <div class="row">
           <%= text_field_tag :address, params[:address], class: 'search-form-boxes', placeholder: 'Address' %>
         </div>
       </div>
-      <div class="col-md-1">
+      <div class="col-md-1 hide-table-col-mobile">
         <div class="row">
           <%= text_field_tag :city, params[:city], class: 'search-form-boxes', placeholder: 'City' %>
         </div>
       </div>
-      <div class="col-md-1">
+      <div class="col-md-1 hide-table-col-mobile">
         <div class="row">
           <%= text_field_tag :zip, params[:zip], class: 'search-form-boxes', placeholder: 'Zip code' %>
         </div>
       </div>
-      <div class="col-md-2">
-        <div class="row" style="margin-right: 5px !important;">
-          <%= select_tag :finished, options_for_select([["Finished?", ""], 'True', 'False']), :class => 'form-control', :style => 'width: 100%;padding: 3px 6px !important;height: 25px; ' %>
+      <div class="col-md-2 hide-table-col-mobile">
+        <div class="row" style="margin-right: 5px !important;margin-top: 6px;">
+          <%= select_tag :finished, options_for_select([["Finished?", ""], 'True', 'False']), :class => 'form-control', :style => 'width: 100%;padding: 3px 6px !important;height: 28px; margin-top: 2px;' %>
         </div>
       </div>
       <div class="col-sm-1">
         <div class="row">
-          <%= submit_tag "Search", :name => nil, :class => 'btn btn-default btn-sm', :style => 'height: 26px !important;padding: 0px 10px 0px 10px !important;' %>
+          <%= submit_tag "Search", :name => nil, :class => 'btn btn-default btn-md', :style => 'height: 28px !important;padding: 0px 10px 0px 10px !important;margin-top:7px;margin-bottom: 10px !important;' %>
         </div>
       </div>
   </div>

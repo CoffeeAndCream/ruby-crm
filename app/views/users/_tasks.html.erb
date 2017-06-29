@@ -15,7 +15,7 @@
                 <% counter += 1 %>
                 <tr id='lead-task-<%=lead.id.to_s%>'>
                   <td style="text-align: center"><%= lead.fullname %></td>
-                  <td style="text-align: center"><%= task.ends.strftime("%m/%d/%Y - %I:%m %p") %></td>
+                  <td  class="hide-table-col-mobile" style="text-align: center"><%= task.ends.strftime("%m/%d/%Y - %I:%m %p") %></td>
                   <td style="text-align: center">Follow up on Lead</td>
                   <td style="text-align: center">
                     <%= bootstrap_form_for lead, url: lead_lead_tasks_path(lead), class: 'leads-table' do |f| %>
@@ -39,7 +39,7 @@
         <% else %>
           <thead class="table-bordered">
             <th>Event</th>
-            <th>Appointment Time</th>
+            <th  class="hide-table-col-mobile">Appointment Time</th>
             <th>Task</th>
             <th>Action</th>
           </thead>

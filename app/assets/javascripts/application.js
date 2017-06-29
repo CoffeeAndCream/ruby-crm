@@ -11,11 +11,17 @@
 // about supported directives.
 //
 //= require turbolinks
-//= require Chart.bundle
-//= require chartkick
+//= require jquery
+//= require jquery_ujs
 //= require moment
+//= require fullcalendar.min
+//= require scheduler
+//= require gcal.min
+//= require full_calendar
 //= require daterangepicker
+//= require date_range_picker
 //= require_tree .
+
 $(document).on("click", ".element", function(){
    $.ajax({
      type: "GET",

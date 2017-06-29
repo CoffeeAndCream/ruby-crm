@@ -1,12 +1,11 @@
-<div class="container" style="width: 1300px;">
+<div class="container" style="max-width: 1300px;">
   <div class="row">
     <div class="col-lg-12">
-      <h1><img src="/icons/pipe.png" height="75px" class=""></img> Projects</h1>
+      <h1 id="header-title"><i id="material-icon-header" class="material-icons">content_paste</i>Projects</h1>
     </div>
   </div>
   <div class="row">
     <div class="col-lg-12" id="search-background">
-      <h5 class="container hide-on-mobile" id="search-icon"><span class="glyphicon glyphicon-search"></span> Advanced Search</h5>
       <%= render 'search_form' %>
     </div>
   </div>
@@ -60,9 +59,9 @@
                 <% end %>
               <% end %>
               <% unless lead.project.finished %>
-                <td><%= link_to 'Finish Project', lead_project_path(id: lead.project.id, lead_id: lead.id, project: {finished: true}), :method => :put %></td>
+                <td><%= link_to 'Finish Project', lead_project_path(id: lead.project.id, lead_id: lead.id, project: {finished: true}), :method => :put, class: 'btn btn-sm btn-primary' %></td>
               <% else %>
-                <td><%= link_to 'Reset Project', lead_project_path(id: lead.project.id, lead_id: lead.id, project: {finished: false}), :method => :put %></td>
+                <td><%= link_to 'Reset Project', lead_project_path(id: lead.project.id, lead_id: lead.id, project: {finished: false}), :method => :put, class: 'btn btn-sm btn-primary' %></td>
               <% end %>
             </tr>
           <% end %>

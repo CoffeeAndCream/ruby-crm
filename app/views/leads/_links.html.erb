@@ -1,16 +1,16 @@
-<ul class="nav navbar-nav navbar-right" style="margin-top:-20px !important; float:right !important">
+<ul class="nav navbar-nav navbar-right" style="margin-left: 0px;">
   <div class="dropdown" style="padding-top: -100px;">
     <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
       Options
     </button>
-    <ul class="dropdown-menu" aria-labelledby="dropdownMenu">
+    <ul class="dropdown-menu" aria-labelledby="dropdownMenu" id="dropdown-menu-options">
       <% unless !@lead.project.nil? %>
           <li><%= link_to raw('<i class="material-icons" style="font-size: 18px;">create</i> Create Project'), new_lead_project_path(@lead),  method: :get, begin_project: true %></li>
       <% else %>
           <li><%= link_to raw('<i class="material-icons"  style="font-size: 18px;"">pageview</i> View Existing Project'), lead_project_path(@lead, @lead.project),  method: :get %></li>
       <% end %>
       <li><%= link_to raw('<i class="material-icons"  style="font-size: 18px;">track_changes</i> Edit'), edit_lead_path(@lead), method: :get %></li>
-      <li><%= link_to raw('<i class="material-icons" style="font-size: 18px;">add_a_photo</i> Add photos'), new_lead_photo_path(@lead) %>
+      <li><%= link_to raw('<i class="material-icons" style="font-size: 18px;">add_a_photo</i> Add files'), new_lead_photo_path(@lead) %>
       <li><%= link_to raw('<i class="material-icons" style="font-size: 18px;">perm_contact_calendar</i> Set Appointment'), calendar_url(:lead_id => @lead.id) %>
       <li><%= link_to raw('<i class="material-icons" style="font-size: 18px;">print</i> Lead sheet'), lead_lead_sheet_path(@lead),  target: "_blank" %>
       <li><%= link_to raw('<i class="material-icons" style="font-size: 18px;">archive</i> Convert to customer'), lead_convert_path(@lead), method: :post %>

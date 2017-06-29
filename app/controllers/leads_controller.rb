@@ -58,6 +58,17 @@ class LeadsController < ApplicationController
       format.js { render 'leads/payments/update_contract.js.erb'}
     end
   end
+  def upload_photos
+    @lead = Lead.find_by_id(params[:lead_id])
+    puts params['/leads/'+@lead.id.to_s+'/upload_photos'][:images].inspect
+    puts @lead.inspect
+    @lead.images += params['/leads/'+@lead.id.to_s+'/upload_photos'][:images]
+    if @lead.save
+      redirect_to lead_path(@lead)
+    else
+      redirect_to lead_path(@lead)
+    end
+  end
   def destroy
     unless authenticate_active_admin_user!
       @lead = Lead.find_by(id: params[:id])
@@ -73,7 +84,8 @@ class LeadsController < ApplicationController
 
   private
   def permitted_params
-    params.require(:lead).permit(:first_name, :last_name, :address, :phone, :email, :lead_id, :sort_column, :sort_direction,:city,:state,:zip, :fullname, :contract_total, :visit_date, :comments, :page, :contacted, :visited, :begin_project, :finished_project, :send_thank_you, :user_id, :source, :lead_task, :customer_task, :project_task, :services => [])
+    params.require(:lead).permit(:first_name, :last_name, :address, :phone, :email, :lead_id, :sort_column, :sort_direction,:city,:state,:zip, :fullname, :contract_total,
+    :visit_date, :comments, :page, :contacted, :visited, :begin_project, :finished_project, :send_thank_you, :user_id, :source, :lead_task, :customer_task, :project_task, images: [], :services => [])
   end
 
 end

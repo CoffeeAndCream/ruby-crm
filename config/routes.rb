@@ -8,23 +8,25 @@ Rails.application.routes.draw do
   end
   get '/calendar' => 'calendars#index'
   patch 'leads/payments/update_contract' => 'leads#update_contract'
+  post "/leads/:lead_id/photos/new" => 'leads#upload_photos'
+  delete 'photos/:photo_id' => 'leads#delete_photo'
 
   resources :customers
   resources :projects
   resources :events
   resources :users
-
+  resources :photos
   resources :leads do
     get '/lead-sheet' => 'leads#lead_sheet'
     patch 'lead_tasks' => 'users#tasks_table', defaults: {format: 'js'}
     patch 'user_leads' => 'users#leads_table', defaults: {format: 'js'}
-
+    post '/upload_photos' => 'leads#upload_photos'
     resources :events
     resources :services
     resources :service_orders
     resources :job_site, defaults: {format: 'js'}
     #dragonfly and imagemagcik
-    resources :photos, only: [:new, :create, :index, :destroy]
+    resources :photos
     #payments
     resources :payments, defaults: { format: 'js' }
     resources :projects do

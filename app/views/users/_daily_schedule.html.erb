@@ -10,9 +10,9 @@
             <th style="text-align: left !important">Date</th>
             <th style="text-align: left !important">Start Time</th>
             <th style="text-align: left !important">End Time</th>
-            <th style="text-align: left !important">Appointment</th>
+            <th class="hide-table-col-mobile" style="text-align: left !important">Appointment</th>
             <th style="text-align: left !important">Location</th>
-            <th style="text-align: left !important">Description</th>
+            <th class="hide-table-col-mobile" style="text-align: left !important">Description</th>
           </thead>
           <tbody>
             <% @events.each do |event| %>
@@ -41,14 +41,14 @@
                 <% unless Lead.find_by_id(event.lead_id).nil? %>
                   <td><%= link_to event.title, lead_path(event.lead_id) %></td>
                 <% else %>
-                  <td><%= event.title %></td>
+                  <td class="hide-table-col-mobile"><%= event.title %></td>
                 <% end %>
                 <% unless Lead.find_by_id(event.lead_id).nil? %>
                   <td><%= Lead.find_by_id(event.lead_id).address + ', ' + Lead.find_by_id(event.lead_id).city + ', ' + Lead.find_by_id(event.lead_id).state %></td>
                 <% else %>
                   <td>Unknown location</td>
                 <% end %>
-                <td><%=event.description%></td>
+                <td class="hide-table-col-mobile"><%=event.description%></td>
               </tr>
             <% end %>
           </tbody>

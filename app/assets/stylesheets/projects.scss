@@ -4,8 +4,10 @@
 
 
 #services-done {
+  padding: 0px !important;
   text-align: center;
   background-color: lightgreen;
+  vertical-align: inherit;
   .btn {
     color: green !important;
     padding: 0px !important;
@@ -20,8 +22,10 @@
   }
 }
 #services-not-done {
+  padding: 0px !important;
   text-align: center;
   background-color: pink;
+  vertical-align: inherit;
   .btn {
     color: red !important;
     padding: 0px !important;
