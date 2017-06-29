@@ -65,8 +65,8 @@
             <th style="text-align: left !important">Date</th>
             <th style="text-align: left !important">Start Time</th>
             <th style="text-align: left !important">End Time</th>
-            <th style="text-align: left !important">Appointment</th>
-            <th style="text-align: left !important">Description</th>
+            <th class="hide-table-col-mobile" style="text-align: left !important">Appointment</th>
+            <th class="hide-table-col-mobile" style="text-align: left !important">Description</th>
           </thead>
           <tbody>
             <% Event.where(:lead_id => @lead.id).each do |event| %>
@@ -75,8 +75,8 @@
                 <td><%=event.start.strftime('%m/%d/%Y')%></td>
                 <td><%=event.start.strftime('%l:%M %P')%></td>
                 <td><%=event.ends.strftime('%l:%M %P')%></td>
-                <td><%=event.title%></td>
-                <td><%=event.description%></td>
+                <td class="hide-table-col-mobile"><%=event.title%></td>
+                <td class="hide-table-col-mobile"><%=event.description%></td>
                 <!--<td><%= button_to "Delete", lead_event_path(@lead, event), method: :delete, :class=>'btn btn-link', :style => "float:left;padding:1px 0px 0px 0px !important;color:blue !important;", remote: true %></td>
                 -->
               </tr>

@@ -1,9 +1,9 @@
-<ul class="nav navbar-nav navbar-right" style="margin-top:-20px !important; float:right !important">
+<ul class="nav navbar-nav navbar-right" style="margin-left: 0px;">
   <div class="dropdown" style="padding-top: -100px;">
     <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
       Options
     </button>
-    <ul class="dropdown-menu" aria-labelledby="dropdownMenu">
+    <ul class="dropdown-menu" aria-labelledby="dropdownMenu" id="dropdown-menu-options">
       <% unless !@lead.project.nil? %>
           <li><%= link_to raw('<i class="material-icons" style="font-size: 18px;">create</i> Create Project'), new_lead_project_path(@lead),  method: :get, begin_project: true %></li>
       <% else %>
