@@ -1,11 +1,16 @@
+<script type="text/javascript" src="https://cdn.jsdelivr.net/bootstrap.filestyle/1.1.0/js/bootstrap-filestyle.min.js"> </script>
+
 <div class="container">
   <div class="col-md-6 col-md-offset-3 info-card">
-    <h1>New Photos</h1>
+    <h1>New Files</h1>
     <%= bootstrap_form_for lead_upload_photos_path(@lead), :html => { multipart: true } do |f| %>
-      <%= f.file_field :images, multiple: true, accept: "image/jpeg, image/jpg, image/gif, image/png", required: 'true' %>
+      <%= f.file_field :images, multiple: true, required: 'true', label: 'Files', class: 'filestyle' %>
       <br>
       <%= f.submit 'Submit', class: 'btn btn-primary btn-md' %>
       <%= link_to 'Cancel', lead_path(@lead), class: 'btn btn-md btn-danger'  %>
     <% end %>
   </div>
 </div>
+<script>
+  $(":file").filestyle({input: false});
+</script>

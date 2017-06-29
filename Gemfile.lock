@@ -480,6 +480,7 @@ DEPENDENCIES
   groupdate
   has_scope
   jbuilder (~> 2.5)
+  jquery-rails
   listen
   nilify_blanks
   pdfkit
@@ -503,4 +504,4 @@ DEPENDENCIES
   wkhtmltopdf-binary
 
 BUNDLED WITH
-   1.14.3
+   1.15.1

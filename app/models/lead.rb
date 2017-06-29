@@ -29,7 +29,10 @@ class Lead < ApplicationRecord
     "#{first_name} #{last_name}"
   end
   def phonenumber
-    phone.tr('^A-Za-z0-9', '')
+    if(phone.tr('^A-Za-z0-9', '').length > 10)
+      return phone.tr('^A-Za-z0-9', '')[1..-1]
+    end
+    return phone.tr('^A-Za-z0-9', '')
   end
   def self.search(search)
     if search

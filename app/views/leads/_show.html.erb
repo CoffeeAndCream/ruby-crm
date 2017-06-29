@@ -115,7 +115,7 @@
   <div class="row details-card">
     <i class="material-icons material-icon-tabs">photo</i>
     <div id="photos-table" class="col-lg-10">
-      <h3>Photos</h3>
+      <h3>Files and Photos</h3>
       <% unless @lead.images.empty? %>
         <ul class="list-inline">
           <% file_counter = -1 %>
@@ -145,7 +145,7 @@
         <% end %>
       </ul>
     <% else %>
-      This lead has no photos. <%= link_to 'Want to add a photo?', new_lead_photo_path(@lead)  %>
+      This lead has no files. <%= link_to 'Want to add a file?', new_lead_photo_path(@lead)  %>
     <% end %>
     </div>
   </div>

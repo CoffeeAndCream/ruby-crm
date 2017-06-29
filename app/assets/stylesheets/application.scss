@@ -10,11 +10,13 @@
  * files in this directory. Styles in this file should be added after the last require_* statement.
  * It is generally better to create a new file per style scope.
 
- *= require rails_bootstrap_forms
+ *= require scheduler
+ *= require scheduler.min
+ *= require fullcalendar.min
  *= require daterangepicker
+ *= require rails_bootstrap_forms
  *= require_tree .
  *= require_self
-
  */
  //global variables
  $THEME_COLOR: #2b5173;
@@ -30,32 +32,7 @@
 
  #advanced-search-bar{
  }
- #search-icon {
-   margin-left: -25px !important;
-   color: #F5F5F5;
-   -webkit-transition: color .25s;
-   transition: color .25s; /* Fading effect takes 1 second */
- }
- #search-icon:hover {
-   color: white;
-   -webkit-transition: color .25s;
-   transition: color .25s; /* Fading effect takes 1 second */
- }
- #search-background {
-   background-color: $THEME_COLOR;
-   border-radius: 1px;
-   border: solid 1px #f1f1f1;
-   -webkit-transition: background-color .5s;
-   transition: background-color .5s; /* Fading effect takes 1 second */
-   margin-bottom: 5px;
- }
- #search-background:hover {
-   background-color: #4574af;
-   border-radius: 1px;
-   border: solid 1px #f1f1f1;
-   -webkit-transition: background-color .5s;
-   transition: background-color .5s; /* Fading effect takes 1 second */
- }
+
 .material-icons {
   vertical-align: top !important;
   color: $THEME_COLOR !important;
