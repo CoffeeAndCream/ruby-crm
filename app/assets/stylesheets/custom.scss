@@ -16,6 +16,14 @@ $THEME_FONT_DROPDOWN_HOVER: #3a76ab;
 .checkbox_container input {
   display: inline !important;
 }
+#material-icon-header {
+  font-size: 40px !important;
+  color: #e63343 !important;
+}
+#header-title {
+  font-weight: 600;
+  float: left !important;
+}
 //mobile viewports
 @media all and (max-width: 1200px) {
   .hide-on-mobile {
@@ -67,6 +75,12 @@ $THEME_FONT_DROPDOWN_HOVER: #3a76ab;
     }
 
 }
+.header-icon {
+  position: relative;
+  float:left;
+  margin-left: 5%;
+  font-weight: 600;
+}
 .navbar-default .navbar-toggle .icon-bar{
   background-color: white !important;
 }
@@ -97,13 +111,12 @@ $THEME_FONT_DROPDOWN_HOVER: #3a76ab;
   border-bottom: white;
   color: black;
   width: 90%;
-  margin-top: 6px;
+  margin-top: 8px;
   margin-bottom: 5px;
 }
 .search-container{
   display: none;
   margin-top: 0px;
-  margin-left: -15px !important;
   padding: 0px 0px 10px 0px;
 }
 #search-background {
@@ -125,7 +138,6 @@ $THEME_FONT_DROPDOWN_HOVER: #3a76ab;
   transition: background-color .5s; /* Fading effect takes 1 second */
 }
 #search-icon {
-  margin-left: -25px !important;
   -webkit-transition: color .25s;
   transition: color .25s; /* Fading effect takes 1 second */
 }
@@ -263,7 +275,12 @@ ul.img-list li:hover span.text-content-bottom {
 .table-container {
   margin-top: -40px;
 }
-
+.index-table {
+  border: 1px solid #b9b9b9;
+}
+.user-button {
+  margin-left: 10px;
+}
 .show-container{
   background:	#F5F5F5;
   border-radius: 3px;
@@ -388,18 +405,24 @@ footer{
   background-color: white !important;
 }
 .table-striped>tbody>tr:nth-of-type(odd):hover{
-  background-color: #fcfcfc !important;
+  background-color: #e8e8ee !important;
 }
 .table-striped>tbody>tr:nth-of-type(even){
-  background-color: #f6f6f6 !important;
+  background-color: #f1f1f1 !important;
 }
 .table-striped>tbody>tr:nth-of-type(even):hover{
-  background-color: #fcfcfc !important;
+  background-color: #e8e8ee !important;
 }
 .pretty th .current {
   padding-right: 20px;
   background-repeat: no-repeat;
   background-position: right center;
+}
+.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
+    padding: 8px;
+    line-height: 1.42857143;
+    vertical-align: top;
+    border-top: 1px solid #bfbfbf;
 }
 
 .pretty th  .asc {

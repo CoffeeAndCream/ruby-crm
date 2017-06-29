@@ -17,6 +17,10 @@ initialize_calendar = function() {
 				center: 'title',
 				right: 'timelineDay,timelineWeek,month'
       },
+      buttonText : {
+        prev : '<',
+        next : '>'
+      },
 			defaultView: 'timelineDay',
       defaultEventMinutes: 90,
       eventLimit: true,
