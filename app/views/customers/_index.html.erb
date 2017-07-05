@@ -3,8 +3,8 @@
       <tr>
         <th>Name</th>
         <th>Phone Number</th>
-        <th>Address</th>
-        <th>Salesperson</th>
+        <th class="hide-table-col-mobile">Address</th>
+        <th class="hide-table-col-mobile">Salesperson</th>
         <th><%= sortable "created_at", "Date Created" %></th>
       </tr>
     </thead>
@@ -17,17 +17,17 @@
           <%= number_to_phone(customer.phonenumber, area_code: true)%>
           <% end %>
         </td>
-        <td>
+        <td class="hide-table-col-mobile">
           <% unless customer.address.nil? %>
             <%= customer.address %>, <%= customer.city %>
           <% end %>
         </td>
         <% unless User.find_by_id(customer.user_id).nil? %>
-          <td><%= User.find_by_id(customer.user_id).fullname %></td>
+          <td class="hide-table-col-mobile"><%= User.find_by_id(customer.user_id).fullname %></td>
         <% else %>
           <td></td>
         <% end %>
-        <td scope="row"><%=customer.created_at.strftime("%m/%d/%y")%></td>
+        <td  class="hide-table-col-mobile" scope="row"><%=customer.created_at.strftime("%m/%d/%y")%></td>
       </tr>
     <% end %>
   </tbody>
