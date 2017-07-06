@@ -55,7 +55,7 @@ hr {
           <tr>
           <% unless @lead.address.nil? || @lead.address.empty? %>
             <td><b>Address</b> </td>
-            <td><%= @lead.address %>, <%=@lead.city%>, <%=@lead.state%></td>
+            <td><%= @lead.address %>, <%=@lead.city%>, <%=@lead.state%> <%= @lead.zip %></td>
           <% end %>
           </tr>
           <tr>
