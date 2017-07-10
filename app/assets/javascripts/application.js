@@ -19,6 +19,7 @@
 //= require gcal.min
 //= require full_calendar
 //= require daterangepicker
+//= require user_calendar
 //= require date_range_picker
 //= require_tree .
 

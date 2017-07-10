@@ -73,6 +73,9 @@ gem 'nilify_blanks'
 
 gem 'pdfkit'
 gem 'wkhtmltopdf-binary'
+gem 'prawn'
+gem 'prawn-table', '~> 0.1.0'
+
 
 #AWS
 gem 'carrierwave'
