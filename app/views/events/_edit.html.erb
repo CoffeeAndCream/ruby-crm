@@ -5,7 +5,8 @@
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
         <h4 class="modal-title" style="float:left">Edit Event</h4>
         <% unless @event.lead_id.nil? %>
-          <%= link_to 'Go to Lead', lead_path(Lead.find_by_id(@event.lead_id)), class: 'btn btn-info btn-xs', style: 'float:left; margin-left: 20px;margin-top: 1px;' %>
+          <% @lead = Lead.find_by_id(@event.lead_id) %>
+          <%= link_to 'Jump to Lead', lead_path(@lead), class: 'btn btn-danger btn-md', style: 'float: right !important; margin-right: 10px;' %>
         <% end %>
       </div>
       <div class="modal-body">
