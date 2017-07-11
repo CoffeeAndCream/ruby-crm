@@ -3,6 +3,11 @@ class UsersController < ApplicationController
   respond_to :html, :js
 
   def show
+    @resources = []
+    User.all.each do |user|
+      @resources.push({:id => user.id, :title => user.fullname})
+    end
+    gon.resources = @resources
     @user = current_user
     @leads = apply_scopes(Lead).where(:user_id => @user.id).order(created_at: :desc).paginate(:page => params[:page], :per_page => 10)
     @events = Event.where(:user_id => @user).where(start: Date.today-14..Date.today+14).order(start: :asc).paginate(:page => params[:page], :per_page => 10)

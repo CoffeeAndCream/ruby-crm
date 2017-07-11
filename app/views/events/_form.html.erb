@@ -1,13 +1,30 @@
+<script>
+  date_range_picker();
+</script>
 <%= simple_form_for @event, remote: true do |f| %>
   <div class="form-inputs">
     <%= f.input :title, placeholder: "Meeting, lead follow-up, show, etc...", label: "Title", input_html: { class: 'form-control event_title' }%>
     <%= f.input :lead_id, as: :hidden, input_html: {class: 'form-control input-sm lead_id' } %>
-    <%= f.input :color, :collection => Service.all,:label_method => :name,:value_method => :color,:label => "Services" ,:include_blank => true %>
+    <% if !params[:repeating_event] %>
+      <%= f.input :color, :collection => Service.all, :label_method => :name,:value_method => :color,:label => "Services" ,:include_blank => true %>
+    <% end %>
     <%= f.input :user_id,:collection => User.where.not(:first_name => nil),:label_method => :fullname,:value_method => :id,:label => "Salesperson" ,:include_blank => false, input_html: {:class => 'salesperson' } %>
-    <%= f.input :date_range, input_html: { class: "form-control input-sm date-range-picker" } %>
+    <% if !params[:repeating_event] %>
+      <%= f.input :date_range, input_html: { class: "form-control input-sm date-range-picker" } %>
+    <% else %>
+      <%= f.input :date_range, input_html: { class: "form-control input-sm date-range-picker-time" } %>
+    <% end %>
     <%= f.input_field :start, as: :hidden, value: Date.today, class: 'form-control input-sm start_hidden' %>
     <%= f.input_field :ends, as: :hidden, value: Date.today, class: 'form-control input-sm end_hidden' %>
-    <%= f.text_area :description, placeholder: "Meeting, lead follow-up, show, etc...", label: "Description", class: 'form-control' %>
+    <% if !params[:repeating_event] %>
+      <%= f.text_area :description, placeholder: "Meeting, lead follow-up, show, etc...", label: "Description", class: 'form-control' %>
+    <% end %>
+    <% if params[:repeating_event] || !@event.dow.empty? %>
+      <br>
+      <b>Select days to repeat</b>
+      <br>
+      <%= f.collection_check_boxes :dow, [["Monday", 1], ["Tuesday", 2], ["Wednesday", 3], ["Thursday", 4], ["Friday", 5], ["Saturday", 6], ["Sunday", 0]], :last, :first, include_blank: false, include_hidden: false, :item_wrapper_class => 'checkbox_container' %>
+    <% end %>
   </div>
   <br>
   <div class="form-actions">
@@ -20,3 +37,14 @@
                 remote: true unless @event.new_record? %>
   </div>
 <% end %>
+<style>
+.checkbox_container {
+  display: block !important;
+  margin-left: 10px;
+  font-style: normal;
+}
+.checkbox_container label {
+  font-weight: lighter;
+  margin-left: 10px;
+}
+</style>

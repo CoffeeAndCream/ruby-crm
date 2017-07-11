@@ -5,31 +5,44 @@ body {
   font-size: 14px;
 }
 
-.fc-resource-area{
-  width: 15% !important;
-}
+
 .calendar {
   padding-top: 25px;
+  .fc-header {
+    background-color: #676767;
+    color: white;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  }
+  .fc-popover>.ui-widget-header+.ui-widget-content{
+    background-color: white !important;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  }
   a {
-    text-shadow: 1px 1px rgba(55,55,55,.45);
+    font-weight: bold;
+    text-shadow: -1px 0 rgba(0,0,0,0.24), 0 1px rgba(0,0,0,0.24), 1px 0 rgba(0,0,0,0.24), 0 -1px rgba(0,0,0,0.24);
     text-transform: capitalize;
-    margin-top: 10px;
+    margin-top: 2px;
     font-size: 14px;
     color: white !important;
     transition: font-size .2s;
     -webkit-transition: font-size .2s;
   }
   a:hover {
-    opacity: .70 !important;
+    opacity: 1 !important;
     background-color: black !important;
     color: white !important;
-    font-style: italic;
-    font-size: 14px;
     transition: all .2s;
     -webkit-transition: all .2s;
   }
   .fc-more{
     color: black !important;
+    text-shadow: none;
+  }
+  .fc-more:hover {
+    color: black !important;
+    text-shadow: none;
+    background-color: white !important;
+    font-style: normal;
   }
   .fc-list-item-title a {
     color: black !important;

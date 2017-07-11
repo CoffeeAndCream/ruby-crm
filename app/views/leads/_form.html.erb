@@ -32,16 +32,16 @@
       <div class="col-md-10">
       </div>
       <div class="col-md-3">
-        <%= f.text_field :address, icon: 'map-marker' %>
+        <%= f.text_field :address, icon: 'map-marker', autocomplete: 'off' %>
       </div>
       <div class="col-md-3">
-        <%= f.text_field :city %>
+        <%= f.text_field :city, autocomplete: 'off' %>
       </div>
       <div class="col-md-2">
-        <%= f.select :state, options_for_select(us_states, 'WI') %>
+        <%= f.select :state, options_for_select(us_states, 'WI'), autocomplete: 'off' %>
       </div>
       <div class="col-md-2">
-        <%= f.text_field :zip %>
+        <%= f.text_field :zip, autocomplete: 'off' %>
       </div>
     </div>
     <div class="row">

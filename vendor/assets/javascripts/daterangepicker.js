@@ -36,9 +36,9 @@
         this.minDate = false;
         this.maxDate = false;
         this.dateLimit = false;
-        this.autoApply = false;
+        this.autoApply = true;
         this.singleDatePicker = false;
-        this.showDropdowns = false;
+        this.showDropdowns = true;
         this.showWeekNumbers = false;
         this.showISOWeekNumbers = false;
         this.showCustomRangeLabel = true;

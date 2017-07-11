@@ -7,7 +7,7 @@ class EventsController < ApplicationController
     if params[:user_id]
       @events = Event.where(start: params[:start]..params[:end]).where(user_id: params[:user_id])
     else
-      @events = Event.where(start: params[:start]..params[:end])
+      @events = Event.where(start: params[:start]..params[:end]).or(Event.where.not(dow: nil))
     end
   end
   def show
@@ -41,6 +41,6 @@ class EventsController < ApplicationController
     end
 
     def event_params
-      params.require(:event).permit(:title, :date_range, :start, :ends, :end, :color, :user_id, :id, :description, :lead_id, :redirect_alert)
+      params.require(:event).permit(:title, :date_range, :start, :ends, :end, :color, :user_id, :id, :description, :lead_id, :redirect_alert, :dow => [])
     end
 end

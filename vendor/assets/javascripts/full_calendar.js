@@ -4,18 +4,29 @@ initialize_calendar = function() {
   $('.calendar').each(function(){
     var calendar = $(this);
     calendar.fullCalendar({
+      dayRender: function (date, cell, view) {
+        if(view.type === 'timelineDay'){
+          var check = $.fullCalendar.formatDate(date,'HH:mm');
+          console.log(String(view.type));
+          if(check < '08:00' || check > '16:30'){
+            cell.css("background-color", "#e9e9e9");
+          }
+        }
+      },
       schedulerLicenseKey: 'CC-Attribution-NonCommercial-NoDerivatives',
 			editable: true, // enable draggable events
       resourceEditable: true,
+      draggable: true,
       selectable: true,
       selectHelper: true,
-			aspectRatio: 1.8,
+      height: 700,
+      slotWidth: 60,
 			scrollTime: '7:00', // undo default 7am scrollTime
       titleFormat: 'dddd MM/DD',
 			header: {
 				left: 'today prev,next',
 				center: 'title',
-				right: 'timelineDay,timelineWeek,month'
+				right: 'timelineDay,basicWeek,month'
       },
       buttonText : {
         prev : '<',
@@ -35,9 +46,16 @@ initialize_calendar = function() {
           date_range_picker();
           $('.start_hidden').val(moment(start).format('YYYY-MM-DD HH:mm'));
           $('.end_hidden').val(moment(end).format('YYYY-MM-DD HH:mm'));
-          $('.salesperson').val(resource.id);
-          $('.lead_id').val(gon.lead.id);
-          $('.event_title').val(gon.lead.first_name + ' ' + gon.lead.last_name);
+          if(resource) {
+            $('.salesperson').val(resource.id);
+          }
+          if(gon.lead){
+            if(confirm('Do you want to set this appointment for ' + gon.lead.first_name + ' ' + gon.lead.last_name + '?')) {
+              $('.lead_id').val(gon.lead.id);
+              $('.event_title').val(gon.lead.last_name + ' - ' + gon.lead.city +', '+gon.lead.zip);
+              gon.lead = '';
+            }
+          };
         });
         calendar.fullCalendar('unselect');
       },
@@ -57,8 +75,10 @@ initialize_calendar = function() {
         });
       },
       eventClick: function(event, jsEvent, view) {
+        console.log(event.start, event.end);
+
         $.getScript(event.edit_url, function() {
-          $('#event_date_range').val(moment(event.start).format("MM/DD/YYYY HH:mm") + ' - ' + moment(event.end).format("MM/DD/YYYY HH:mm"))
+          $('#event_date_range').val(moment(event.start).format("MM/DD/YYYY HH:mm") + ' - ' + moment(event.end).format("MM/DD/YYYY HH:mm"));
           date_range_picker();
           $('.start_hidden').val(moment(event.start).format('YYYY-MM-DD HH:mm'));
           $('.end_hidden').val(moment(event.end).format('YYYY-MM-DD HH:mm'));

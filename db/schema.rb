@@ -57,6 +57,7 @@ ActiveRecord::Schema.define(version: 201702111755526) do
     t.text     "description"
     t.datetime "created_at",                      null: false
     t.datetime "updated_at",                      null: false
+    t.integer  "dow",         default: [],        null: false, array: true
     t.index ["lead_id"], name: "index_events_on_lead_id", using: :btree
     t.index ["user_id"], name: "index_events_on_user_id", using: :btree
   end
@@ -96,12 +97,9 @@ ActiveRecord::Schema.define(version: 201702111755526) do
     t.boolean  "send_thank_you",                            default: false
     t.datetime "updated_at",                                                null: false
     t.json     "images"
-<<<<<<< HEAD
-=======
     t.string   "lead_task"
     t.string   "customer_task"
     t.string   "project_task"
->>>>>>> 5dbbbffbf2e22035657e4594ea72e52d4d6cefb1
     t.index ["user_id"], name: "index_leads_on_user_id", using: :btree
   end
 
