@@ -19,9 +19,9 @@ initialize_calendar = function() {
       draggable: true,
       selectable: true,
       selectHelper: true,
-      height: 700,
+      height: 550,
       slotWidth: 50,
-			scrollTime: '7:00', // undo default 7am scrollTime
+			scrollTime: '8:00', // undo default 7am scrollTime
       titleFormat: 'dddd MM/DD',
 			header: {
 				left: 'today prev,next',
