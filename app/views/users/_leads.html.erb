@@ -14,26 +14,23 @@
         <table class="table table-hover table-bordered table-striped table-responsive">
           <thead>
             <th>Name</th>
-            <th>Address</th>
+            <th class="hide-table-col-mobile">Address</th>
             <th>Phone Number</th>
             <th class="hide-table-col-mobile">Services</th>
-            <th class="hide-table-col-mobile">Status</th>
+            <th>Photos</th>
           </thead>
           <tbody>
             <% @leads.each do |lead| %>
               <tr>
                 <td><%= link_to lead.fullname, lead_path(lead) %></td>
-                <td><%= lead.address %>, <%= lead.city %>, <%= lead.state %> <%= lead.zip %></td>
+                <td class="hide-table-col-mobile"><%= lead.address %>, <%= lead.city %>, <%= lead.state %> <%= lead.zip %></td>
                 <td><%= number_to_phone(lead.phonenumber,  area_code: true) %></td>
                 <td class="hide-table-col-mobile"><%= (lead.services.reject(&:empty?).map { |i| Service.find_by_id(i).name }).join(', ') %></td>
-                <td  class="hide-table-col-mobile" id="all-leads-tasks">
-                  <% unless lead.lead_task.nil? %>
-                    <%= form_for lead, remote: true, url: lead_user_leads_path(lead) do |f| %>
-                      <%= f.select(:lead_task, options_for_select(["NG", "Rehash", "Sold"], lead.lead_task), {hide_label: true},{class: 'lead-task-dropdowns'}) %>
-                      <%= submit_tag("Submit") %>
-                    <% end %>
+                <td style="text-align: center">
+                  <% if lead.images.empty? %>
+                    <%= link_to '<i class="material-icons" style="color:red !important;vertical-align: middle !important;">info</i>'.html_safe, new_lead_photo_path(lead) %>
                   <% else %>
-                    No status
+                    <%= link_to '<i class="material-icons" style="color:green !important;vertical-align: middle !important;">check_circle</i>'.html_safe, lead_path(lead) %>
                   <% end %>
                 </td>
               </tr>

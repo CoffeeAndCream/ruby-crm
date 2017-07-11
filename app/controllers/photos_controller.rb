@@ -6,6 +6,8 @@ class PhotosController < ApplicationController
   def new
     @lead = Lead.find_by_id(params[:lead_id])
     @photo = Photo.new
+    session[:prev_url] = request.referer
+    puts request.referer
   end
 
   def create

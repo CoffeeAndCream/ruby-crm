@@ -64,7 +64,11 @@ class LeadsController < ApplicationController
     puts @lead.inspect
     @lead.images += params['/leads/'+@lead.id.to_s+'/upload_photos'][:images]
     if @lead.save
-      redirect_to lead_path(@lead)
+      if session[:prev_url]
+        redirect_to session[:prev_url]
+      else
+        redirect_to lead_path(@lead)
+      end
     else
       redirect_to lead_path(@lead)
     end
