@@ -19,7 +19,7 @@ initialize_calendar = function() {
       draggable: true,
       selectable: true,
       selectHelper: true,
-      height: 550,
+      height: 625,
       slotWidth: 50,
 			scrollTime: '8:00', // undo default 7am scrollTime
       titleFormat: 'dddd MM/DD',
@@ -38,7 +38,6 @@ initialize_calendar = function() {
       resources: gon.resources,
       events: '/events.json',
       theme: 'jquery-ui',
-      aspectRatio: 1.8,
 
       select: function(start, end, ev, view, resource) {
         $.getScript('/events/new', function() {

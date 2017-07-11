@@ -2,14 +2,13 @@
 .fc td, .fc th {
   border-style: solid;
   border-width: 1px;
-  padding: 0;
   background-color: white;
   vertical-align: top;
   border-color: #d2d2d2;
 }
 </style>
 <div class="row">
-  <div class="col-lg-11 col-lg-offset-0" style="margin-left:4%">
+  <div class="col-lg-10 col-lg-offset-1">
     <br>
     <%= button_to "Add Repeating Event", new_event_path, params: {:repeating_event => true}, method: :get, remote: true %>
     <div class='calendar'></div>
