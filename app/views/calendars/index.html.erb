@@ -9,7 +9,9 @@
 }
 </style>
 <div class="row">
-  <div class="col-lg-8 col-lg-offset-2">
+  <div class="col-lg-10 col-lg-offset-1">
+    <br>
+    <%= button_to "Add Repeating Event", new_event_path, params: {:repeating_event => true}, method: :get, remote: true %>
     <div class='calendar'></div>
   </div>
 </div>
