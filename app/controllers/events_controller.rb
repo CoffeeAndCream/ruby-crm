@@ -7,7 +7,7 @@ class EventsController < ApplicationController
     if params[:user_id]
       @events = Event.where(start: params[:start]..params[:end]).where(user_id: params[:user_id])
     else
-      @events = Event.where(start: params[:start]..params[:end]).or(Event.where.not(dow: nil))
+      @events = Event.where(start: params[:start]..params[:end]).or(Event.where('start BETWEEN ? AND ?', Date.parse(params[:start])-2.month, Date.parse(params[:end])+2.month).where.not(dow: nil))
     end
   end
   def show
