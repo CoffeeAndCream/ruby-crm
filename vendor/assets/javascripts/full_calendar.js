@@ -20,7 +20,7 @@ initialize_calendar = function() {
       selectable: true,
       selectHelper: true,
       height: 700,
-      slotWidth: 60,
+      slotWidth: 50,
 			scrollTime: '7:00', // undo default 7am scrollTime
       titleFormat: 'dddd MM/DD',
 			header: {
