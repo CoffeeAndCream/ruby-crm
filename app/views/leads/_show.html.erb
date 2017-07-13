@@ -135,7 +135,7 @@
         <% file_counter = -1 %>
         <% @lead.images.each do |image| %>
         <% file_counter += 1 %>
-          <% unless File.extname(image.to_s) == '.png' || File.extname(image.to_s) == '.jpg' || File.extname(image.to_s) == '.jpeg' %>
+          <% unless File.extname(image.to_s) == '.png' || File.extname(image.to_s) == '.jpg' || File.extname(image.to_s) == '.jpeg' || File.extname(image.to_s) == '.JPG' %>
             <li id='file-<%= file_counter %>'>
               <% puts image.inspect %>
               <%= link_to File.basename(image.to_s), image.to_s, alt: 'File', style: 'font-size: 16px; padding-right: 30px;', class: 'img-thumbnail btn btn-md btn-default' %>

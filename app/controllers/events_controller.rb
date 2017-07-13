@@ -21,11 +21,6 @@ class EventsController < ApplicationController
     @lead = Lead.find_by_id(params[:lead_id])
     @event = Event.new(event_params)
     @event.save
-    if params[:event][:redirect_alert]
-      respond_to do |format|
-        format.js {render 'leads/events/create.js.erb'}
-      end
-    end
   end
   def update
     @event.update(event_params)
