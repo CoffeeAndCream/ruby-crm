@@ -13,6 +13,7 @@
       <li><%= link_to raw('<i class="material-icons" style="font-size: 18px;">add_a_photo</i> Add files'), new_lead_photo_path(@lead) %>
       <li><%= link_to raw('<i class="material-icons" style="font-size: 18px;">perm_contact_calendar</i> Set Appointment'), calendar_url(:lead_id => @lead.id) %>
       <li><%= link_to raw('<i class="material-icons" style="font-size: 18px;">print</i> Lead sheet'), lead_lead_sheet_path(@lead),  target: "_blank" %>
+      <li><%= link_to raw('<i class="material-icons" style="font-size: 18px;">email</i> Print Letter'), letters_path(:lead_id => @lead),  target: "_blank" %>
       <li><%= link_to raw('<i class="material-icons" style="font-size: 18px;">archive</i> Convert to customer'), lead_convert_path(@lead), method: :post %>
       <li><%= link_to raw('<i class="material-icons" style="font-size: 18px;">delete</i> Delete'), lead_path, method: :delete, data: { :confirm => "Are you sure?" } %></li>
     </ul>

@@ -183,6 +183,7 @@ class LeadsController < ApplicationController
     #render layout: false
   end
 
+
   private
   def permitted_params
     params.require(:lead).permit(:first_name, :last_name, :address, :phone, :email, :lead_id, :sort_column, :sort_direction,:city,:state,:zip, :fullname, :contract_total,

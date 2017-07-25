@@ -1,0 +1,15 @@
+<div class="container">
+  <div class="row">
+    <div class="col-lg-10">
+      <br>
+      <h1>Choose a Letter</h1>
+      <div class="details-card">
+        <%= bootstrap_form_for :letter do |f| %>
+          <%= f.collection_select(:id, @letters, :id, :name, :label => "Letters") %>
+          <%= f.hidden_field(:lead_id, value: @lead.id) %>
+          <%= f.submit "Create", :class=>'btn btn-md btn-primary' %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
