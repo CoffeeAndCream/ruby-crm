@@ -1,0 +1,7 @@
+var chart = Chartkick.charts["chart-1"];
+var data = {};
+<% @data.each do |x| %>
+  data['<%= raw x.first %>'] = '<%= raw x.second %>';
+<% end %>
+console.log(data);
+chart.updateData(data);

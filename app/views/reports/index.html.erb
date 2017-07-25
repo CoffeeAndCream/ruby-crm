@@ -4,8 +4,17 @@
     <div class="col-lg-10 col-lg-offset-1 info-card">
       <h1><i id="material-icon-header" class="material-icons">assessment</i>Reports</h1>
       <br>
-      <%= line_chart Lead.group_by_week(:created_at, last: 8).count, label: "Leads", xtitle: "Weeks", ytitle: "Number of Leads Created" %>
+      <div id="lead-line-chart">
+        <%= line_chart @data, label: "Leads", xtitle: "Weeks", ytitle: "Number of Leads Created" %>
+      </div>
       <br>
+      Date Range:
+      <br>
+      <%= simple_form_for :dates, remote: true do |f| %>
+        <%= f.date_field :begin_date %>
+        <%= f.date_field :end_date%>
+        <%= f.submit "Go" %>
+      <% end %>
     </div>
   </div>
   <div class="row">
@@ -41,3 +50,6 @@ td {
   text-align: center;
 }
 </style>
+<script>
+  console.log('<%= raw @data %>');
+</script>
