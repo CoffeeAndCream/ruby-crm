@@ -23,7 +23,7 @@
             <tr>
               <td><%= user.fullname %></td>
               <td style="color:green">$<%= Lead.where(user_id: user.id).sum(:contract_total) %></td>
-              <td><%= (Lead.where(user_id: user.id).sum(:contract_total) / Lead.sum(:contract_total))*100 %>%</td>
+              <td><%= ((Lead.where(user_id: user.id).sum(:contract_total) / Lead.sum(:contract_total))*100).round(2) %>%</td>
             </tr>
           <% end %>
           <tr>
