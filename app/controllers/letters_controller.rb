@@ -12,7 +12,7 @@ class LettersController < ApplicationController
     require "prawn"
     Prawn::Font::AFM.hide_m17n_warning = true
     pdf = Prawn::Document.new(:page_size => 'LETTER')
-    pdf.image open("http://localhost:3000/" +  Company.first.images.to_s), width: 250, position: :center
+    pdf.image open(Company.first.images.to_s), width: 250, position: :center
     pdf.move_down 80
     pdf.text DateTime.now.strftime("%d %B, %Y")
     pdf.move_down 50
