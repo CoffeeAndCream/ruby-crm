@@ -45,6 +45,7 @@ ActiveRecord::Schema.define(version: 201702111755526) do
     t.string   "smtp_address"
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
+    t.json     "images"
   end
 
   create_table "events", force: :cascade do |t|
@@ -101,6 +102,13 @@ ActiveRecord::Schema.define(version: 201702111755526) do
     t.string   "customer_task"
     t.string   "project_task"
     t.index ["user_id"], name: "index_leads_on_user_id", using: :btree
+  end
+
+  create_table "letters", force: :cascade do |t|
+    t.string   "name"
+    t.text     "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   create_table "payments", force: :cascade do |t|

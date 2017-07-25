@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   resources :events
   resources :users
   resources :photos
+  resources :letters
   resources :leads do
     get '/lead-sheet' => 'leads#lead_sheet'
     patch 'lead_tasks' => 'users#tasks_table', defaults: {format: 'js'}
