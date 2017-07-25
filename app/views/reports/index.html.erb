@@ -1,0 +1,43 @@
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-10 col-lg-offset-1 info-card">
+      <h1><i id="material-icon-header" class="material-icons">assessment</i>Reports</h1>
+      <br>
+      <%= line_chart Lead.group_by_week(:created_at).count, label: "Leads", xtitle: "Weeks", ytitle: "Number of Leads Created" %>
+      <br>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-10 col-lg-offset-1 info-card">
+      <h2>Finances</h2>
+      <br>
+      <table class="table table-responsive table-striped">
+        <thead>
+          <th>Salesperson</th>
+          <th>Money Brought In</th>
+          <th>Percent of Total</th>
+        </thead>
+        <tbody>
+          <% User.all.each do |user| %>
+            <tr>
+              <td><%= user.fullname %></td>
+              <td style="color:green">$<%= Lead.where(user_id: user.id).sum(:contract_total) %></td>
+              <td><%= (Lead.where(user_id: user.id).sum(:contract_total) / Lead.sum(:contract_total))*100 %>%</td>
+            </tr>
+          <% end %>
+          <tr>
+            <td><b>Total</b></td>
+            <td style="color:green"><b>$<%= Lead.sum(:contract_total) %></b></td>
+            <td>100.0%</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<style>
+td {
+  text-align: center;
+}
+</style>

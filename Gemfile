@@ -60,14 +60,15 @@ gem 'devise'
 #USED TO FAKE DATA IN SEED
 gem 'faker'
 
+#active admin
 gem 'activeadmin', git: 'https://github.com/activeadmin/activeadmin'
 gem "active_admin_import" , github: "activeadmin-plugins/active_admin_import"
 gem 'active_skin'
 gem 'cancancan'
 
+#form fields
 gem 'sass-rails', '>= 3.2'
 gem 'bootstrap_form'
-
 gem 'simple_form'
 gem 'nilify_blanks'
 
@@ -81,6 +82,7 @@ gem 'prawn-table', '~> 0.1.0'
 gem 'carrierwave'
 gem 'fog'
 
+#reporting
 gem 'chartkick'
 gem 'groupdate'
 gem 'whenever', :require => false

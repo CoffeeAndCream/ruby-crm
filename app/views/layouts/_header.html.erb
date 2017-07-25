@@ -46,6 +46,7 @@
         <li class="<%= 'active' if params[:controller] == 'customers' || (!@lead.nil? && @lead.customer) && params[:controller] != 'projects' %>"><a href="/customers#index"><span class="glyphicon glyphicon-book"></span> Customers</span></a></li>
         <li class="<%= 'active' if params[:controller] == 'projects' %>"><a href="/projects#index"><span class="glyphicon glyphicon-folder-open"></span> &nbsp; Projects</span></a></li>
         <li class="<%= 'active' if params[:controller] == 'calendars' %>"><a href="/calendar#index"><span class="glyphicon glyphicon-time"></span>  Calendar</span></a></li>
+        <li class="<%= 'active' if params[:controller] == 'reports' %>"><a href="/reports#index"><span class="glyphicon glyphicon-download-alt"></span>&nbsp;  Reports</span></a></li>
       </ul>
       <ul>
         <div class="col-lg-2 navbar-form hide-on-mobile">
