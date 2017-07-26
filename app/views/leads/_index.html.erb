@@ -5,6 +5,7 @@
         <th>Phone Number</th>
         <th class="hide-table-col-mobile">Address</th>
         <th class="hide-table-col-mobile">Salesperson</th>
+        <th class="hide-table-col-mobile"><%= sortable "contract_total", "Contract" %></th>
         <th class="hide-table-col-mobile"><%= sortable "created_at", "Date Created" %></th>
       </tr>
     </thead>
@@ -29,6 +30,7 @@
         <% else %>
         <td class="hide-table-col-mobile"></td>
         <% end %>
+        <td class="hide-table-col-mobile" style="color:green">$<%= lead.contract_total %></td>
         <td class="hide-table-col-mobile" scope="row"><%=lead.created_at.strftime("%m/%d/%y")%></td>
       </tr>
       <% end %>
