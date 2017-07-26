@@ -34,14 +34,14 @@
               <td><%= user.fullname %></td>
               <td><%= Lead.where(user_id: user.id).where(customer: true).count %></td>
               <td style="color:green">$<%= Lead.where(user_id: user.id).sum(:contract_total) %></td>
-              <td><b><%= ((Lead.where(user_id: user.id).sum(:contract_total) / Lead.sum(:contract_total))*100).round(2) %>%</b></td>
+              <td><b><%= ((Lead.where(user_id: user.id).sum(:contract_total).to_f / Lead.sum(:contract_total).to_f)*100).round(2) %>%</b></td>
             </tr>
           <% end %>
           <tr>
             <td>Unassigned leads</td>
             <td><%= Lead.where(user_id: nil).where(customer: true).count %></td>
             <td style="color:green">$<%= ((Lead.where(user_id: nil).sum(:contract_total))) %></td>
-            <td><b><%= ((Lead.where(user_id: nil).sum(:contract_total) / Lead.sum(:contract_total))*100).round(2) %>%</b></td>
+            <td><b><%= ((Lead.where(user_id: nil).sum(:contract_total).to_f / Lead.sum(:contract_total).to_f)*100).round(2) %>%</b></td>
           </tr>
           <tr>
             <td><b>Total</b></td>
@@ -77,7 +77,7 @@
             <td>Unassigned leads</td>
             <td><%= Lead.where(user_id: nil).where(customer: true).count %></b></td>
             <td><%= Lead.where(user_id: nil).count %></td>
-            <td><b><%= ((Lead.where(user_id: nil).count / Lead.all.count)*100).round(2) %>%</b></td>
+            <td><b><%= ((Lead.where(user_id: nil).count.to_f / Lead.all.count.to_f)*100).round(2) %>%</b></td>
           </tr>
           <tr>
             <td><b>Total</b></td>
