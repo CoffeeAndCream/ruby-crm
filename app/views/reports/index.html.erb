@@ -74,15 +74,9 @@
             </tr>
           <% end %>
           <tr>
-            <td>Unassigned leads</td>
-            <td><%= Lead.where(user_id: nil).where(customer: true).count %></b></td>
-            <td><%= Lead.where(user_id: nil).count %></td>
-            <td><b><%= ((Lead.where(user_id: nil).count.to_f / Lead.all.count.to_f)*100).round(2) %>%</b></td>
-          </tr>
-          <tr>
             <td><b>Total</b></td>
-            <td><b><%= Lead.where(customer: true).count %></b></td>
-            <td><b><%= Lead.all.count %></b></td>
+            <td><b><%= Lead.where.not(user_id: nil).where(customer: true).count %></b></td>
+            <td><b><%= Lead.where.not(user_id: nil).count %></b></td>
             <td><b>100.0%</b></td>
           </tr>
         </tbody>
