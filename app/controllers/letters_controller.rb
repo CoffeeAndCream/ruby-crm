@@ -25,7 +25,9 @@ class LettersController < ApplicationController
     pdf.move_down 20
     pdf.text 'Sincerely,'
     pdf.move_down 20
-    pdf.text User.find_by_id(@lead.user_id).fullname
+    unless @lead.user_id.nil?
+      pdf.text User.find_by_id(@lead.user_id).fullname
+    end
     pdf.text 'Legacy Exteriors, LLC'
     pdf.draw_text 'PH: 608-221-3000', at: [0, 0]
     pdf.draw_text 'Legacy Exteriors, LLC', at: [215, 20]
