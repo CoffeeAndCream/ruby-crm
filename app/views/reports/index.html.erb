@@ -79,7 +79,7 @@
             <td><b>Total</b></td>
             <td><b><%= Lead.where.not(user_id: nil).where(customer: true).count %></b></td>
             <td><b><%= Lead.where.not(user_id: nil).count %></b></td>
-            <td><b><%= ((Lead.where.not(user_id: nil).where(customer: true).count.to_f / Lead.where.not(user_id: nil).count.to_f)*100).round(2) %></b></td>
+            <td><b><%= ((Lead.where.not(user_id: nil).where(customer: true).count.to_f / Lead.where.not(user_id: nil).count.to_f)*100).round(2) %>%</b></td>
           </tr>
         </tbody>
       </table>
