@@ -66,12 +66,14 @@
         </thead>
         <tbody>
           <% User.all.each do |user| %>
-            <tr>
-              <td><%= user.fullname %></td>
-              <td><%= Lead.where(user_id: user.id).where(customer: true).count %></td>
-              <td><%= Lead.where(user_id: user.id).count %>
-              <td><b><%= ((Lead.where(user_id: user.id).where(customer: true).count.to_f / Lead.where(user_id: user.id).count.to_f)*100).round(2) %>%</b></td>
-            </tr>
+            <% unless Lead.where(:user_id => user.id).count == 0 %>
+              <tr>
+                <td><%= user.fullname %></td>
+                <td><%= Lead.where(user_id: user.id).where(customer: true).count %></td>
+                <td><%= Lead.where(user_id: user.id).count %>
+                <td><b><%= ((Lead.where(user_id: user.id).where(customer: true).count.to_f / Lead.where(user_id: user.id).count.to_f)*100).round(2) %>%</b></td>
+              </tr>
+            <% end %>
           <% end %>
           <tr>
             <td><b>Total</b></td>
