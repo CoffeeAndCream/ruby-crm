@@ -3,15 +3,87 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title" style="float:left">Edit Event</h4>
         <% unless @event.lead_id.nil? %>
           <% @lead = Lead.find_by_id(@event.lead_id) %>
           <%= link_to 'Jump to Lead', lead_path(@lead), class: 'btn btn-danger btn-md', style: 'float: right !important; margin-right: 10px;' %>
         <% end %>
-      </div>
-      <div class="modal-body">
-        <%= render 'form', event: @event %>
+        <ul class="nav nav-tabs">
+          <li class="active modal-title" style="float:left"><a data-toggle="tab" href="#edit">Edit Event</a></li>
+          <li><a data-toggle="tab" href="#details">Lead Details</a></li>
+        </ul>
+        <div class="tab-content">
+          <div id="edit" class="tab-pane fade in active">
+            <div class="modal-body">
+              <%= render 'form', event: @event %>
+            </div>
+          </div>
+          <div id="details" class="tab-pane fade">
+            <h3>Lead Details</h3>
+            <br>
+            <% if @lead.nil? %>
+              <p>Couldn't find a lead for this event.</p>
+            <% else %>
+              <table class="table table-hover pretty">
+                <tbody>
+                  <tr>
+                  <% unless @lead.address.nil? || @lead.address.empty? %>
+                    <td><b>Address</b> </td>
+                    <td><%= @lead.address %>, <%=@lead.city%>, <%=@lead.state%></td>
+                  <% end %>
+                  </tr>
+                  <tr>
+                    <% unless @lead.phone.nil? || @lead.phone.empty?  %>
+                    <td><b>Phone</b> </td>
+                    <td><%= number_to_phone(@lead.phonenumber, area_code: true) %></td>
+                    <% end %>
+                  </tr>
+                  <tr>
+                    <% unless @lead.email.nil? || @lead.email.empty?  %>
+                    <td><b>Email</b> </td>
+                        <td> <%= @lead.email %></td>
+                      <% end %>
+                  </tr>
+                  <tr>
+                    <% unless @user.nil? %>
+                      <td><b>Salesperson</b> </td>
+                      <td><%= @user.first_name %> <%= @user.last_name %></h5></td>
+                    <% end %>
+                  </tr>
+                  <tr>
+                    <td><b>Services</b></td>
+                    <td>
+                      <% unless @lead.services.nil? %>
+                        <%= (@lead.services.reject(&:empty?).map { |i| Service.find_by_id(i).name }).join(', ') %>
+                      <% end %>
+                    </td>
+                  </tr>
+                  <tr>
+                    <% unless @lead.user.nil? %>
+                    <td><b>Source</b> </td>
+                      <td><%= @lead.source %></h5></td>
+                      <% end %>
+                  </tr>
+                  <tr>
+                    <td><b>Status</b> </td>
+                    <% if @lead.customer %>
+                      <td>Customer</td>
+                    <% else %>
+                      <td>Lead</td>
+                    <% end %>
+                  </tr>
+                  <tr>
+                    <td><b>Lead Report</b></td>
+                    <td><%= @lead.lead_task %></td>
+                  </tr>
+                <thead>
+              </table>
+            <% end %>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </div>
+<script>
+  console.log("Tab section");
+</script>
