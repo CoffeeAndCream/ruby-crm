@@ -346,11 +346,19 @@ ul.img-list li:hover span.text-content-bottom {
   background-color: #F5F5F5;
 }
 .login-container {
-  border-radius: 25px;
+  border-radius: 5px;
   color: #4f4a6b;
   padding: 25px;
+  margin: 10%;
+  margin-top: 0px;
 }
-
+#closing-stats {
+  margin-left: 25px;
+  font-size: 25px;
+  margin-bottom: -20px;
+  font-weight: bold;
+  color: $THEME_FONT_DROPDOWN_HOVER;
+}
 #progress-completed{
   width:95%;
   height:50px;
