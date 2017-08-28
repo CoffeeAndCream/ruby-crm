@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   has_scope :zip, :user, :city, :fullname, :address, :city, :customer
   respond_to :html, :js
+  before_action :protect_read_only!, only: [:new, :edit, :create, :update, :destroy]
 
   def show
     @resources = []

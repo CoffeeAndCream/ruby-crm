@@ -16,6 +16,11 @@ class ApplicationController < ActionController::Base
         redirect_to root_path, :info => "Only administrators can use this feature."
      end
   end
+  def protect_read_only!
+    if current_user.role?("read only")
+      redirect_to :back, info: 'Sorry, you can\'t make changes to that'
+    end
+  end
   def after_sign_in_path_for(resource)
     leads_path
   end

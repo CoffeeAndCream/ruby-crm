@@ -1,4 +1,6 @@
 class PhotosController < ApplicationController
+  before_action :protect_read_only!, only: [:destroy]
+
   def index
     @photos = Photo.all
   end

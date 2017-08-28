@@ -1,6 +1,7 @@
 class ProjectsController < ApplicationController
   helper_method :sort_column, :sort_direction
   has_scope :zip, :user, :city, :fullname, :address, :city, :customer
+  before_action :protect_read_only!, only: [:new, :edit, :create, :update, :destroy]
 
   def new
     @lead = Lead.find_by_id(params[:lead_id])

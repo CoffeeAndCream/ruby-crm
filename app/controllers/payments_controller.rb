@@ -1,5 +1,6 @@
 class PaymentsController < ApplicationController
   respond_to :html, :js
+  before_action :protect_read_only!, only: [:new, :edit, :create, :destroy]
 
   def create
     @lead = Lead.find_by_id(params[:lead_id])

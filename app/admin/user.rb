@@ -29,7 +29,7 @@ ActiveAdmin.register User do
             f.input :password
             f.input :password_confirmation
             f.input :color, class: "colorpicker"
-            f.input :role, as: :radio, collection: {None: "none", Administrator: "admin"}
+            f.input :role, as: :radio, collection: {None: "none", Administrator: "admin", Read_Only: "read only"}
         end
         f.actions
     end

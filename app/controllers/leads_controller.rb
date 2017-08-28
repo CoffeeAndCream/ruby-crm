@@ -1,6 +1,7 @@
 class LeadsController < ApplicationController
   helper_method :sort_column, :sort_direction
   has_scope :zip, :user, :city, :fullname, :first_name, :last_name, :address, :city, :customer
+  before_action :protect_read_only!, only: [:new, :edit, :convert, :create, :destroy]
 
 
   def index

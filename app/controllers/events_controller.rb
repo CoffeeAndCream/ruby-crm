@@ -2,6 +2,7 @@ class EventsController < ApplicationController
   skip_before_filter  :verify_authenticity_token
   respond_to :json
   before_action :set_event, only: [:show, :edit, :update, :destroy]
+  before_action :protect_read_only!, only: [:new, :edit, :create, :update, :destroy]
 
   def index
     if params[:user_id]
