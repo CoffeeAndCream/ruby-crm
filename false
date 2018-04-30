@@ -1,2 +1,0 @@
-      invoke  active_record
-      create    db/migrate/20170710193320_change_dow_on_events.rb
