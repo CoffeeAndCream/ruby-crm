@@ -25,7 +25,9 @@
                 <td><%= link_to lead.fullname, lead_path(lead) %></td>
                 <td class="hide-table-col-mobile"><%= lead.address %>, <%= lead.city %>, <%= lead.state %> <%= lead.zip %></td>
                 <td><%= number_to_phone(lead.phonenumber,  area_code: true) %></td>
-                <td class="hide-table-col-mobile"><%= (lead.services.reject(&:empty?).map { |i| Service.find_by_id(i).name }).join(', ') %></td>
+                <% unless lead.services.nil? %>
+                  <td class="hide-table-col-mobile"><%= (lead.services.reject(&:empty?).map { |i| Service.find_by_id(i).name }).join(', ') %></td>
+                <% end %>
                 <td style="text-align: center">
                   <% if lead.images.empty? %>
                     <%= link_to '<i class="material-icons" style="color:red !important;vertical-align: middle !important;">info</i>'.html_safe, new_lead_photo_path(lead) %>
