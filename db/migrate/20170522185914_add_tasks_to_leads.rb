@@ -1,4 +1,4 @@
-class AddTasksToLeads < ActiveRecord::Migration[5.0]
+class AddTasksToLeads < ActiveRecord::Migration[5.1]
   def change
     add_column :leads, :lead_task, :string
     add_column :leads, :customer_task, :string

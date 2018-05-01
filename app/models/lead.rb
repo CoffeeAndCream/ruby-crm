@@ -1,7 +1,6 @@
 class Lead < ApplicationRecord
   scope :user, -> user { where(:user => user) }
   scope :city, -> city { where(:city => city) }
-  scope :zip, -> zip { where(:zip => zip) }
   scope :fullname, -> fullname { where('(first_name || last_name) LIKE ?', "%#{fullname}%")}
   scope :first_name, -> first_name { where("lower(first_name) LIKE ?", "%#{first_name.downcase}%")}
   scope :last_name, -> last_name { where("lower(last_name) LIKE ?", "%#{last_name.downcase}%")}
@@ -11,7 +10,7 @@ class Lead < ApplicationRecord
 
   #scope :by_period, -> created_at, ended_at { where("created_at = ? AND created_at = ?", created_at, ended_at) }
 
-  belongs_to :user, inverse_of: :leads
+  belongs_to :user, inverse_of: :leads, optional: true
   validates :first_name, :last_name, :presence => true
   validates :address, uniqueness: { scope: [:first_name, :last_name],
       :message => "Someone already exists with this name and address." }

@@ -4,5 +4,5 @@ development:
   database: crm_development
   pool: 5
   username: postgres
-  password: turn0ffth3l1ghts
+  password: 
   host: localhost

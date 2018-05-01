@@ -12,17 +12,10 @@
 //
 //= require turbolinks
 //= require jquery
-//= require jquery_ujs
-//= require moment
-//= require fullcalendar.min
-//= require scheduler
-//= require gcal.min
-//= require full_calendar
 //= require daterangepicker
-//= require user_calendar
-//= require date_range_picker
 //= require Chart.bundle
 //= require chartkick
+//= require user_calendar
 //= require_tree .
 
 $(document).on("click", ".element", function(){

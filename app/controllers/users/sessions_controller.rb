@@ -1,6 +1,6 @@
 class Users::SessionsController < Devise::SessionsController
-  prepend_before_filter :require_no_authentication, :only => [ :new, :create, :cancel ]
-  prepend_before_filter :verify_user, only: [:destroy]
+  prepend_before_action :require_no_authentication, :only => [ :new, :create, :cancel ]
+  prepend_before_action :verify_user, only: [:destroy]
 
   private
   ## This method intercepts SessionsController#destroy action

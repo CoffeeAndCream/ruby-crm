@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   include ApplicationHelper
-  before_filter :request_filter
+  before_action :request_filter
   before_action :authenticate_user!
   before_action :set_time_zone, if: :authenticate_user!
 
