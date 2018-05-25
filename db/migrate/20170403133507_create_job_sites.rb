@@ -1,4 +1,4 @@
-class CreateJobSites < ActiveRecord::Migration[5.0]
+class CreateJobSites < ActiveRecord::Migration[5.1]
   def change
     create_table :job_sites do |t|
       t.references :lead, foreign_key: true

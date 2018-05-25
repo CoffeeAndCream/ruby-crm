@@ -1,4 +1,4 @@
-class CreateLeads < ActiveRecord::Migration[5.0]
+class CreateLeads < ActiveRecord::Migration[5.1]
   def change
     create_table :leads do |t|
       t.references :user

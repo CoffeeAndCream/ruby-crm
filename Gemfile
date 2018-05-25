@@ -6,25 +6,28 @@ git_source(:github) do |repo_name|
 end
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 5.0.1'
+gem 'rails', '~> 5.1'
+gem 'bootsnap'
 # Use pg as the database for Active Record
 gem 'pg'
 # Use Puma as the app server
-gem 'puma', '~> 3.0'
+gem 'puma'
 
+gem 'momentjs-rails'
+gem 'fullcalendar'
 
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .coffee assets and views
-gem 'coffee-rails', '~> 4.2'
+gem 'coffee-rails'
 gem 'jquery-rails'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
-gem 'turbolinks', '~> 5'
+gem 'turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder', '~> 2.5'
+gem 'jbuilder'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password
@@ -41,7 +44,7 @@ end
 group :development do
   gem 'web-console'
   gem 'spring'
-  gem 'spring-watcher-listen', '~> 2.0.0'
+  gem 'spring-watcher-listen'
   gem 'better_errors'
   gem 'rails_layout'
 end
@@ -67,7 +70,7 @@ gem 'active_skin'
 gem 'cancancan'
 
 #form fields
-gem 'sass-rails', '>= 3.2'
+gem 'sass-rails'
 gem 'bootstrap_form'
 gem 'simple_form'
 gem 'nilify_blanks'
@@ -75,12 +78,12 @@ gem 'nilify_blanks'
 gem 'pdfkit'
 gem 'wkhtmltopdf-binary'
 gem 'prawn'
-gem 'prawn-table', '~> 0.1.0'
+gem 'prawn-table'
 
 
 #AWS
 gem 'carrierwave'
-gem 'fog'
+gem 'fog-aws'
 
 #reporting
 gem 'chartkick'
@@ -88,8 +91,6 @@ gem 'groupdate'
 gem 'whenever', :require => false
 
 gem "will_paginate", :git => "https://github.com/mislav/will_paginate.git"
-gem 'dragonfly', '~> 1.1.1'
-gem 'dragonfly-cloudinary'
 gem 'rack-cache'
 gem 'has_scope'
 
