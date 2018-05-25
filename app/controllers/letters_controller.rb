@@ -13,7 +13,7 @@ class LettersController < ApplicationController
     Prawn::Font::AFM.hide_m17n_warning = true
     pdf = Prawn::Document.new(:page_size => 'LETTER')
     if Rails.env.production? 
-      pdf.image open(Company.first.images.to_s), width: 250, position: :center
+      pdf.image open(URI.parse(URI.escape(Company.first.images.to_s))), width: 250, position: :center
       pdf.move_down 80
     end
     pdf.text DateTime.now.strftime("%d %B, %Y")
